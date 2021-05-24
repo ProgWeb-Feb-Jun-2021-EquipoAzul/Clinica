@@ -10,3 +10,6 @@ class Index(generic.TemplateView):
 # Logout temporal para que no mande error
 class Logout(generic.TemplateView):
     template_name = "pages/index.html"
+
+class Test(generic.TemplateView):
+    template_name = "pages/test.html"

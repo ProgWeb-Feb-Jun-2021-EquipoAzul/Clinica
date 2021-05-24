@@ -6,4 +6,5 @@ app_name = "Clinica"
 urlpatterns = [
     path('index',views.Index.as_view(),name="index"),
     path('logout',views.Logout.as_view(), name="logout"),
+    path('test',views.Test.as_view(), name="test"),
 ]
