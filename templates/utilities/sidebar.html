@@ -1,52 +1,42 @@
 {% load static %}
 
-<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+<!-- sidebar left start-->
+<div class="sidebar-left">
+    <div class="sidebar-left-info">
 
-    <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-        <div class="sidebar-brand-icon">
-            <i class="fas fa-tooth"></i>
+        <div class="user-box">
+            <div class="d-flex justify-content-center">
+                <img src="{% static '/images/users/avatar-1.jpg' %}" alt="" class="img-fluid rounded-circle">
+            </div>
+            <div class="text-center text-white mt-2">
+                <h6>Travis Watson</h6>
+                <p class="text-muted m-0">Admin</p>
+            </div>
         </div>
-        <div class="sidebar-brand-text mx-3">Clinica</div>
-    </a>
+        <!--sidebar nav start-->
+        <ul class="side-navigation">
+            <li>
+                <h3 class="navigation-title">Menú</h3>
+            </li>
+            <li>
+                <a href="index.html"><i class="mdi mdi-account-switch"></i> <span>Citas</span></a>
+            </li>
+            <li>
+                <a href="index.html"><i class="mdi mdi-calendar"></i> <span>Horario</span></a>
+            </li>
+            <li>
+                <a href="index.html"><i class="mdi mdi-calendar-plus"></i> <span>Editar Horario</span></a>
+            </li>
+            <li>
+                <a href="index.html"><i class="mdi mdi-account-settings"></i> <span>Ver Perfil</span></a>
+            </li>
+            <li>
+                <a href="index.html"><i class="mdi mdi-briefcase-check"></i> <span>Tratamientos</span></a>
+            </li>
+            <li>
+                <a href="index.html"><i class="mdi mdi-account-off"></i> <span>Cerra Sesion</span></a>
+            </li>
 
-    <!-- Divider -->
-    <hr class="sidebar-divider">
-
-    <!-- Heading -->
-    <div class="sidebar-heading">
-        Menu
+        </ul><!--sidebar nav end-->
     </div>
-
-    <!-- Nav Item - Tables -->
-    <li class="nav-item">
-        <a class="nav-link" href="tables.html">
-            <i class="fas fa-teeth"></i>
-            <span>Citas</span></a>
-    </li>
-
-    <li class="nav-item">
-        <a class="nav-link" href="tables.html">
-            <i class="fas fa-calendar-alt"></i>
-            <span>Horario</span></a>
-    </li>
-
-    <li class="nav-item">
-        <a class="nav-link" href="tables.html">
-            <i class="fas fa-calendar-plus"></i>
-            <span>Editar Horario</span></a>
-    </li>
-
-    <li class="nav-item">
-        <a class="nav-link" href="tables.html">
-            <i class="fas fa-user"></i>
-            <span>Ver Perfil</span></a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="tables.html">
-            <i class="fas fa-briefcase"></i>
-            <span>Tratamientos</span></a>
-    </li>
-
-</ul>
-<!-- End of Sidebar -->
+</div><!-- sidebar left end-->
