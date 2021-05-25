@@ -50,6 +50,10 @@ class Doctor(models.Model):
     usuario= models.ForeignKey(Usuario, verbose_name="Usuario", on_delete=models.RESTRICT)
     Especialidad = models.CharField(max_length=50, verbose_name="Especialidad")
 
+
+
+
+
     def __str__(self):
         return self.Especialidad
 
