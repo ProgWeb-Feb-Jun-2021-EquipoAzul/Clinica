@@ -1,0 +1,63 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+        <meta name="description" content="">
+        <meta name="author" content="Mannat Themes">
+        <meta name="keyword" content="">
+
+        <title></title>
+
+        <!-- Theme Css -->
+        <link href="{% static '/css/bootstrap.min.css' %}" rel="stylesheet">
+        <link href="{% static '/css/slidebars.min.css' %}" rel="stylesheet">
+        <link href="{% static '/css/icons.css' %}" rel="stylesheet">
+        <link href="{% static '/css/menu.css' %}" rel="stylesheet" type="text/css">
+        <link href="{% static '/css/style.css' %}" rel="stylesheet">
+    </head>
+    <body class="sticky-header bg-gradient-primary">
+        <div class="topbar">
+            <div class="topbar_innerbox">
+                <div class="topbar_name">
+                    <h1>Clinica</h1>
+                </div>
+            </div>
+        </div>
+
+        {% include "utilities/topbar.html" %}
+        {% include "utilities/sidebar.html" %}
+
+        <!-- body content start-->
+        <div class="body-content">
+            <div class="container-fluid">
+                <div class="page-head">
+                    <h4 class="my-2">Starter Page</h4>
+                    <form method="post">
+                      {% csrf_token %}
+                      {{ form }}
+                      <button type="submit">Submit</button>
+                      <button type="reset">Cancel</button>
+                    </form>
+                </div>
+            </div><!--end container-->
+        </div>
+          <!--end body content-->
+
+      <!-- jQuery -->
+      <script src="{% static '/js/jquery-3.2.1.min.js' %}"></script>
+      <script src="{% static '/js/popper.min.js' %}"></script>
+      <script src="{% static '/js/bootstrap.min.js' %}"></script>
+      <script src="{% static '/js/jquery-migrate.js' %}"></script>
+      <script src="{% static '/js/modernizr.min.js' %}"></script>
+      <script src="{% static '/js/jquery.slimscroll.min.js' %}"></script>
+      <script src="{% static '/js/slidebars.min.js' %}"></script>
+
+
+      <!--app js-->
+      <script src="{% static '/js/jquery.app.js' %}"></script>
+
+    </body>
+</html>
