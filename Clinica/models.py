@@ -27,7 +27,7 @@ class Usuario(models.Model):
     UltimoAcceso = models.DateTimeField(auto_now_add=True, verbose_name="Ultimo acceso al sistema")
 
     def __str__(self):
-        return self.Nombre + " " +self.ApellidoPaterno
+        return self.Nombres + " " +self.ApellidoPaterno
 
 
 class ExpedientePaciente(models.Model):
@@ -44,54 +44,46 @@ class ExpedientePaciente(models.Model):
     FechaCreacion = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.Nombre + " " +self.ApellidoPaterno
-
-class Doctor(models.Model):
-    usuario= models.ForeignKey(Usuario, verbose_name="Usuario", on_delete=models.RESTRICT)
-    Especialidad = models.CharField(max_length=50, verbose_name="Especialidad")
-
-    def __str__(self):
-        return self.Especialidad
+        return self.Nombres + " " +self.ApellidoPaterno
 
 class Nota(models.Model):
-    Nota = models.CharField(max_length=50, verbose_name="Nota")
-    FechaCreacion = models.DateTimeField()
-
+    Expedientepaciente= models.ForeignKey(ExpedientePaciente, verbose_name="Expediente del paciente", on_delete=models.RESTRICT)
+    Nota = models.CharField(max_length=200, verbose_name="Nota")
+    FechaCreacion = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.Nota
 
-class Expediente_Nota(models.Model):
-    expedientepaciente= models.ForeignKey(ExpedientePaciente, verbose_name="Expediente del paciente", on_delete=models.RESTRICT)
-    nota= models.ForeignKey(Nota, verbose_name="Nota", on_delete=models.RESTRICT)
+class Tratamiento(models.Model):
+    Tratamiento = models.CharField(max_length=50, verbose_name="Tratamiento")
+    Descripcion = models.CharField(max_length=200, verbose_name="Descripcion")
 
+    def __str__(self):
+        return self.Tratamiento
 
+class Doctor(models.Model):
+    Usuario= models.ForeignKey(Usuario, verbose_name="Usuario", on_delete=models.RESTRICT)
+    Especialidad = models.CharField(null=True,blank=True,max_length=60, verbose_name="Especialidad")
+    Tratamientos = models.ManyToManyField(Tratamiento, through='Doctor_Tratamiento')
+
+    def __str__(self):
+        return self.Usuario.Nombres + " " +self.Usuario.ApellidoPaterno
+
+class Doctor_Tratamiento(models.Model):
+    Doctor= models.ForeignKey(Doctor, verbose_name="Doctor", on_delete=models.CASCADE)
+    Tratamiento= models.ForeignKey(Tratamiento, verbose_name="Tratamiento", on_delete=models.CASCADE)
 
 class Cita(models.Model):
-    expedientepaciente= models.ForeignKey(ExpedientePaciente, verbose_name="Expediente del paciente", on_delete=models.RESTRICT)
+    Expedientepaciente= models.ForeignKey(ExpedientePaciente, verbose_name="Expediente del paciente", on_delete=models.RESTRICT)
     doctor= models.ForeignKey(Doctor, verbose_name="Doctor", on_delete=models.RESTRICT)
     Fecha =  models.DateField()
     HoraInicio = models.TimeField()
     HoraFin = models.TimeField()
     Tratamiento = models.CharField(max_length=50, verbose_name="Tratamiento")
-    FechaCreacion = models.DateTimeField()
+    FechaCreacion = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.Tratamiento
-
-class Tratamiento(models.Model):
-    Tratamiento = models.CharField(max_length=50, verbose_name="Tratamiento")
-    Descripcion = models.CharField(max_length=50, verbose_name="Descripcion")
-
-    def __str__(self):
-        return self.Tratamiento
-
-
-class Doctor_Tratamiento(models.Model):
-    doctor= models.ForeignKey(Doctor, verbose_name="Doctor", on_delete=models.RESTRICT)
-    tratamiento= models.ForeignKey(Tratamiento, verbose_name="Tratamiento", on_delete=models.RESTRICT)
-
-
 
 class Hora(models.Model):
     Dia =  models.DateField()

@@ -2,7 +2,7 @@ from django import forms
 from django.core.validators import RegexValidator
 
 from .models import (Usuario, ExpedientePaciente, Doctor,
-Nota, Expediente_Nota, Cita, Tratamiento, Doctor_Tratamiento, Hora,
+Nota, Cita, Tratamiento, Doctor_Tratamiento, Hora,
 Doctor_Hora)
 
 TIPO_EMPLEADO = (
@@ -128,5 +128,22 @@ class ExpedientePacienteForm(forms.ModelForm):
         )
     class Meta:
         model = ExpedientePaciente
+        fields = "__all__"
+        exclude = ["FechaCreacion"]
+
+class NotaForm(forms.ModelForm):
+    Expedientepaciente = forms.ModelChoiceField(
+        queryset=Usuario.objects.all(),
+        label="Paciente",
+        required=True,
+        )
+    Nota = forms.CharField(
+        max_length=200,
+        label="Contenido de la nota del paciente",
+        required=True,
+        widget=forms.Textarea(attrs={"placeholder": "Nota sobre el paciente", "class": "form-control"})
+        )
+    class Meta:
+        model = Nota
         fields = "__all__"
         exclude = ["FechaCreacion"]

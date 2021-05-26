@@ -3,10 +3,10 @@ from django.views import generic
 from django.urls import reverse_lazy
 
 from .models import (Usuario, ExpedientePaciente, Doctor,
-Nota, Expediente_Nota, Cita, Tratamiento, Doctor_Tratamiento, Hora,
+Nota, Cita, Tratamiento, Doctor_Tratamiento, Hora,
 Doctor_Hora)
 
-from .forms import UsuarioForm, ExpedientePacienteForm
+from .forms import UsuarioForm, ExpedientePacienteForm, NotaForm
 
 # Create your views here.
 class Index(generic.TemplateView):
@@ -22,5 +22,5 @@ class Test(generic.TemplateView):
 class NuevoUsuario(generic.CreateView):
     template_name = "pages/nuevo_usuario.html"
     model = Usuario
-    form_class = UsuarioForm
+    form_class = NotaForm
     success_url = reverse_lazy("Clinica:test")
