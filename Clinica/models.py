@@ -26,6 +26,13 @@ class Usuario(models.Model):
     Telefono = models.CharField(max_length=12,verbose_name="Telefono")
     UltimoAcceso = models.DateTimeField(auto_now_add=True, verbose_name="Ultimo acceso al sistema")
 
+    def save(self, *args, **kwargs):
+        is_new = True if not self.id else False
+        super(Usuario, self).save(*args, **kwargs)
+        if is_new and self.TipoEmpleado =='D':
+            doctor = Doctor(Usuario=self)
+            doctor.save()
+
     def __str__(self):
         return self.Nombres + " " +self.ApellidoPaterno
 
