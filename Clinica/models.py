@@ -13,6 +13,8 @@ GENERO = (
         ('M', 'Mujer'),
     )
 
+
+
 class Usuario(models.Model):
     NombreUsuario = models.CharField(max_length=30, verbose_name="Cuenta del usuario")
     Contrasena = models.CharField(max_length=50, verbose_name="Contraseña")
