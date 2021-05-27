@@ -6,7 +6,7 @@ from .models import (Usuario, ExpedientePaciente, Doctor,
 Nota, Cita, Tratamiento, Doctor_Tratamiento, Hora,
 Doctor_Hora)
 
-from .forms import UsuarioForm, ExpedientePacienteForm, NotaForm
+from .forms import UsuarioForm, ExpedientePacienteForm, NotaForm,CitaForm
 
 # Create your views here.
 class Index(generic.TemplateView):
@@ -21,6 +21,6 @@ class Test(generic.TemplateView):
 
 class NuevoUsuario(generic.CreateView):
     template_name = "pages/nuevo_usuario.html"
-    model = Usuario
-    form_class = NotaForm
+    model = Cita
+    form_class = CitaForm
     success_url = reverse_lazy("Clinica:test")

@@ -81,9 +81,9 @@ class Doctor_Tratamiento(models.Model):
     Tratamiento= models.ForeignKey(Tratamiento, verbose_name="Tratamiento", on_delete=models.CASCADE)
 
 class Cita(models.Model):
-    Expedientepaciente= models.ForeignKey(ExpedientePaciente, verbose_name="Expediente del paciente", on_delete=models.RESTRICT)
-    doctor= models.ForeignKey(Doctor, verbose_name="Doctor", on_delete=models.RESTRICT)
-    Fecha =  models.DateField()
+    ExpedientePaciente= models.ForeignKey(ExpedientePaciente, verbose_name="Expediente del paciente", on_delete=models.RESTRICT)
+    Doctor =models.ForeignKey(Doctor, verbose_name="Doctor", on_delete=models.RESTRICT)
+    Fecha= models.DateField(verbose_name="Fecha")
     HoraInicio = models.TimeField()
     HoraFin = models.TimeField()
     Tratamiento = models.CharField(max_length=50, verbose_name="Tratamiento")
@@ -96,10 +96,9 @@ class Hora(models.Model):
     Dia =  models.DateField()
     Hora = models.TimeField()
 
-
     def __str__(self):
         return self.Dia
 
 class Doctor_Hora(models.Model):
-    doctor= models.ForeignKey(Doctor, verbose_name="Doctor", on_delete=models.RESTRICT)
-    hora= models.ForeignKey(Hora, verbose_name="Hora", on_delete=models.RESTRICT)
+    Doctor= models.ForeignKey(Doctor, verbose_name="Doctor", on_delete=models.RESTRICT)
+    Hora= models.ForeignKey(Hora, verbose_name="Hora", on_delete=models.RESTRICT)
