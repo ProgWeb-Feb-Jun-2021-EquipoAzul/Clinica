@@ -40,6 +40,8 @@ INSTALLED_APPS = [
 
     ### USER APPS ###
     'Clinica',
+    'api',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
