@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
+from django.urls import reverse_lazy
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -133,3 +134,6 @@ STATICFILES_DIRS = [
 ]
 
 AUTH_USER_MODEL = 'Clinica.Usuario'
+
+LOGIN_REDIRECT_URL = 'Clinica:index'
+LOGOUT_REDIRECT_URL = 'login'

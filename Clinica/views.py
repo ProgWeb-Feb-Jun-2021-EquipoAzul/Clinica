@@ -14,11 +14,6 @@ from .forms import UsuarioForm, ExpedientePacienteForm, NotaForm,CitaForm,Doctor
 class Index(generic.TemplateView):
     template_name = "pages/index.html"
 
-# Logout temporal para que no mande error
-
-class Test(generic.TemplateView):
-    template_name = "pages/test.html"
-
 class NuevoUsuario(generic.CreateView):
     template_name = "pages/nuevo_usuario.html"
     model = Usuario

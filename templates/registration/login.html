@@ -73,8 +73,13 @@
 
 
                                             </form>{% endcomment %}
-                                            <form class="" action="index.html" method="post">
-                                                {{form.as_p}}
+                                            <form class="" action="{% url 'login' %}" method="POST">
+                                                {% csrf_token %}
+                                                {{form.username.label_tag}}
+                                                {{form.username}}
+                                                {{form.password.label_tag}}
+                                                {{form.password}}
+                                                {{form.errors}}
                                                 <button type="submit" name="button">Login</button>
                                             </form>
                                         </div>
