@@ -131,3 +131,5 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     BASE_DIR / "static-storage",
 ]
+
+AUTH_USER_MODEL = 'Clinica.Usuario'
