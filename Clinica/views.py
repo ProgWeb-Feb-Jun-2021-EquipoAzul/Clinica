@@ -10,9 +10,13 @@ Doctor_Hora)
 
 from .forms import UsuarioForm, ExpedientePacienteForm, NotaForm,CitaForm,DoctorForm
 
+
+URL_LOGIN='registration/login.html'
+
 # Create your views here.
-class Index(generic.TemplateView):
+class Index(LoginRequiredMixin, generic.TemplateView):
     template_name = "pages/index.html"
+    login_url = 'login'
 
 # Logout temporal para que no mande error
 class Login(generic.TemplateView):
@@ -30,7 +34,7 @@ class NuevoUsuario(generic.CreateView):
     template_name = "pages/nuevo_usuario.html"
     model = Usuario
     form_class = UsuarioForm
-    success_url = reverse_lazy("Clinica:test")
+    success_url = reverse_lazy("Clinica:index")
 
 '''class EditarUsuario(generic.UpdateView):
     template_name = "pages/editar_usuario.html"
