@@ -19,7 +19,7 @@ GENERO = (
 
 
 
-class UsuarioForm(forms.ModelForm):
+class UsuarioForm(forms.ModelForm): ### Para Crear Usuario y EditarUsuario
     password1 = forms.CharField(label='Password', widget=forms.PasswordInput)
     password2 = forms.CharField(label='Password confirmation', widget=forms.PasswordInput)
     TipoEmpleado = forms.ChoiceField(
@@ -223,3 +223,4 @@ class CitaForm(forms.ModelForm):
         model = Cita
         fields = "__all__"
         exclude = ["FechaCreacion"]
+###------------------------------------------------------------------------####

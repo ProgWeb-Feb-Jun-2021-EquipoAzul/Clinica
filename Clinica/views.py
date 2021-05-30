@@ -22,13 +22,14 @@ class Index(LoginRequiredMixin, generic.TemplateView):
 class Login(generic.TemplateView):
     template_name = "pages/login.html"
 
-'''class ListaUsuarios(generic.ListView):
+'''-------------------------------Administrador--------------------------------------'''
+class ListaUsuarios(generic.ListView):
     template_name = "pages/lista_usuarios.html"
     model = Usuario
 
 class DetallesUsuario(generic.DetailView):
     template_name = "pages/detalles_usuario.html"
-    model = Usuario'''
+    model = Usuario
 
 class NuevoUsuario(generic.CreateView):
     template_name = "pages/nuevo_usuario.html"
@@ -36,28 +37,31 @@ class NuevoUsuario(generic.CreateView):
     form_class = UsuarioForm
     success_url = reverse_lazy("Clinica:index")
 
-'''class EditarUsuario(generic.UpdateView):
+class EditarUsuario(generic.UpdateView):
     template_name = "pages/editar_usuario.html"
     model = Usuario
-    ##Faltaform_class =
+    form_class = UsuarioForm
     success_url = reverse_lazy("Clinica:detalles_usuario")
-
-class ListaTratamiento(generic.ListView):
-    template_name = "pages/lista_tratamientos.html"
-    model =  Tratamiento
 
 class CrearTratamiento(generic.CreateView):
     template_name = "pages/crear_tratamiento.html"
     model = Tratamiento
-    #form_class = TratamientoForm ##Checar cuando a edy de la gana hacer este forms
+    form_class = TratamientoForm
     success_url = reverse_lazy("Clinica:lista_tratamientos")
 
 class EditarTratamiento(generic.UpdateView):
     template_name = "pages/editar_tratamiento.html"
     model = Tratamiento
-    # Falta crear  form_class =
+    form_class = TratamientoForm
     success_url = reverse_lazy("Clinica:lista_tratamientos")
 
+class ListaTratamiento(generic.ListView):
+    template_name = "pages/lista_tratamientos.html"
+    model =  Tratamiento
+
+
+'''-------------------------------Fin Administrador--------------------------------------'''
+'''-------------------------------Recepcionista------------------------------------------'''
 class ListaDoctores(generic.ListView):
     template_name = "pages/lista_doctores.html"
     model = Doctor
@@ -66,7 +70,7 @@ class DetallesDoctor(generic.DetailView):
     template_name = template_name = "pages/detalles_doctor.html"
     model = Doctor
     success_url = reverse_lazy("Clinica:lista_doctores")
-
+'''
 class ListaPacientes(generic.ListView):
     template_name = "pages/lista_pacientes.html"
     model =  ExpedientePaciente
@@ -97,7 +101,9 @@ class EditarCita(generic.UpdateView):
     model = Cita
     #form_class
     success_url = reverse_lazy("Clinica:lista_citas")
-
+'''
+'''-----------------------------------------Doctor---------------------------------'''
+'''
 class PerfilDoctor(generic.DetailView):
     template_name = "pages/doctor_pk.html"
     model = Doctor
