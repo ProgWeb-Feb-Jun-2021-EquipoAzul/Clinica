@@ -1,6 +1,5 @@
 {% load static %}
 <!-- sidebar left start-->
-{% block sidebar%}
 <div class="sidebar-left">
     <div class="sidebar-left-info">
 
@@ -9,35 +8,72 @@
                 <img src="{% static '/images/users/avatar-1.jpg' %}" alt="" class="img-fluid rounded-circle">
             </div>
             <div class="text-center text-white mt-2">
-                <h6>Travis Watson</h6>
-                <p class="text-muted m-0">Admin</p>
+                <h6>{{user.Nombres}} {{user.ApellidoPaterno}}</h6>
+                <p class="text-muted m-0">
+                  {% if user.TipoEmpleado == 'R' %}
+                    Recepcionista
+                  {% elif user.TipoEmpleado == 'D' %}
+                    Doctor
+                  {% else %}
+                    Administrador
+                  {% endif %}
+                </p>
             </div>
         </div>
         <!--sidebar nav start-->
         <ul class="side-navigation">
+          <li>
+              <h3 class="navigation-title">Menú</h3>
+          </li>
+          {% if user.TipoEmpleado == 'R' %}
             <li>
-                <h3 class="navigation-title">Menú</h3>
+                <a href="#"><i class="fa fa-users"></i> <span>Pacientes</span></a>
             </li>
             <li>
-                <a href="#"><i class="mdi mdi-account-switch"></i> <span>Citas</span></a>
+                <a href="#">  <i class="fa fa-plus-square"></i> <span>Crear paciente</span></a>
             </li>
             <li>
-                <a href="#"><i class="mdi mdi-calendar"></i> <span>Horario</span></a>
+                <a href="#"><i class="fa fa-hand-o-right"></i> <span>Citas</span></a>
             </li>
             <li>
-                <a href="#"><i class="mdi mdi-calendar-plus"></i> <span>Editar Horario</span></a>
+                <a href="#">  <i class="fa fa-plus-square"></i> <span>Crear cita</span></a>
             </li>
             <li>
-                <a href="#"><i class="mdi mdi-account-settings"></i> <span>Ver Perfil</span></a>
+                <a href="#"><i class="fa fa-user-md"></i> <span>Doctores</span></a>
+            </li>
+          {% elif user.TipoEmpleado == 'D'%}
+            <li>
+                <a href="#"><i class="fa fa-hand-o-right"></i> <span>Citas</span></a>
             </li>
             <li>
-                <a href="#"><i class="mdi mdi-briefcase-check"></i> <span>Tratamientos</span></a>
+                <a href="#"><i class="fa fa-calendar"></i> <span>Horario</span></a>
             </li>
             <li>
-                <a href="{% url 'logout' %}"><i class="mdi mdi-account-off"></i> <span>Cerra Sesion</span></a>
+                <a href="#"><i class="fa fa-pencil-square-o"></i> <span>Editar horario</span></a>
             </li>
-
+            <li>
+                <a href="#"><i class="fa fa-user"></i> <span>Ver perfil</span></a>
+            </li>
+            <li>
+                <a href="#"><i class="fa fa-medkit"></i> <span>Tratamientos</span></a>
+            </li>
+          {% else %}
+            <li>
+                <a href="#"><i class="fa fa-users"></i> <span>Usuarios</span></a>
+            </li>
+            <li>
+                <a href="#">  <i class="fa fa-plus-square"></i><span>Crear usuario</span></a>
+            </li>
+            <li>
+                <a href="#"><i class="fa fa-medkit"></i> <span>Tratamientos</span></a>
+            </li>
+            <li>
+                <a href="#">  <i class="fa fa-plus-square"></i> <span> Crear tratamiento</span></a>
+            </li>
+          {% endif %}
+          <li>
+              <a href="{% url 'logout' %}"><i class="mdi mdi-account-off"></i> <span>Cerra Sesion</span></a>
+          </li>
         </ul><!--sidebar nav end-->
     </div>
 </div><!-- sidebar left end-->
-{% endblock %}

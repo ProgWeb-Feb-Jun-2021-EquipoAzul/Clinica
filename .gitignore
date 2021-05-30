@@ -1,4 +1,9 @@
+blue_team/__pycache__/
 
 Clinica/__pycache__/
 
-Clinica/migrations/
+api/__pycache__/
+
+api/migrations/__pycache__/
+
+Clinica/migrations/__pycache__/
