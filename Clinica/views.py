@@ -1,12 +1,14 @@
 from django.shortcuts import render
 from django.views import generic
 from django.urls import reverse_lazy
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .models import (Usuario, ExpedientePaciente, Doctor,
 Nota, Cita, Tratamiento, Doctor_Tratamiento, Hora,
 Doctor_Hora)
 
-from .forms import UsuarioForm, ExpedientePacienteForm, NotaForm,CitaForm
+from .forms import UsuarioForm, ExpedientePacienteForm, NotaForm,CitaForm,DoctorForm
 
 # Create your views here.
 class Index(generic.TemplateView):
@@ -15,9 +17,6 @@ class Index(generic.TemplateView):
 # Logout temporal para que no mande error
 class Login(generic.TemplateView):
     template_name = "pages/login.html"
-
-class Test(generic.TemplateView):
-    template_name = "pages/test.html"
 
 '''class ListaUsuarios(generic.ListView):
     template_name = "pages/lista_usuarios.html"
@@ -29,8 +28,8 @@ class DetallesUsuario(generic.DetailView):
 
 class NuevoUsuario(generic.CreateView):
     template_name = "pages/nuevo_usuario.html"
-    model = Cita
-    form_class = CitaForm
+    model = Usuario
+    form_class = UsuarioForm
     success_url = reverse_lazy("Clinica:test")
 
 '''class EditarUsuario(generic.UpdateView):

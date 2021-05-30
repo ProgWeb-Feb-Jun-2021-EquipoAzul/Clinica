@@ -5,6 +5,7 @@ from .models import (Usuario, ExpedientePaciente, Doctor,
 Nota, Cita, Tratamiento, Doctor_Tratamiento, Hora,
 Doctor_Hora)
 
+
 TIPO_EMPLEADO = (
         ('A', 'Administrador'),
         ('R', 'Recepcionista'),
@@ -16,19 +17,9 @@ GENERO = (
         ('M', 'Mujer'),
     )
 
+
+
 class UsuarioForm(forms.ModelForm):
-    NombreUsuario = forms.CharField(
-        max_length=30,
-        label="Cuenta del usuario",
-        required=True,
-        widget=forms.TextInput(attrs={"placeholder": "Jesus10", "class": "form-control"})
-        )
-    Contrasena = forms.CharField(
-        max_length=50,
-        label="Contraseña",
-        required=True,
-        widget=forms.PasswordInput(attrs={"placeholder": "*********", "class": "form-control"})
-        )
     TipoEmpleado = forms.ChoiceField(
         choices = TIPO_EMPLEADO,
         label="Tipo de empleado",
@@ -57,7 +48,7 @@ class UsuarioForm(forms.ModelForm):
         required=True,
         label="Fecha de nacimiento",
         widget=forms.DateInput(format='%d/%m/%Y',attrs={'type': 'date'}))
-    Correo = forms.EmailField(
+    email = forms.EmailField(
         max_length=50,
         label="Correo electrónico",
         required=True,
@@ -70,8 +61,7 @@ class UsuarioForm(forms.ModelForm):
         )
     class Meta:
         model = Usuario
-        fields = "__all__"
-        exclude = ["UltimoAcceso"]
+        fields = 'username', 'password', 'TipoEmpleado','Nombres','ApellidoPaterno','ApellidoMaterno','Genero','Nacimiento','email','Telefono'
 
 class ExpedientePacienteForm(forms.ModelForm):
     Nombres = forms.CharField(
@@ -174,12 +164,6 @@ class DoctorForm(forms.ModelForm):
         queryset=Usuario.objects.all(),
         label="Empleado",
         required=True,
-        )
-    Especialidad = forms.CharField(
-        max_length=60,
-        label="Descripción del tratamiento",
-        required=True,
-        widget=forms.Textarea(attrs={"placeholder": "Aqui esta la explicacion del tratamiento.", "class": "form-control"})
         )
     class Meta:
         model = Doctor
