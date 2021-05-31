@@ -1,0 +1,21 @@
+{% extends "utilities/base.html" %}
+
+{% block titulo %}Agregar a horario{% endblock %}
+
+{% block contenido %}
+<div class="body-content">
+    <div class="container-fluid">
+        <div class="page-head">
+          <h1>Agregar Usuario</h1>
+        </div>
+        <div class="">
+          <form method="post">
+              {%csrf_token%}
+              {{form}}
+              <button type="submit">Crear</button>
+          </form>
+        </div>
+    </div><!--end container-->
+</div>
+
+{% endblock contenido%}

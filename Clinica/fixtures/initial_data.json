@@ -1,0 +1,28 @@
+[
+  {
+    "model": "Clinica.usuario",
+    "pk": 1,
+    "fields": {
+      "password": "pbkdf2_sha256$216000$6Qil86XeEZ96$vM47rNfwf99mQkcc/9B8Un2MJue3UgamSZVjipmW/Tg=",
+      "last_login": null,
+      "is_superuser": true,
+      "first_name": "",
+      "last_name": "",
+      "is_staff": true,
+      "is_active": true,
+      "username": "ed",
+      "TipoEmpleado": "A",
+      "Nombres": "",
+      "ApellidoPaterno": "",
+      "ApellidoMaterno": "",
+      "Genero": "",
+      "Nacimiento": null,
+      "email": "",
+      "Telefono": null,
+      "date_joined":
+      "2021-05-30T22:29:13.511Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  }
+]

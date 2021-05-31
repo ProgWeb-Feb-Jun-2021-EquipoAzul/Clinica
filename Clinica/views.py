@@ -3,44 +3,90 @@ from django.views import generic
 from django.urls import reverse_lazy
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import HttpResponseRedirect
+from django.db.models import Q
 
 from .models import (Usuario, ExpedientePaciente, Doctor,
-Nota, Cita, Tratamiento, Doctor_Tratamiento, Hora,
-Doctor_Hora)
+Nota, Cita, Tratamiento, Doctor_Tratamiento, Hora)
 
-from .forms import UsuarioForm, ExpedientePacienteForm, NotaForm,CitaForm,DoctorForm
+from .forms import (NuevoUsuarioForm, EditarUsuarioForm, ExpedientePacienteForm, NotaForm,CitaForm,DoctorForm,HoraForms)
 
 
-URL_LOGIN='registration/login.html'
+URL_LOGIN='login'
 
-# Create your views here.
+
+#-----------------VIEWS GENERALES-----------------
+
 class Index(LoginRequiredMixin, generic.TemplateView):
     template_name = "pages/index.html"
-    login_url = 'login'
+    login_url = URL_LOGIN
 
 # Logout temporal para que no mande error
 class Login(generic.TemplateView):
     template_name = "pages/login.html"
 
-'''class ListaUsuarios(generic.ListView):
+#--------------VIEWS ADMINISTRADOR-------------
+class ListaUsuarios(LoginRequiredMixin,generic.ListView):
     template_name = "pages/lista_usuarios.html"
-    model = Usuario
+    login_url = URL_LOGIN
+    queryset = Usuario.objects.filter(Q(TipoEmpleado='R') | Q(TipoEmpleado='D')).order_by("Nombres")
 
-class DetallesUsuario(generic.DetailView):
-    template_name = "pages/detalles_usuario.html"
-    model = Usuario'''
-
-class NuevoUsuario(generic.CreateView):
+class NuevoUsuario(LoginRequiredMixin,generic.CreateView):
     template_name = "pages/nuevo_usuario.html"
+    login_url = URL_LOGIN
     model = Usuario
-    form_class = UsuarioForm
+    form_class = NuevoUsuarioForm
     success_url = reverse_lazy("Clinica:index")
 
-'''class EditarUsuario(generic.UpdateView):
+class EditarUsuario(LoginRequiredMixin,generic.UpdateView):
     template_name = "pages/editar_usuario.html"
+    login_url = URL_LOGIN
     model = Usuario
-    ##Faltaform_class =
-    success_url = reverse_lazy("Clinica:detalles_usuario")
+    form_class = EditarUsuarioForm
+    success_url = reverse_lazy("Clinica:lista_usuarios")
+
+class DetallesUsuario(LoginRequiredMixin,generic.DetailView):
+    template_name = "pages/detalles_usuario.html"
+    login_url = URL_LOGIN
+    model = Usuario
+
+class BorrarUsuario(LoginRequiredMixin,generic.DeleteView):
+    template_name = "pages/borrar_usuario.html"
+    login_url = URL_LOGIN
+    model = Usuario
+    success_url = reverse_lazy("Clinica:lista_usuarios")
+
+#--------------VIEWS RECEPCIONISTA-------------
+
+#-----------------VIEWS DOCTOR-----------------
+
+
+
+
+class AgregarHorario(generic.CreateView):
+    template_name = "pages/agregar_horario.html"
+    model = Hora
+    form_class = HoraForms
+    success_url = reverse_lazy("Clinica:index")
+
+    #Agrega la pk de doctor a la que pertenece la hora agregada
+    def form_valid(self, form):
+        obj = form.save(commit=False)
+        obj.Doctor = Doctor.objects.filter(Usuario=self.request.user).first()
+        obj.save()
+        return super().form_valid(form)
+
+
+'''
+class Index1(generic.ListView):
+        template_name = "home/pag1.html"
+
+
+'''
+
+
+
+'''
 
 class ListaTratamiento(generic.ListView):
     template_name = "pages/lista_tratamientos.html"
