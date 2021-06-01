@@ -1,7 +1,6 @@
 from django.contrib import admin
 from .models import (Usuario, ExpedientePaciente, Doctor,
-Nota, Cita, Tratamiento, Doctor_Tratamiento, Hora,
-Doctor_Hora)
+Nota, Cita, Tratamiento, Doctor_Tratamiento, Hora)
 
 # Register your models here.
 admin.site.register(Usuario)
@@ -12,4 +11,3 @@ admin.site.register(Cita)
 admin.site.register(Tratamiento)
 admin.site.register(Doctor_Tratamiento)
 admin.site.register(Hora)
-admin.site.register(Doctor_Hora)

@@ -1,0 +1,17 @@
+++++++++++++++++++++++++++++++++++++++++++++++++
++"para descargar los datos de la base de datos"+
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+python manage.py dumpdata --format=json Clinica > Clinica/fixtures/initial_data.json
+
+++++++++++++++++++++++++++++++++++++++++++++
++"para meter los datos en la base de datos"+
+++++++++++++++++++++++++++++++++++++++++++++
+
+python manage.py loaddata initial_data.json
+
+_________________________________________________________________________
+_puedes ser mas especifico sobre que modelo quieres descargar datos asi:_
+_________________________________________________________________________
+
+python manage.py dumpdata --format=json Clinica:Usuario/ > Clinicafixtures/usuario_data.json

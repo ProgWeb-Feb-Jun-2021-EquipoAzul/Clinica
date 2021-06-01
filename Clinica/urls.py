@@ -6,15 +6,18 @@ app_name = "Clinica"
 urlpatterns = [
 <<<<<<< HEAD
     path('index/',views.Index.as_view(),name="index"),
+
+    #Administrador
+    path('lista_usuarios/',views.ListaUsuarios.as_view(), name="lista_usuarios"),
     path('nuevo_usuario/',views.NuevoUsuario.as_view(), name="nuevo_usuario"),
+    path('editar_usuario/<int:pk>', views.EditarUsuario.as_view(), name="editar_usuario"),
+    path('detalles_usuario/<int:pk>', views.DetallesUsuario.as_view(), name="detalles_usuario"),
+    path('borrar_usuario/<int:pk>', views.BorrarUsuario.as_view(), name="borrar_usuario"),
+    #Recepcionista
+    #Doctor
+    path('agregar_horario/',views.AgregarHorario.as_view(), name="agregar_horario"),
 =======
-    path('index',views.Index.as_view(),name="index"),
-    path('login',views.Login.as_view(), name="login"),
-    path('test',views.Test.as_view(), name="test"),
-    path('nuevo_usuario/',views.NuevoUsuario.as_view(), name="nuevo_usuario"),
     path('lista_usuarios/', views.ListaUsuarios.as_view(), name="lista_usuarios"),
-    path('detalles_usuarios/<int:pk>/', views.DetallesUsuario.as_view(), name="detalles_usuario"),
-    path('editar_usuario/<int:pk>/', views.EditarUsuario.as_view(), name="detalles_usuario"),
     path('lista_tratamientos/', views.ListaTratamiento.as_view(), name="lista_tratamientos"),
     path('crear_tratamiento/', views.CrearTratamiento.as_view(), name="crear_tratamiento"),
     path('editar_tratamiento/<int:pk>/', views.EditarTratamiento.as_view(), name="editar_tratamiento"),

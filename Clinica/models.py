@@ -19,6 +19,21 @@ GENERO = (
         ('M', 'Mujer'),
     )
 
+DIA = (
+        ('Domingo', 'Domingo'),
+        ('Lunes', 'Lunes'),
+        ('Martes', 'Martes'),
+        ('Miercoles', 'Miercoles'),
+        ('Jueves', 'Jueves'),
+        ('Viernes', 'Viernes'),
+        ('Sabado', 'Sabado'),
+    )
+
+GENERO = (
+        ('H', 'Hombre'),
+        ('M', 'Mujer'),
+    )
+
 class Usuario(AbstractUser):
     username = models.CharField(
         max_length=50,
@@ -104,26 +119,30 @@ class Tratamiento(models.Model):
 
     def __str__(self):
         return self.Tratamiento
-
-class Hora(models.Model):
-    Dia =  models.DateField()
-    Hora = models.TimeField()
-
-    def __str__(self):
-        return str(self.Dia)
-
+        
 class Doctor(models.Model):
     Usuario= models.OneToOneField(Usuario, on_delete=models.CASCADE)
     Especialidad = models.CharField(null=True,blank=True,max_length=60, verbose_name="Especialidad")
     Tratamientos = models.ManyToManyField(Tratamiento, through='Clinica.Doctor_Tratamiento')
-    Horas = models.ManyToManyField(Hora, through='Clinica.Doctor_Hora')
 
     def __str__(self):
         return self.Usuario.Nombres + " " +self.Usuario.ApellidoPaterno
 
+class Hora(models.Model):
+    Doctor= models.ForeignKey(Doctor, verbose_name="Doctor", on_delete=models.CASCADE)
+    Dia =  models.CharField(max_length=10,choices=DIA,verbose_name="Género",blank=True)
+    Hora = models.TimeField()
+    class Meta:
+        unique_together = ('Doctor','Dia', 'Hora')
+
+    def __str__(self):
+        return self.Dia + " " + self.Hora.strftime("%H:%M")
+
+
+'''
 class Doctor_Hora(models.Model):
     Doctor= models.ForeignKey(Doctor, verbose_name="Doctor", on_delete=models.RESTRICT)
-    Hora= models.ForeignKey(Hora, verbose_name="Hora", on_delete=models.RESTRICT)
+    Hora= models.ForeignKey(Hora, verbose_name="Hora", on_delete=models.RESTRICT)'''
 
 class Doctor_Tratamiento(models.Model):
     Doctor= models.ForeignKey(Doctor, verbose_name="Doctor", on_delete=models.CASCADE)

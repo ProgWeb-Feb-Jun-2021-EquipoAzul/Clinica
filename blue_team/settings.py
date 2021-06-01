@@ -137,3 +137,9 @@ AUTH_USER_MODEL = 'Clinica.Usuario'
 
 LOGIN_REDIRECT_URL = 'Clinica:index'
 LOGOUT_REDIRECT_URL = 'login'
+
+import os
+PROJECT_DIR = os.path.abspath(os.path.dirname(__file__))
+FIXTURE_DIRS = (
+   os.path.join(PROJECT_DIR, 'fixtures'),
+)

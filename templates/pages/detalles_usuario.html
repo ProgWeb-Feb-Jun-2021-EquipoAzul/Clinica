@@ -1,0 +1,25 @@
+{% extends "utilities/base.html" %}
+
+{% block titulo %}Detalles usuario{% endblock %}
+
+{% block contenido %}
+<div class="body-content">
+    <div class="container-fluid">
+        <div class="page-head">
+          <h1>Detalles del usuario</h1>
+        </div>
+        <div class="h5 mb-0 font-weight-bold text-gray-800">
+          {{ object.username }} <br>
+          {{ object.TipoEmpleado}} <br>
+          {{ object.Nombres}} <br>
+          {{ object.ApellidoPaterno}} <br>
+          {{ object.Genero}} <br>
+          {{ object.Nacimiento}} <br>
+          {{ object.email}} <br>
+          {{ object.Telefono}} <br>
+          {{ object.date_joined}} <br>
+        </div>
+    </div><!--end container-->
+</div>
+
+{% endblock contenido%}

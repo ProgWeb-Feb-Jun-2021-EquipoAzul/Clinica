@@ -1,0 +1,98 @@
+[
+  {
+    "model":"Clinica.Usuario",
+    "pk":1,
+    "fields":{
+      "username":"edy",
+      "password":"pbkdf2_sha256$216000$U228OlC7hG1z$tL3sYLYYKO+0hFYli8pi31l6mvTiFroPKNrT91+Vxoc=",
+      "TipoEmpleado":"A",
+      "Nombres":"Edy Jesus Manuel",
+      "ApellidoPaterno":"Cota",
+      "ApellidoMaterno":"Villa",
+      "Genero":"H",
+      "Nacimiento":"1999-05-04",
+      "email":"edy@gmail.com",
+      "Telefono":"6645698521",
+      "last_login": null,
+      "is_superuser": true,
+      "is_staff": false,
+      "is_active": true,
+      "groups": [],
+      "date_joined":
+      "2021-05-30T22:29:13.511Z",
+      "user_permissions": []
+    }
+  },
+  {
+    "model":"Clinica.Usuario",
+    "pk":2,
+    "fields":{
+      "username":"Administrador",
+      "password":"pbkdf2_sha256$216000$c0Lf9VSSxe28$SMdRli1cNkR05qEG1PNkj8+9qECg7z0NKDtC03aF+CI=",
+      "TipoEmpleado":"A",
+      "Nombres":"Ricardo",
+      "ApellidoPaterno":"Estefando",
+      "ApellidoMaterno":"Ayala",
+      "Genero":"H",
+      "Nacimiento":"1999-05-04",
+      "email":"ricardo@gmail.com",
+      "Telefono":"6654875698",
+      "last_login": null,
+      "is_superuser": true,
+      "is_staff": false,
+      "is_active": true,
+      "groups": [],
+      "date_joined":
+      "2021-05-30T22:29:13.511Z",
+      "user_permissions": []
+    }
+  },
+  {
+    "model":"Clinica.Usuario",
+    "pk":3,
+    "fields":{
+      "username":"Recepcionista",
+      "password":"pbkdf2_sha256$216000$hVbEOQyElySl$SCrEfAsgazJtATXXMHoTONjGZCBFWKas/Lg8WUEsgdg=",
+      "TipoEmpleado":"R",
+      "Nombres":"Leticia",
+      "ApellidoPaterno":"Calderon",
+      "ApellidoMaterno":"Librera",
+      "Genero":"M",
+      "Nacimiento":"1988-12-14",
+      "email":"leticia@gmail.com",
+      "Telefono":"6646328595",
+      "last_login": null,
+      "is_superuser": true,
+      "is_staff": false,
+      "is_active": true,
+      "groups": [],
+      "date_joined":
+      "2021-05-30T22:29:13.511Z",
+      "user_permissions": []
+    }
+  },
+  {
+    "model":"Clinica.Usuario",
+    "pk":4,
+    "fields":{
+      "username":"Doctor",
+      "password":"pbkdf2_sha256$216000$c0Lf9VSSxe28$SMdRli1cNkR05qEG1PNkj8+9qECg7z0NKDtC03aF+CI=",
+      "TipoEmpleado":"D",
+      "Nombres":"Juan",
+      "ApellidoPaterno":"Madero",
+      "ApellidoMaterno":"Cabrera",
+      "Genero":"H",
+      "Nacimiento":"1989-12-27",
+      "email":"leticia@gmail.com",
+      "Telefono":"6645871236",
+      "last_login": null,
+      "is_superuser": true,
+      "is_staff": false,
+      "is_active": true,
+      "groups": [],
+      "date_joined":
+      "2021-05-30T22:29:13.511Z",
+      "user_permissions": []
+    }
+  }
+]
