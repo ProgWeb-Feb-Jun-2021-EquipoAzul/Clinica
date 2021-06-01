@@ -96,42 +96,42 @@ class EditarCita(generic.UpdateView):
     success_url = reverse_lazy("Clinica:lista_citas")
 
 class PerfilDoctor(generic.DetailView):
-    template_name = "pages/doctor_pk.html"
+    template_name = "pages/doctor.html"
     model = Doctor
 
-class tramientosDoctor(generic.ListView):
-    template_name = "pages/doctor_tratamientos_pk.html"
+class TramientosDoctor(generic.ListView):
+    template_name = "pages/doctor_tratamientos.html"
     model = Tratamiento
-    success_url = reverse_lazy("Clinica:doctor_pk")
+    success_url = reverse_lazy("Clinica:doctor")
 
 class HorarioDoctor(generic.ListView):
-    template_name = "pages/horario_doctor_pk.html"
+    template_name = "pages/horario_doctor.html"
     model = HorarioDoctor
-    success_url = reverse_lazy("Clinica:doctor_pk")
+    success_url = reverse_lazy("Clinica:doctor")
 
 class EditarHorario(generic.UpdateView):
     template_name = "pages/editar_horario.html"
     model = HorarioDoctor
     #form_class
-    success_url = reverse_lazy("Clinica:horario_doctor_pk")
+    success_url = reverse_lazy("Clinica:horario_doctor")
 
 class CitasDoctor(generic.ListView):
-    template_name = "pages/doctor_citas_pk.html"
+    template_name = "pages/doctor_citas.html"
     model = Cita
-    success_url = reverse_lazy("Clinica:doctor_pk")
+    success_url = reverse_lazy("Clinica:doctor")
 
 class VerNotas(generic.ListView):
-    template_name = "pages/doctor_notas_pk.html"
+    template_name = "pages/doctor_notas.html"
     model = Nota
-    success_url = reverse_lazy("Clinica:doctor_citas_pk")
+    success_url = reverse_lazy("Clinica:doctor_citas")
 
 class CrearNota(generic.CreateView):
-    template_name = "pages/crear_notas_pk.html"
+    template_name = "pages/crear_notas.html"
     model = Nota
     #form_class
-    success_url = reverse_lazy("Clinica:doctor_citas_pk")
+    success_url = reverse_lazy("Clinica:doctor_citas")
 
 class VerPaciente(generic.DetailView):
-    template_name = "pages/expedientepaciente_pk.html"
+    template_name = "pages/expedientepaciente.html"
     model = ExpedientePaciente
-    success_url = reverse_lazy("Clinica:doctor_citas_pk")'''
+    success_url = reverse_lazy("Clinica:doctor_citas")'''
