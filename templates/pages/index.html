@@ -3,13 +3,11 @@
 {% block titulo %}Index{% endblock %}
 
 {% block contenido %}
-        <div class="body-content">
-            <div class="container-fluid">
-                <div class="page-head">
-                  {% if user.is_authenticated %}
-                      <h1>Auntenticado</h1>
-                  {% endif %}
-                </div>
-            </div><!--end container-->
-        </div>
+        <div class="container-fluid">
+            <div class="page-head">
+                {% if user.is_authenticated %}
+                    <h1>Auntenticado</h1>
+                {% endif %}
+            </div>
+        </div><!--end container-->
 {% endblock contenido%}

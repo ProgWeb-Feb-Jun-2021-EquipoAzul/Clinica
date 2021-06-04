@@ -3,18 +3,15 @@
 {% block titulo %}Borrar usuario{% endblock %}
 
 {% block contenido %}
-<div class="body-content">
-    <div class="container-fluid">
-        <div class="page-head">
-          <h1>Borrar usuario</h1>
-        </div>
-        <form method="post">
-          {% csrf_token %}
-          <h2>¿Deseas borrar al usuario?: {{ object }}</h2>
-          <button type="submit">Delete</button>
-          <button type="reset">Cancel</button>
-        </form>
-    </div><!--end container-->
-</div>
-
+  <div class="container-fluid">
+      <div class="page-head">
+        <h1>Borrar usuario</h1>
+      </div>
+      <form method="post">
+        {% csrf_token %}
+        <h2>¿Deseas borrar al usuario?: {{ object }}</h2>
+        <button type="submit">Delete</button>
+        <button type="reset">Cancel</button>
+      </form>
+  </div><!--end container-->
 {% endblock contenido%}
