@@ -86,8 +86,8 @@ class Index1(generic.ListView):
 
 
 
-'''
 
+'''
 class ListaTratamiento(generic.ListView):
     template_name = "pages/lista_tratamientos.html"
     model =  Tratamiento
