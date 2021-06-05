@@ -101,6 +101,7 @@ class ExpedientePaciente(models.Model):
     Alergias = models.CharField(max_length=200, verbose_name="Alergias")
     Padecimientos = models.CharField(max_length=200, verbose_name="Padecimientos")
     FechaCreacion = models.DateTimeField(auto_now_add=True)
+    ##Fechaupdate
 
     def __str__(self):
         return self.Nombres + " " +self.ApellidoPaterno
@@ -117,9 +118,11 @@ class Tratamiento(models.Model):
     Tratamiento = models.CharField(max_length=50, verbose_name="Tratamiento")
     Descripcion = models.CharField(max_length=200, verbose_name="Descripcion")
 
+
+
     def __str__(self):
         return self.Tratamiento
-        
+
 class Doctor(models.Model):
     Usuario= models.OneToOneField(Usuario, on_delete=models.CASCADE)
     Especialidad = models.CharField(null=True,blank=True,max_length=60, verbose_name="Especialidad")

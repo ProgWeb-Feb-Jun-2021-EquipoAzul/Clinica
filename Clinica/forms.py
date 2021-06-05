@@ -216,6 +216,64 @@ class ExpedientePacienteForm(forms.ModelForm):
         fields = "__all__"
         exclude = ["FechaCreacion"]
 
+class EditarPacienteForm(forms.ModelForm):
+    Nombres = forms.CharField(
+        max_length=50,
+        label="Nombres",
+        required=True,
+        widget=forms.TextInput(attrs={"placeholder": "Jesús Manuel", "class": "form-control"})
+        )
+    ApellidoPaterno = forms.CharField(
+        max_length=50,
+        label="Apellido Paterno",
+        required=True,
+        widget=forms.TextInput(attrs={"placeholder": "Cota", "class": "form-control"}))
+    ApellidoMaterno = forms.CharField(
+        max_length=50,
+        label="Apellido Materno",
+        required=True,
+        widget=forms.TextInput(attrs={"placeholder": "Villa", "class": "form-control"}))
+    Genero = forms.ChoiceField(
+        choices = GENERO,
+        label="Género",
+        required=True)
+    Nacimiento = forms.DateField(
+        required=True,
+        label="Fecha de nacimiento",
+        widget=forms.DateInput(format='%d/%m/%Y',attrs={'type': 'date'}))
+    Direccion = forms.CharField(
+        max_length=80,
+        label="Dirección",
+        required=True,
+        widget=forms.TextInput(attrs={"placeholder": "Avenida San Juan", "class": "form-control"}))
+    Correo = forms.EmailField(
+        max_length=50,
+        label="Correo electrónico",
+        required=True,
+        widget=forms.TextInput(attrs={"placeholder": "correo@sitio.com", "class": "form-control"}))
+    Telefono = forms.CharField(
+        max_length=12,
+        label="Telefono",
+        required=True,
+        widget=forms.TextInput(attrs={"placeholder": "6642545896", "class": "form-control"})
+        )
+    Alergias = forms.CharField(
+        max_length=200,
+        label="Alergias",
+        required=True,
+        widget=forms.Textarea(attrs={"placeholder": "Descripción de las alergias del paciente.", "class": "form-control"})
+        )
+    Padecimientos = forms.CharField(
+        max_length=200,
+        label="Padecimientos",
+        required=True,
+        widget=forms.Textarea(attrs={"placeholder": "Descripción de Padecimientos del paciente.", "class": "form-control"})
+        )
+    class Meta:
+        model = ExpedientePaciente
+        fields = "__all__"
+        exclude = ["FechaCreacion"]
+
 class NotaForm(forms.ModelForm):
     Expedientepaciente = forms.ModelChoiceField(
         queryset=Usuario.objects.all(),
@@ -234,6 +292,24 @@ class NotaForm(forms.ModelForm):
         exclude = ["FechaCreacion"]
 
 class TratamientoForm(forms.ModelForm):
+    Tratamiento = forms.CharField(
+        max_length=50,
+        label="Nombre del tratamiento",
+        required=True,
+        widget=forms.Textarea(attrs={"placeholder": "Tratamiento", "class": "form-control"})
+        )
+    Descripcion = forms.CharField(
+        max_length=200,
+        label="Descripción del tratamiento",
+        required=True,
+        widget=forms.Textarea(attrs={"placeholder": "Aqui esta la explicacion del tratamiento.", "class":"form-control"})
+        )
+    class Meta:
+        model = Tratamiento
+        fields = "__all__"
+        exclude = []
+
+class EditarTratamientoForm(forms.ModelForm):
     Tratamiento = forms.CharField(
         max_length=50,
         label="Nombre del tratamiento",
