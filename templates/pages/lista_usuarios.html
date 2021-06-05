@@ -19,9 +19,9 @@
             <td>{{ Usuario.email }}</td>
             <td>{{ Usuario.TipoEmpleado }}</td>
             <td>{{ Usuario.date_joined }}</td>
-            <td><a href="{% url 'Clinica:detalles_usuario' Usuario.pk%}">Detail</a></td>
-            <td><a href="{% url 'Clinica:editar_usuario' Usuario.pk%}">Update</a></td>
-            <td><a href="{% url 'Clinica:borrar_usuario' Usuario.pk%}">Delete</a></td>
+            <td><a href="{% url 'Clinica:detalles_usuario' Usuario.pk%}">Detalles</a></td>
+            <td><a href="{% url 'Clinica:editar_usuario' Usuario.pk%}">Editar</a></td>
+            <td><a href="{% url 'Clinica:borrar_usuario' Usuario.pk%}">Eliminar</a></td>
           </tr>
           {% endfor %}
         </table>
