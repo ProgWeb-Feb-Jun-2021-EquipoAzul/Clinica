@@ -12,12 +12,21 @@ urlpatterns = [
     path('editar_usuario/<int:pk>', views.EditarUsuario.as_view(), name="editar_usuario"),
     path('detalles_usuario/<int:pk>', views.DetallesUsuario.as_view(), name="detalles_usuario"),
     path('borrar_usuario/<int:pk>', views.BorrarUsuario.as_view(), name="borrar_usuario"),
+    ###____________________________________Tratamientos________________________________________''
     path('lista_tratamientos/', views.ListaTratamiento.as_view(), name="lista_tratamientos"),
-    path('editar_tratamiento/', views.EditarTratamiento.as_view(), name="editar_tratamiento"),
+    path('editar_tratamiento/<int:pk>', views.EditarTratamiento.as_view(), name="editar_tratamiento"),
+    path('borrar_tratamiento/<int:pk>', views.borrar_tratamiento.as_view(), name="borrar_tratamiento"),
+    path('crear_tratamiento/', views.CrearTratamiento.as_view(), name="crear_tratamiento"),
     #Recepcionista
     path('lista_pacientes/', views.ListaPacientes.as_view(), name="lista_pacientes"),
     path('editar_paciente/<int:pk>/', views.EditarPaciente.as_view(), name="editar_paciente"),
     path('detalles_paciente/<int:pk>/', views.DetallesPaciente.as_view(), name="detalles_paciente"),
+    ###_____________________________Citas_________________________________________
+    path('crear_cita/', views.CrearCita.as_view(), name="crear_cita"),
+    path('lista_citas/', views.ListaCitas.as_view(), name="lista_citas"),
+    path('editar_cita/<int:pk>', views.EditarCita.as_view(), name="editar_cita"),
+    path('borrar_cita/<int:pk>', views.BorrarCita.as_view(), name="borrar_cita"),
+    path('detalles_cita/<int:pk>/', views.DetallesCita.as_view(), name="detalles_cita"),
     #Doctor
     path('lista_doctores/', views.ListaDoctores.as_view(), name="lista_doctores"),
     path('detalles_doctor/<int:pk>/', views.DetallesDoctor.as_view(), name="detalles_doctor"),

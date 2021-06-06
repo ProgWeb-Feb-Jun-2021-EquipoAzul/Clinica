@@ -157,8 +157,9 @@ class Cita(models.Model):
     Fecha= models.DateField(verbose_name="Fecha")
     HoraInicio = models.TimeField()
     HoraFin = models.TimeField()
-    Tratamiento = models.CharField(max_length=50, verbose_name="Tratamiento")
+    Tratamiento= models.ForeignKey(Tratamiento, verbose_name="Tratamiento", on_delete=models.CASCADE)
+    '''Tratamiento = models.CharField(max_length=50, verbose_name="Tratamiento")'''
     FechaCreacion = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.Tratamiento
+        return self.ExpedientePaciente

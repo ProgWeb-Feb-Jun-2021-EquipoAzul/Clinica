@@ -346,13 +346,13 @@ Buscar como hacer eventos para hacer los queries de las horas y
 tratamientos del Doctor cuando se selecciona el doctor
 '''
 class CitaForm(forms.ModelForm):
-    Doctor = forms.ModelChoiceField(
-        queryset=Doctor.objects.all(),
-        label="Doctor",
-        required=True)
     ExpedientePaciente = forms.ModelChoiceField(
         queryset=ExpedientePaciente.objects.all(),
         label="Paciente",
+        required=True)
+    Doctor = forms.ModelChoiceField(
+        queryset=Doctor.objects.all(),
+        label="Doctor",
         required=True)
     Fecha = forms.DateField(
         required=True,
@@ -366,11 +366,10 @@ class CitaForm(forms.ModelForm):
         required=True,
         label="Hora fin de la cita",
         widget=forms.TimeInput(format='%H:%M'))
-    Tratamiento = forms.CharField(
-        max_length=50,
-        label="Tratamiento a realizarse",
-        required=True,
-        widget=forms.TextInput(attrs={"placeholder": "Tratamiento", "class": "form-control"}))
+    Tratamiento = forms.ModelChoiceField(
+        queryset=Tratamiento.objects.all(),
+        label="Tratamiento",
+        required=True)
 
     class Meta:
         model = Cita
