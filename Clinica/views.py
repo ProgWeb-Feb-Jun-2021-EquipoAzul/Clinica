@@ -78,6 +78,11 @@ class EditarPaciente(generic.UpdateView):
     form_class = EditarPacienteForm
     success_url = reverse_lazy("Clinica:lista_pacientes")
 
+class DetallesPaciente(generic.DetailView):
+    template_name = "pages/detalles_paciente.html"
+    model =  ExpedientePaciente
+    success_url = reverse_lazy("Clinica:lista_pacientes")
+
 #-----------------VIEWS DOCTOR-----------------
 
 
@@ -101,7 +106,7 @@ class ListaDoctores(generic.ListView):
     model = Doctor
 
 class DetallesDoctor(generic.DetailView):
-    template_name = template_name = "pages/detalles_doctor.html"
+    template_name = "pages/detalles_doctor.html"
     model = Doctor
     success_url = reverse_lazy("Clinica:lista_doctores")
 '''
@@ -131,13 +136,8 @@ class CrearTratamiento(generic.CreateView):
 
 
 
-'''
 
-'''
-class DetallesPaciente(generic.DetailView:
-    template_name = "pages/detalles_paciente.html"
-    model =  ExpedientePaciente
-    success_url = reverse_lazy("Clinica:lista_pacientes")
+
 
 '''
 

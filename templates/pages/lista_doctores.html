@@ -5,20 +5,23 @@
 {% block contenido %}
   <div class="container-fluid">
       <div class="page-head">
-        <h1>Lista de docotores</h1>
+        <h1>Lista de doctores</h1>
       </div>
       <div class="">
         <table class="table">
           <th>Nombre</th>
-          <!--<th>Especialidad</th>-->
+          <th>Especialidad</th>
           <th>Correo</th>
           <th>Telefono</th>
-          {% for Usuario in object_list %}
+          {% for Doctor in object_list %}
           <tr>
-            <td>{{ Usuario.Nombres }} {{ Usuario.ApellidoPaterno }}</td>
-            <td>{{ Usuario.Telefono}}</td>
-            <td>{{ Usuario.Correo }}</td>
-            <td><a href="{% url 'Clinica:detalles_doctor' Usuario.pk%}">Detalles</a></td>
+            <td>{{ Doctor.Usuario.Nombres }} {{ Doctor.Usuario.ApellidoPaterno }}</td>
+            <td>{{ Doctor.Especialidad }}</td>
+            <td>{{ Doctor.Usuario.Correo }}</td>
+            <td>{{ Doctor.Usuario.Telefono}}</td>          
+            <td><a href="{% url 'Clinica:detalles_doctor' Doctor.pk%}">Detalles</a></td>
+
+
           </tr>
           {% endfor %}
 

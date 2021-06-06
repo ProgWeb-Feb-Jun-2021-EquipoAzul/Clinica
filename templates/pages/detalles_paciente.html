@@ -1,0 +1,22 @@
+{% extends "utilities/base.html" %}
+{% block titulo %}Detalles paciente{% endblock %}
+
+{% block contenido %}
+  <div class="container-fluid">
+      <div class="page-head">
+        <h1>Detalles del paciente</h1>
+      </div>
+      <div class="h5 mb-0 font-weight-bold text-gray-800">
+        {{ object.Nombres}} <br>
+        {{ object.ApellidoPaterno}} <br>
+        {{ object.ApellidoMaterno}} <br>
+        {{ object.Nacimiento}} <br>
+        {{ object.Genero}} <br>
+        {{ object.Correo}} <br>
+        {{ object.Telefono}} <br>
+        {{ object.Alergias}} <br>
+        {{ object.Padecimientos}} <br>
+
+      </div>
+  </div><!--end container-->
+{% endblock contenido%}

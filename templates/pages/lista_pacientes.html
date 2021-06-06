@@ -19,7 +19,6 @@
             <td>{{ ExpedientePaciente.Correo }}</td>
             <td><a href="{% url 'Clinica:detalles_paciente' ExpedientePaciente.pk%}">Detalles</a></td>
             <td><a href="{% url 'Clinica:editar_paciente' ExpedientePaciente.pk%}">Editar</a></td>
-            <td><a href="{% url 'Clinica:editar_paciente' ExpedientePaciente.pk%}">Crear cita</a></td>
           </tr>
           {% endfor %}
         </table>

@@ -17,6 +17,7 @@ urlpatterns = [
     #Recepcionista
     path('lista_pacientes/', views.ListaPacientes.as_view(), name="lista_pacientes"),
     path('editar_paciente/<int:pk>/', views.EditarPaciente.as_view(), name="editar_paciente"),
+    path('detalles_paciente/<int:pk>/', views.DetallesPaciente.as_view(), name="detalles_paciente"),
     #Doctor
     path('lista_doctores/', views.ListaDoctores.as_view(), name="lista_doctores"),
     path('detalles_doctor/<int:pk>/', views.DetallesDoctor.as_view(), name="detalles_doctor"),
@@ -28,7 +29,7 @@ urlpatterns = [
 
 
 
-    #path('detalles_paciente/<int:pk>/', views.DetallesPaciente.as_view(), name="detalles_paciente"),
+
 
     #path('doctor/<int:pk>/', views.PerfilDoctor.as_view(), name="doctor"),
     #path('doctor_tratamientos/', view.TramientosDoctor.as_view(), name="doctor_tratamientos"),
