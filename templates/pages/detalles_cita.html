@@ -1,0 +1,20 @@
+{% extends "utilities/base.html" %}
+{% block titulo %}Detalles Cita{% endblock %}
+
+{% block contenido %}
+  <div class="container-fluid">
+      <div class="page-head">
+        <h1>Detalles de la Cita</h1>
+      </div>
+      <div class="h5 mb-0 font-weight-bold text-gray-800">
+        Paciente:   {{ object.ExpedientePaciente}} <br>
+        Doctor   {{ object.Doctor}} <br>
+        Fecha: {{ object.Fecha}} <br>
+        Hora: {{ object.HoraInicio}} <br>
+        Termino: {{ object.HoraFin}} <br>
+        Tratamiento: {{ object.Tratamiento}} <br>
+        Cita Creada: {{ object.FechaCreacion}} <br>
+     <input type="button" value="Regresar" onclick="history.back()">
+      </div>
+  </div><!--end container-->
+{% endblock contenido%}

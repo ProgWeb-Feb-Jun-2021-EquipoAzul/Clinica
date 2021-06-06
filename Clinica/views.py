@@ -10,7 +10,7 @@ from .models import (Usuario, ExpedientePaciente, Doctor,
 Nota, Cita, Tratamiento, Doctor_Tratamiento, Hora)
 
 from .forms import (NuevoUsuarioForm, EditarUsuarioForm, ExpedientePacienteForm, NotaForm, CitaForm, DoctorForm,
-HoraForms,EditarPacienteForm,CitaForm, EditarTratamientoForm )
+HoraForms,EditarPacienteForm,CitaForm, EditarTratamientoForm, TratamientoForm, CitaForm)
 
 
 URL_LOGIN='login'
@@ -56,7 +56,7 @@ class BorrarUsuario(LoginRequiredMixin,generic.DeleteView):
     login_url = URL_LOGIN
     model = Usuario
     success_url = reverse_lazy("Clinica:lista_usuarios")
-
+'''_____________________________Tratamientos__________________________________'''
 class ListaTratamiento(generic.ListView):
     template_name = "pages/lista_tratamientos.html"
     model =  Tratamiento
@@ -66,6 +66,20 @@ class EditarTratamiento(generic.UpdateView):
     model = Tratamiento
     form_class = EditarTratamientoForm
     success_url = reverse_lazy("Clinica:lista_tratamientos")
+
+class borrar_tratamiento(LoginRequiredMixin,generic.DeleteView):
+    template_name = "pages/borrar_tratamiento.html"
+    login_url = URL_LOGIN
+    model = Tratamiento
+    success_url = reverse_lazy("Clinica:lista_tratamientos")
+
+class CrearTratamiento(generic.CreateView):
+    template_name = "pages/crear_tratamiento.html"
+    model = Tratamiento
+    form_class = TratamientoForm
+
+
+
 
 #--------------VIEWS RECEPCIONISTA-------------
 class ListaPacientes(generic.ListView):
@@ -109,34 +123,35 @@ class DetallesDoctor(generic.DetailView):
     template_name = "pages/detalles_doctor.html"
     model = Doctor
     success_url = reverse_lazy("Clinica:lista_doctores")
-'''
-class Index1(generic.ListView):
-        template_name = "home/pag1.html"
 
+'''_____________________________Citas_________________________________________-'''
+class ListaCitas(generic.ListView):
+    template_name = "pages/lista_citas.html"
+    model = Cita
 
-
-class CrearCita(generic.ListView):
+class CrearCita(generic.CreateView):
     template_name = "pages/crear_cita.html"
-    form_class = CitaForm
     model =  Cita
+    form_class = CitaForm
+    success_url = reverse_lazy("Clinica:lista_citas")
+class DetallesCita(generic.DetailView):
+    template_name = "pages/detalles_cita.html"
+    model = Cita
+    success_url = reverse_lazy("Clinica:lista_citas")
 
+class EditarCita(generic.UpdateView):
+    template_name = "pages/editar_cita.html"
+    model = Cita
+    form_class=CitaForm
+    success_url = reverse_lazy("Clinica:lista_citas")
 
+class BorrarCita(LoginRequiredMixin,generic.DeleteView): ###Falta completar
+    template_name = "pages/borrar_cita.html"
+    login_url = URL_LOGIN
+    model = Cita
+    success_url = reverse_lazy("Clinica:lista_citas")
 
-
-
-
-class CrearTratamiento(generic.CreateView):
-    template_name = "pages/crear_tratamiento.html"
-    model = Tratamiento
-    #form_class = TratamientoForm ##Checar cuando a edy de la gana hacer este forms
-    success_url = reverse_lazy("Clinica:lista_tratamientos")
-
-
-
-
-
-
-
+'''
 
 
 '''

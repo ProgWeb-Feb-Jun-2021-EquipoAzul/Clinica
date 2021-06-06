@@ -3,9 +3,11 @@
 {% block titulo %}Lista de tratamientos{% endblock %}
 
 {% block contenido %}
+
   <div class="container-fluid">
       <div class="page-head">
         <h1>Lista de tratamientos</h1>
+        <a href="{% url 'Clinica:crear_tratamiento' %}"><div class="btn btn-primary mybutton">Crear Tratamiento</div></a>
       </div>
       <div class="">
         <table class="table">
@@ -13,10 +15,10 @@
           <th>Descripcion</th>
           {% for Tratamiento in object_list %}
           <tr>
-            <td>{{ Tratamiento.Nombres }}</td>
+            <td>{{ Tratamiento.Tratamiento }}</td>
             <td>{{ Tratamiento.Descripcion }}</td>
             <td><a href="{% url 'Clinica:editar_tratamiento' Tratamiento.pk%}">Editar</a></td>
-            <td><a href="{% url 'Clinica:borrar_usuario' Usuario.pk%}">Eliminar</a></td>
+            <td><a href="{% url 'Clinica:borrar_tratamiento' Tratamiento.pk%}">Eliminar</a></td>
           </tr>
           {% endfor %}
         </table>

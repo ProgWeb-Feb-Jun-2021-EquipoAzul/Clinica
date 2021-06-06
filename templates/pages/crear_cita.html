@@ -1,0 +1,7 @@
+<form method="post">
+
+    {% csrf_token %}
+    {{form}}
+    <button type="submit">Crear</button>
+   <input type="button" value="Cancelar" onclick="history.back()">
+</form>
