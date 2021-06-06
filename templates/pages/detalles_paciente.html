@@ -1,22 +1,22 @@
 {% extends "utilities/base.html" %}
-
-{% block titulo %}Detalles usuario{% endblock %}
+{% block titulo %}Detalles paciente{% endblock %}
 
 {% block contenido %}
   <div class="container-fluid">
       <div class="page-head">
-        <h1>Detalles del usuario</h1>
+        <h1>Detalles del paciente</h1>
       </div>
       <div class="h5 mb-0 font-weight-bold text-gray-800">
-        {{ object.username }} <br>
-        {{ object.TipoEmpleado}} <br>
         {{ object.Nombres}} <br>
         {{ object.ApellidoPaterno}} <br>
-        {{ object.Genero}} <br>
+        {{ object.ApellidoMaterno}} <br>
         {{ object.Nacimiento}} <br>
-        {{ object.email}} <br>
+        {{ object.Genero}} <br>
+        {{ object.Correo}} <br>
         {{ object.Telefono}} <br>
-        {{ object.date_joined}} <br>
+        {{ object.Alergias}} <br>
+        {{ object.Padecimientos}} <br>
+
       </div>
   </div><!--end container-->
 {% endblock contenido%}

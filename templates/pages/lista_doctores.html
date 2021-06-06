@@ -1,0 +1,34 @@
+{% extends "utilities/base.html" %}
+
+{% block titulo %}Lista de Doctores {% endblock %}
+
+{% block contenido %}
+  <div class="container-fluid">
+      <div class="page-head">
+        <h1>Lista de doctores</h1>
+      </div>
+      <div class="">
+        <table class="table">
+          <th>Nombre</th>
+          <th>Especialidad</th>
+          <th>Correo</th>
+          <th>Telefono</th>
+          {% for Doctor in object_list %}
+          <tr>
+            <td>{{ Doctor.Usuario.Nombres }} {{ Doctor.Usuario.ApellidoPaterno }}</td>
+            <td>{{ Doctor.Especialidad }}</td>
+            <td>{{ Doctor.Usuario.Correo }}</td>
+            <td>{{ Doctor.Usuario.Telefono}}</td>          
+            <td><a href="{% url 'Clinica:detalles_doctor' Doctor.pk%}">Detalles</a></td>
+
+
+          </tr>
+          {% endfor %}
+
+
+        </table>
+      </div>
+  </div><!--end container-->
+
+{% endblock contenido%}
+<!--Falta el  Tratamiento el la tabla -->

@@ -1,0 +1,28 @@
+{% extends "utilities/base.html" %}
+
+{% block titulo %}Lista de tratamientos{% endblock %}
+
+{% block contenido %}
+  <div class="container-fluid">
+      <div class="page-head">
+        <h1>Lista de tratamientos</h1>
+      </div>
+      <div class="">
+        <table class="table">
+          <th>Tratamiento</th>
+          <th>Descripcion</th>
+          {% for Tratamiento in object_list %}
+          <tr>
+            <td>{{ Tratamiento.Nombres }}</td>
+            <td>{{ Tratamiento.Descripcion }}</td>
+            <td><a href="{% url 'Clinica:editar_tratamiento' Tratamiento.pk%}">Editar</a></td>
+            <td><a href="{% url 'Clinica:borrar_usuario' Usuario.pk%}">Eliminar</a></td>
+          </tr>
+          {% endfor %}
+        </table>
+      </div>
+  </div><!--end container-->
+
+{% endblock contenido%}
+
+<!--BOrrar tratamiento url -->

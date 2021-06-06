@@ -3,31 +3,29 @@
 {% block titulo %}Lista de usuarios{% endblock %}
 
 {% block contenido %}
-<div class="body-content">
-    <div class="container-fluid">
-        <div class="page-head">
-          <h1>Lista de usuarios</h1>
-        </div>
-        <div class="">
-          <table class="table">
-            <th>Nombre</th>
-            <th>Correo</th>
-            <th>Tipo de Cuenta</th>
-            <th>Creacion</th>
-            {% for Usuario in object_list %}
-            <tr>
-              <td>{{ Usuario.Nombres }} {{ Usuario.ApellidoPaterno }}</td>
-              <td>{{ Usuario.email }}</td>
-              <td>{{ Usuario.TipoEmpleado }}</td>
-              <td>{{ Usuario.date_joined }}</td>
-              <td><a href="{% url 'Clinica:detalles_usuario' Usuario.pk%}">Detail</a></td>
-              <td><a href="{% url 'Clinica:editar_usuario' Usuario.pk%}">Update</a></td>
-              <td><a href="{% url 'Clinica:borrar_usuario' Usuario.pk%}">Delete</a></td>
-            </tr>
-            {% endfor %}
-          </table>
-        </div>
-    </div><!--end container-->
-</div>
+  <div class="container-fluid">
+      <div class="page-head">
+        <h1>Lista de usuarios</h1>
+      </div>
+      <div class="">
+        <table class="table">
+          <th>Nombre</th>
+          <th>Correo</th>
+          <th>Tipo de Cuenta</th>
+          <th>Creacion</th>
+          {% for Usuario in object_list %}
+          <tr>
+            <td>{{ Usuario.Nombres }} {{ Usuario.ApellidoPaterno }}</td>
+            <td>{{ Usuario.email }}</td>
+            <td>{{ Usuario.TipoEmpleado }}</td>
+            <td>{{ Usuario.date_joined }}</td>
+            <td><a href="{% url 'Clinica:detalles_usuario' Usuario.pk%}">Detalles</a></td>
+            <td><a href="{% url 'Clinica:editar_usuario' Usuario.pk%}">Editar</a></td>
+            <td><a href="{% url 'Clinica:borrar_usuario' Usuario.pk%}">Eliminar</a></td>
+          </tr>
+          {% endfor %}
+        </table>
+      </div>
+  </div><!--end container-->
 
 {% endblock contenido%}

@@ -12,8 +12,14 @@ urlpatterns = [
     path('editar_usuario/<int:pk>', views.EditarUsuario.as_view(), name="editar_usuario"),
     path('detalles_usuario/<int:pk>', views.DetallesUsuario.as_view(), name="detalles_usuario"),
     path('borrar_usuario/<int:pk>', views.BorrarUsuario.as_view(), name="borrar_usuario"),
+    path('lista_tratamientos/', views.ListaTratamiento.as_view(), name="lista_tratamientos"),
+    path('editar_tratamiento/', views.EditarTratamiento.as_view(), name="editar_tratamiento"),
     #Recepcionista
+    path('lista_pacientes/', views.ListaPacientes.as_view(), name="lista_pacientes"),
+    path('editar_paciente/<int:pk>/', views.EditarPaciente.as_view(), name="editar_paciente"),
+    path('detalles_paciente/<int:pk>/', views.DetallesPaciente.as_view(), name="detalles_paciente"),
     #Doctor
+proyecto-cinthia
     # path('agregar_horario/',views.AgregarHorario.as_view(), name="agregar_horario"),
     # path('lista_usuarios/', views.ListaUsuarios.as_view(), name="lista_usuarios"),
     # path('lista_tratamientos/', views.ListaTratamiento.as_view(), name="lista_tratamientos"),
@@ -32,5 +38,6 @@ urlpatterns = [
     # path('doctor_notas', views.VerNotas.as_view(), name="doctor_notas"),
     # path('crear_notas', views.CrearNota.as_view(), name="crear_notas"),
     # path('expedientepaciente/<int:pk>/', views.VerPaciente.as_view(), name="expedientepaciente")
+
 
 ]

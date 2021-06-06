@@ -1,18 +1,18 @@
 {% extends "utilities/base.html" %}
 
-{% block titulo %}Editar usuario{% endblock %}
+{% block titulo %}Editar paciente{% endblock %}
 
 {% block contenido %}
 <div class="container-fluid">
     <div class="page-head">
-            <h1>Editar usuario</h1>
+            <h1>Editar paciente</h1>
     </div>
     <div class="">
         <form method="post">
             {%csrf_token%}
             {{form}}
-            <button type="submit">Crear</button>
-            <button type="reset">Cancel</button>
+            <button type="submit">Guardar cambios</button>
+            <button type="reset" href="{% url 'Clinica:lista_pacientes' %}">Cancel</button>
         </form>
     </div>
 </div><!--end container-->
