@@ -16,7 +16,7 @@
         {{ object.Telefono}} <br>
         {{ object.Alergias}} <br>
         {{ object.Padecimientos}} <br>
-
+        <a href="{% url 'Clinica:lista_pacientes' %}"><input type="button" name="Return" value="Regresar"></a>
       </div>
   </div><!--end container-->
 {% endblock contenido%}

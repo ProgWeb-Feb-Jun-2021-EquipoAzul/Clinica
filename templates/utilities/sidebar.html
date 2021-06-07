@@ -27,10 +27,10 @@
           </li>
           {% if user.TipoEmpleado == 'R' %}
             <li>
-                <a href="#"><i class="fa fa-users"></i> <span>Pacientes</span></a>
+                <a href="{% url 'Clinica:lista_pacientes' %}"><i class="fa fa-users"></i> <span>Pacientes</span></a>
             </li>
             <li>
-                <a href="#">  <i class="fa fa-plus-square"></i> <span>Crear paciente</span></a>
+                <a href="{% url 'Clinica:crear_paciente' %}">  <i class="fa fa-plus-square"></i> <span>Crear paciente</span></a>
             </li>
             <li>
                 <a href="#"><i class="fa fa-hand-o-right"></i> <span>Citas</span></a>
@@ -57,12 +57,12 @@
             <li>
                 <a href="#"><i class="fa fa-medkit"></i> <span>Tratamientos</span></a>
             </li>
-          {% else %}
+          {% else %} #ADMINISTRADOR
             <li>
                 <a href="{% url 'Clinica:lista_usuarios' %}"><i class="fa fa-users"></i> <span>Usuarios</span></a>
             </li>
             <li>
-                <a href="#">  <i class="fa fa-plus-square"></i><span>Crear usuario</span></a>
+                <a href="{% url 'Clinica:nuevo_usuario' %}">  <i class="fa fa-plus-square"></i><span>Crear usuario</span></a>
             </li>
             <li>
                 <a href="#"><i class="fa fa-medkit"></i> <span>Tratamientos</span></a>
