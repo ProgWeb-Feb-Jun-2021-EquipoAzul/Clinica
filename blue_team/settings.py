@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'Clinica',
     'api',
     'rest_framework',
+    'smart_selects',
 ]
 
 MIDDLEWARE = [
@@ -137,6 +138,8 @@ AUTH_USER_MODEL = 'Clinica.Usuario'
 
 LOGIN_REDIRECT_URL = 'Clinica:index'
 LOGOUT_REDIRECT_URL = 'login'
+
+USE_DJANGO_JQUERY = True
 
 import os
 PROJECT_DIR = os.path.abspath(os.path.dirname(__file__))

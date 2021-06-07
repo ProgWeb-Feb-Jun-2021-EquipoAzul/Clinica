@@ -12,7 +12,7 @@
         {% csrf_token %}
         <h2>¿Deseas borrar al tratamiento?: {{ object }}</h2>
         <button type="submit">Delete</button>
-        <input type="button" value="Cancelar" onclick="history.back()">
+        <a href="{% url 'Clinica:lista_tratamientos' %}"><input type="button" name="Cancel" value="Cancelar"></a>
       </form>
   </div><!--end container-->
 {% endblock contenido%}

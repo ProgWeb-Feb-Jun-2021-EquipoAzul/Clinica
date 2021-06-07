@@ -8,15 +8,15 @@
         <h1>Detalles del usuario</h1>
       </div>
       <div class="h5 mb-0 font-weight-bold text-gray-800">
-        {{ object.username }} <br>
-        {{ object.TipoEmpleado}} <br>
         {{ object.Nombres}} <br>
         {{ object.ApellidoPaterno}} <br>
+        {{ object.ApellidoMaterno}} <br>
         {{ object.Genero}} <br>
         {{ object.Nacimiento}} <br>
         {{ object.email}} <br>
         {{ object.Telefono}} <br>
         {{ object.date_joined}} <br>
+        <a href="{% url 'Clinica:lista_usuarios' %}"><input type="button" name="Return" value="Regresar"></a>
       </div>
   </div><!--end container-->
 {% endblock contenido%}

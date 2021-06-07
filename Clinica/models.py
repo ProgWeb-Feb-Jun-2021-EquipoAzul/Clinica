@@ -4,6 +4,9 @@ from django.db.models.signals import post_save
 
 from django.contrib.auth.validators import UnicodeUsernameValidator
 
+#from smart_selects.db_fields import ChainedForeignKey
+#from smart_selects.db_fields import ChainedManyToManyField
+
 # Create your models here.
 
 username_validator = UnicodeUsernameValidator()
@@ -67,27 +70,6 @@ class Usuario(AbstractUser):
     def __str__(self):
         return self.Nombres + " " +self.ApellidoPaterno
 
-'''class Usuario(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
-    models.CharField(max_length=1,choices=TIPO_EMPLEADO, verbose_name="Tipo de empleado")
-    Nombres = models.CharField(max_length=50, verbose_name="Nombres")
-    ApellidoPaterno = models.CharField(max_length=50,verbose_name="Apellido paterno")
-    ApellidoMaterno = models.CharField(max_length=50,verbose_name="Apellido materno")
-    Genero = models.CharField(max_length=1,choices=GENERO,verbose_name="Género")
-    Nacimiento= models.DateField(verbose_name="Fecha de nacimiento")
-    Correo = models.EmailField(max_length=50,verbose_name="Correo electrónico")
-    Telefono = models.CharField(max_length=12,verbose_name="Telefono")
-
-    def __str__(self):
-        return self.Nombres + " " +self.ApellidoPaterno'''
-
-'''def post_user_created_signal(sender, instance, created, **kwargs):
-    if created:
-        n = Usuario.objects.create(user=instance)
-    if instance.TipoEmpleado == 'D':
-        Doctor.objects.create(Usuario=n)
-post_save.connect(post_user_created_signal, sender=User)'''
-
 
 class ExpedientePaciente(models.Model):
     Nombres = models.CharField(max_length=50, verbose_name="Nombres")
@@ -141,12 +123,6 @@ class Hora(models.Model):
     def __str__(self):
         return self.Dia + " " + self.Hora.strftime("%H:%M")
 
-
-'''
-class Doctor_Hora(models.Model):
-    Doctor= models.ForeignKey(Doctor, verbose_name="Doctor", on_delete=models.RESTRICT)
-    Hora= models.ForeignKey(Hora, verbose_name="Hora", on_delete=models.RESTRICT)'''
-
 class Doctor_Tratamiento(models.Model):
     Doctor= models.ForeignKey(Doctor, verbose_name="Doctor", on_delete=models.CASCADE)
     Tratamiento= models.ForeignKey(Tratamiento, verbose_name="Tratamiento", on_delete=models.CASCADE)
@@ -155,10 +131,20 @@ class Cita(models.Model):
     ExpedientePaciente= models.ForeignKey(ExpedientePaciente, verbose_name="Expediente del paciente", on_delete=models.RESTRICT)
     Doctor =models.ForeignKey(Doctor, verbose_name="Doctor", on_delete=models.RESTRICT)
     Fecha= models.DateField(verbose_name="Fecha")
-    HoraInicio = models.TimeField()
-    HoraFin = models.TimeField()
+    '''Tratamiento = ChainedManyToManyField(
+        Tratamiento,
+        horizontal=True,
+        verbose_name='Tratamiento',
+        chained_field="Doctor",
+        chained_model_field="Doctor")
+    HoraInicio = ChainedForeignKey(
+        Hora,
+        chained_field="Doctor",
+        chained_model_field="Doctor",
+        show_all=False,
+        auto_choose=True,
+        sort=True)'''
     Tratamiento= models.ForeignKey(Tratamiento, verbose_name="Tratamiento", on_delete=models.CASCADE)
-    '''Tratamiento = models.CharField(max_length=50, verbose_name="Tratamiento")'''
     FechaCreacion = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

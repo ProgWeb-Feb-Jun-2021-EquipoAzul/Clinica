@@ -1,5 +1,8 @@
 from django import forms
 from django.core.validators import RegexValidator
+from django.forms import Form
+
+from datetime import date
 
 from .models import (Usuario, ExpedientePaciente, Doctor,
 Nota, Cita, Tratamiento, Doctor_Tratamiento, Hora)
@@ -33,6 +36,16 @@ HORAS = (
         ('16:00', '04:00 pm'),('17:00', '05:00 pm'),('18:00', '06:00 pm'),('19:00', '07:00 pm'),
         ('20:00', '08:00 pm'),('21:00', '09:00 pm'),('22:00', '10:00 pm'),('23:00', '11:00 pm'),
     )
+
+class FiltroUsuarios(Form):
+    FILTER_CHOICES = (
+        ("all", 'Todo los campos'),
+        ("Nombres", 'Nombres'),
+        ("Telefono", 'email'),
+        ("TipoEmpleado", 'Tipo de empleado'),
+    )
+    search = forms.CharField(required=False)
+    filter_field = forms.ChoiceField(choices=FILTER_CHOICES)
 
 class NuevoUsuarioForm(forms.ModelForm):
     password1 = forms.CharField(label='Password', widget=forms.PasswordInput)
@@ -216,6 +229,16 @@ class ExpedientePacienteForm(forms.ModelForm):
         fields = "__all__"
         exclude = ["FechaCreacion"]
 
+class FiltroPacientes(Form):
+    FILTER_CHOICES = (
+        ("all", 'Todo los campos'),
+        ("Nombres", 'Nombres'),
+        ("Telefono", 'Telefono'),
+        ("Correo", 'Correo'),
+    )
+    search = forms.CharField(required=False)
+    filter_field = forms.ChoiceField(choices=FILTER_CHOICES)
+
 class EditarPacienteForm(forms.ModelForm):
     Nombres = forms.CharField(
         max_length=50,
@@ -291,6 +314,9 @@ class NotaForm(forms.ModelForm):
         fields = "__all__"
         exclude = ["FechaCreacion"]
 
+class FiltroTratamientos(Form):
+    search = forms.CharField(required=False)
+
 class TratamientoForm(forms.ModelForm):
     Tratamiento = forms.CharField(
         max_length=50,
@@ -358,23 +384,18 @@ class CitaForm(forms.ModelForm):
         required=True,
         label="Fecha de la cita",
         widget=forms.DateInput(format='%d/%m/%Y',attrs={'type': 'date'}))
-    HoraInicio=forms.TimeField(
-        required=True,
-        label="Hora inicio de la cita",
-        widget=forms.TimeInput(format='%H:%M'))
-    HoraFin=forms.TimeField(
-        required=True,
-        label="Hora fin de la cita",
-        widget=forms.TimeInput(format='%H:%M'))
+    '''HoraInicio = forms.ChoiceField(
+        label="Hora de Inicio",
+        required=True)'''
     Tratamiento = forms.ModelChoiceField(
         queryset=Tratamiento.objects.all(),
         label="Tratamiento",
         required=True)
-
     class Meta:
         model = Cita
         fields = "__all__"
         exclude = ["FechaCreacion"]
+
 
 class HoraForms(forms.ModelForm):
     Dia = forms.ChoiceField(

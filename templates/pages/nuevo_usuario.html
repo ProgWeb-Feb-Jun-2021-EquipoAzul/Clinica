@@ -38,8 +38,8 @@
                     <form method="post">
                       {% csrf_token %}
                       {{ form }}
-                      <button type="submit">Submit</button>
-                      <button type="reset">Cancel</button>
+                      <button type="submit">Crear</button>
+                      <a href="{% url 'Clinica:lista_usuarios' %}"><input type="button" name="Cancel" value="Cancelar"></a>
                     </form>
                 </div>
             </div><!--end container-->

@@ -1,30 +1,6 @@
 [
   {
     "model":"Clinica.Usuario",
-    "pk":1,
-    "fields":{
-      "username":"edy",
-      "password":"pbkdf2_sha256$216000$U228OlC7hG1z$tL3sYLYYKO+0hFYli8pi31l6mvTiFroPKNrT91+Vxoc=",
-      "TipoEmpleado":"A",
-      "Nombres":"Edy Jesus Manuel",
-      "ApellidoPaterno":"Cota",
-      "ApellidoMaterno":"Villa",
-      "Genero":"H",
-      "Nacimiento":"1999-05-04",
-      "email":"edy@gmail.com",
-      "Telefono":"6645698521",
-      "last_login": null,
-      "is_superuser": true,
-      "is_staff": false,
-      "is_active": true,
-      "groups": [],
-      "date_joined":
-      "2021-05-30T22:29:13.511Z",
-      "user_permissions": []
-    }
-  },
-  {
-    "model":"Clinica.Usuario",
     "pk":2,
     "fields":{
       "username":"Administrador",

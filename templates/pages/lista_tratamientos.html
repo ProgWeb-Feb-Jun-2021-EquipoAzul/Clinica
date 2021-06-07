@@ -7,9 +7,13 @@
   <div class="container-fluid">
       <div class="page-head">
         <h1>Lista de tratamientos</h1>
-        <a href="{% url 'Clinica:crear_tratamiento' %}"><div class="btn btn-primary mybutton">Crear Tratamiento</div></a>
       </div>
       <div class="">
+        <form class="row">
+            {{ form.search }}
+            <input type="submit" class="btn btn-default" value="Buscar">
+            <a href="{% url 'Clinica:crear_tratamiento' %}"><input type="button" name="crear" value="Crear tratamiento"></a>
+        </form>
         <table class="table">
           <th>Tratamiento</th>
           <th>Descripcion</th>
