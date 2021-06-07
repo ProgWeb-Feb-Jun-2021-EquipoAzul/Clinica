@@ -167,22 +167,27 @@ class AgregarHorario(generic.CreateView):
         obj.save()
         return super().form_valid(form)
 
-
-
-'''#No implementado
-class EditarHorario(generic.UpdateView):
+class EditarHorario(generic.UpdateView): ###requiere pk de doctor, aun no funciona
     template_name = "pages/editar_horario.html"
-    model = HorarioDoctor
-    #form_class
+    model = Hora
+    form_class=HoraForms
     success_url = reverse_lazy("Clinica:horario_doctor")
-'''
+    def form_valid(self, form):
+        obj = form.save(commit=False)
+        obj.Doctor = Doctor.objects.filter(Usuario=self.request.user).first()
+        obj.save()
+        return super().form_valid(form)
 
-'''#No implementado
-class HorarioDoctor(generic.ListView):
+class HorarioDoctor(generic.ListView):  ###Aun no hereda el form falta hacer  que acepte un pk de doctor aun no funciona
     template_name = "pages/horario_doctor.html"
-    model = HorarioDoctor
+    model = Hora
     success_url = reverse_lazy("Clinica:doctor")
-'''
+    def form_valid(self, form):
+        obj = form.save(commit=False)
+        obj.Doctor = Doctor.objects.filter(Usuario=self.request.user).first()
+        obj.save()
+        return super().form_valid(form)
+
     ###_____________________________Citas___________________________________
 '''#No implementado
 class CitasDoctor(generic.ListView):
