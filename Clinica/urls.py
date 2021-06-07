@@ -39,6 +39,8 @@ urlpatterns = [
         ###_____________________________Doctores_________________________________________
     path('lista_doctores/', views.ListaDoctores.as_view(), name="lista_doctores"),
     path('detalles_doctor/<int:pk>/', views.DetallesDoctor.as_view(), name="detalles_doctor"),
+    path('horario_doctor/', views.HorarioDoctor.as_view(), name="horario_doctor"),
+    path('editar_horario/<int:pk>/', views.EditarHorario.as_view(), name="editar_horario"),
 
     #Doctor
 
