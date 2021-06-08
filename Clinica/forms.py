@@ -103,7 +103,7 @@ class NuevoUsuarioForm(forms.ModelForm):
 
     def save(self, commit=True):
         # Save the provided password in hashed format
-        Usuario = super(UsuarioForm, self).save(commit=False)
+        Usuario = super(NuevoUsuarioForm, self).save(commit=False)
         Usuario.set_password(self.cleaned_data["password1"])
         if commit:
             Usuario.save()
@@ -353,9 +353,17 @@ class EditarTratamientoForm(forms.ModelForm):
         fields = "__all__"
         exclude = []
 
-'''
-Los tratamientos se llenarian con una tabla
-'''
+class FiltroDoctores(Form):
+    FILTER_CHOICES = (
+        ("all", 'Todo los campos'),
+        ("Nombres", 'Nombres'),
+        ("Especialidad", 'Especialidad'),
+        ("Correo", 'Correo'),
+        ("Telefono", 'Telefono'),
+    )
+    search = forms.CharField(required=False)
+    filter_field = forms.ChoiceField(choices=FILTER_CHOICES)
+
 class DoctorForm(forms.ModelForm):
     Usuario = forms.ModelChoiceField(
         queryset=Usuario.objects.all(),
@@ -366,6 +374,7 @@ class DoctorForm(forms.ModelForm):
         model = Doctor
         fields = "__all__"
         exclude = []
+
 
 '''
 Buscar como hacer eventos para hacer los queries de las horas y

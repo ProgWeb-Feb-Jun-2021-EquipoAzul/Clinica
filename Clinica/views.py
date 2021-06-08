@@ -12,7 +12,7 @@ Nota, Cita, Tratamiento, Doctor_Tratamiento, Hora)
 from .forms import (NuevoUsuarioForm, EditarUsuarioForm, ExpedientePacienteForm, NotaForm, CitaForm, DoctorForm,
 HoraForms,EditarPacienteForm,CitaForm, EditarTratamientoForm, TratamientoForm, CitaForm
 
-,FiltroUsuarios,FiltroTratamientos, FiltroPacientes)
+,FiltroUsuarios,FiltroTratamientos, FiltroPacientes, FiltroDoctores)
 
 
 URL_LOGIN='login'
@@ -218,6 +218,35 @@ class BorrarCita(LoginRequiredMixin,generic.DeleteView): ###Falta completar
 class ListaDoctores(generic.ListView):
     template_name = "pages/lista_doctores.html"
     model = Doctor
+
+    def get_queryset(self):
+        query = self.request.GET.get('search')
+        filter_field = self.request.GET.get('filter_field')
+        # Do your filter and search here
+
+        #CHEEEEECAR filtro all muestra a todos los tipos de usuario
+        if filter_field == "all":
+            return Doctor.objects.filter(Q(Usuario__Nombres__icontains=query) | Q(Especialidad__icontains=query)| Q(Usuario__email__icontains=query)| Q(Usuario__Telefono__icontains=query)).order_by("Usuario__Nombres")
+        elif filter_field == "Nombres":
+            return Doctor.objects.filter(Q(Usuario__Nombres__icontains=query) ).order_by("Usuario__Nombres")
+        elif filter_field == "Especialidad":
+            return Doctor.objects.filter(Q(Especialidad__icontains=query)).order_by("Usuario__Nombres")
+        elif filter_field == "Correo":
+            return Doctor.objects.filter(Q(Usuario__email__icontains=query)).order_by("Usuario__Nombres")
+        elif filter_field == "Telefono":
+            return Doctor.objects.filter(Q(Usuario__Telefono__icontains=query)).order_by("Usuario__Nombres")
+        else:
+            return Doctor.objects.all().order_by("Usuario__Nombres")
+
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['form'] = FiltroDoctores(initial={
+            'search': self.request.GET.get('search', ''),
+            'filter_field': self.request.GET.get('filter_field', ''),
+        })
+
+        return context
 
 class DetallesDoctor(generic.DetailView):
     template_name = "pages/detalles_doctor.html"

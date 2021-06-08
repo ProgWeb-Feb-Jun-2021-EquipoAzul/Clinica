@@ -107,7 +107,7 @@ class Tratamiento(models.Model):
 
 class Doctor(models.Model):
     Usuario= models.ForeignKey(Usuario, on_delete=models.CASCADE)
-    Especialidad = models.CharField(null=True,blank=True,max_length=60, verbose_name="Especialidad")
+    Especialidad = models.CharField(null=True,blank=True,max_length=60, verbose_name="Especialidad", default="")
     Tratamientos = models.ManyToManyField(Tratamiento, through='Clinica.Doctor_Tratamiento')
 
     def __str__(self):

@@ -8,14 +8,23 @@
         <h1>Detalles del doctor</h1>
       </div>
       <div class="h5 mb-0 font-weight-bold text-gray-800">
-        {{ object.Usuario.Nombres}} <br>
-        {{ object.Usuario.ApellidoPaterno}} <br>
-        {{ object.Usuario.ApellidoMaterno}} <br>
-        {{ object.Usuario.Genero}} <br>
-        {{ object.Usuario.email}} <br>
-        {{ object.Usuario.Telefono}} <br>
-        {{ object.Especialidad}} <br>
+        Nombres: {{ object.Usuario.Nombres}}<br>
+        ApellidoPaterno: {{ object.Usuario.ApellidoPaterno}}<br>
+        ApellidoMaterno: {{ object.Usuario.ApellidoMaterno}}<br>
+        Genero: {{ object.Usuario.Genero}}<br>
+        Correo: {{ object.Usuario.email}}<br>
+        Telefono: {{ object.Usuario.Telefono}}<br>
+         Especialidad: {{ object.Especialidad}}<br>
 
+          <table class="table">
+            <th>Tratamiento</th>
+            {% for Tratamiento in object.Tratamientos.all %}
+            <tr>
+              <td>{{ Tratamiento }}</td>
+            </tr>
+          {% endfor %}
+          </table>
+        <a href="{% url 'Clinica:lista_doctores' %}"><input type="button" name="Return" value="Regresar"></a>
       </div>
   </div><!--end container-->
 {% endblock contenido%}
