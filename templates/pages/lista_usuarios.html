@@ -12,9 +12,10 @@
             {{ form.search }}
             {{ form.filter_field }}
             <input type="submit" class="btn btn-default" value="Buscar">
-            <a href="{% url 'Clinica:nuevo_usuario' %}"><input type="button" name="crear" value="Crear usuario"></a>
+            <a href="{% url 'Clinica:nuevo_usuario' %}"><button<input type="button" name="crear" value="Crear usuario"></button></a>
+            
         </form>
-        <table class="table">
+        <table id="table_id" class="table table-striped table-sm table-bordered">
           <th>Nombre</th>
           <th>Correo</th>
           <th>Tipo de Cuenta</th>
