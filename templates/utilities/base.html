@@ -8,6 +8,18 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <style>
+            body,
+            html {
+                margin: 0;
+                padding: 0;
+                height: 100%;
+                background: #1b97f0 !important;
+            }
+    
+    
+        </style>
+    
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
         <meta name="description" content="">
@@ -28,7 +40,7 @@
         <link href="{% static '/css/menu.css' %}" rel="stylesheet" type="text/css">
         <link href="{% static '/css/style.css' %}" rel="stylesheet">
     </head>
-    <body class="sticky-header">
+    <body class="sticky-header" >
         <section>
             <!-- sidebar left start-->
             <div class="sidebar-left">
@@ -36,7 +48,7 @@
 
                     <div class="user-box">
                         <div class="d-flex justify-content-center">
-                            <img src="{% static '/images/users/avatar-1.jpg' %}" alt="" class="img-fluid rounded-circle">
+                            <img src="{% static '/images/aduse.png' %}" alt="" class="img-fluid rounded-circle">
                         </div>
                         <div class="text-center text-white mt-2">
                             <h6>{{user.Nombres}} {{user.ApellidoPaterno}}</h6>
@@ -110,15 +122,15 @@
             <!-- body content start-->
             <div class="body-content">
                 <!-- header section start-->
-                <div class="header-section">
+                <div class="header-section" style=background-color:#1b97f0;>
                     <!--logo and logo icon start-->
                     <div class="logo">
                         <a href="index.html">
                             <span class="logo-img">
-                                <img src="{% static 'images/logo_sm.png' %}" alt="" height="26">
+                                <img src="{% static 'images/logoclinica.png' %}" alt="" height="26">
                             </span>
                             <!--<i class="fa fa-maxcdn"></i>-->
-                            <span class="brand-name">Syntra</span>
+                            <span class="brand-name">Dental Clinic</span>
                         </a>
                     </div>
 
@@ -128,10 +140,11 @@
 
                     <!--mega menu start-->
                     <div id="navbar-collapse-1" class="navbar-collapse collapse mega-menu">
-                        <ul class="nav navbar-nav">
+                        <ul class="nav navbar-nav " style=background-color:#1b97f0;>
                              <!-- Classic list -->
                             <li>
                                 <form class="search-content" action="index.html" method="post">
+                                    
                                     <input type="text" class="form-control mt-3" name="keyword" placeholder="Buscar...">
                                     <span class="search-button"><i class="ti ti-search"></i></span>
                                 </form>
