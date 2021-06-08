@@ -367,13 +367,19 @@ class FiltroDoctores(Form):
 class DoctorForm(forms.ModelForm):
     Usuario = forms.ModelChoiceField(
         queryset=Usuario.objects.all(),
-        label="Empleado",
+        label="Doctor",
         required=True,
         )
     class Meta:
         model = Doctor
         fields = "__all__"
         exclude = []
+
+class PerfilDoctorForm(forms.ModelForm):
+    class Meta:
+        model = Doctor
+        fields = "__all__"
+        exclude = ["Usuario"]
 
 
 '''

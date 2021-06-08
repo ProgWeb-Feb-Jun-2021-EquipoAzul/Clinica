@@ -1,0 +1,32 @@
+{% extends "utilities/base.html" %}
+
+{% block titulo %}Perfil{% endblock %}
+
+{% block contenido %}
+  <div class="container-fluid">
+      <div class="page-head">
+        <h1>Perfil</h1>
+      </div>
+      <div class="h5 mb-0 font-weight-bold text-gray-800">
+        Nombres: {{ object.Usuario.Nombres}}<br>
+        ApellidoPaterno: {{ object.Usuario.ApellidoPaterno}}<br>
+        ApellidoMaterno: {{ object.Usuario.ApellidoMaterno}}<br>
+        Genero: {{ object.Usuario.Genero}}<br>
+        Correo: {{ object.Usuario.email}}<br>
+        Telefono: {{ object.Usuario.Telefono}}<br>
+         Especialidad: {{ object.Especialidad}}<br>
+
+          <table class="table">
+            <th>Tratamiento</th>
+            {% for Tratamiento in object.Tratamientos.all %}
+            <tr>
+              <td>{{ Tratamiento }}</td>
+            </tr>
+          {% endfor %}
+          </table>
+          {% load filters %}
+        <a href="{% url 'Clinica:editar_perfil' user.id|pk_doctor  %}"><input type="button" name="Edit" value="Editar"></a>
+        <a href="#"><input type="button" name="Return" value="Regresar"></a>
+      </div>
+  </div><!--end container-->
+{% endblock contenido%}

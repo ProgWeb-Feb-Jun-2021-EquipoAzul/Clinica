@@ -12,7 +12,7 @@ from .models import (Usuario, ExpedientePaciente, Doctor,
 Nota, Cita, Tratamiento, Doctor_Tratamiento, Hora)
 
 from .forms import (NuevoUsuarioForm, EditarUsuarioForm, ExpedientePacienteForm, NotaForm, CitaForm, DoctorForm,
-HoraForms,EditarPacienteForm,CitaForm, EditarTratamientoForm, TratamientoForm, CitaForm
+HoraForms,EditarPacienteForm,CitaForm, EditarTratamientoForm, TratamientoForm, CitaForm, PerfilDoctorForm
 
 ,FiltroUsuarios,FiltroTratamientos, FiltroPacientes, FiltroDoctores)
 
@@ -257,11 +257,17 @@ class DetallesDoctor(generic.DetailView):
 
 #-----------------VIEWS DOCTOR-----------------
     ###_____________________________Perfil_________________________________________
-'''#No implementado
+#No implementado
 class PerfilDoctor(generic.DetailView):
-    template_name = "pages/doctor.html"
+    template_name = "pages/perfil.html"
     model = Doctor
-'''
+
+class EditarPerfil(generic.UpdateView):
+    template_name = "pages/editar_perfil.html"
+    model = Doctor
+    form_class=PerfilDoctorForm
+    success_url = reverse_lazy("Clinica:detalles_perfil")
+
     ###_____________________________Tratamientos___________________________________
 '''#No implementa
 class TramientosDoctor(generic.ListView):

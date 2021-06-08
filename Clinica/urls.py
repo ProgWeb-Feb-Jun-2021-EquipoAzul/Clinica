@@ -43,10 +43,10 @@ urlpatterns = [
     #Doctor
 
         ###_____________________________Perfil_________________________________________
-    #path('doctor/<int:pk>/', views.PerfilDoctor.as_view(), name="doctor"), #No implementado
+    path('perfil/<int:pk>/', views.PerfilDoctor.as_view(), name="perfil"), #No implementado
 
         ###_____________________________Tratamientos___________________________________
-    #path('doctor_tratamientos/', view.TramientosDoctor.as_view(), name="doctor_tratamientos"), #No implementado
+    path('editar_perfil/<int:pk>/', views.EditarPerfil.as_view(), name="editar_perfil"), #incompleto falta liga a citas y ver como solo mostrar los datos que se queiren editar
 
         ###_____________________________Horario___________________________________
     #path('agregar_horario/',views.AgregarHorario.as_view(), name="agregar_horario"), #No implementado
