@@ -6,6 +6,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect
 from django.db.models import Q
 
+
+
 from .models import (Usuario, ExpedientePaciente, Doctor,
 Nota, Cita, Tratamiento, Doctor_Tratamiento, Hora)
 
@@ -254,7 +256,6 @@ class DetallesDoctor(generic.DetailView):
     success_url = reverse_lazy("Clinica:lista_doctores")
 
 #-----------------VIEWS DOCTOR-----------------
-
     ###_____________________________Perfil_________________________________________
 '''#No implementado
 class PerfilDoctor(generic.DetailView):
@@ -289,6 +290,7 @@ class EditarHorario(generic.UpdateView): ###requiere pk de doctor, aun no funcio
     model = Hora
     form_class=HoraForms
     success_url = reverse_lazy("Clinica:horario_doctor")
+
     def form_valid(self, form):
         obj = form.save(commit=False)
         obj.Doctor = Doctor.objects.filter(Usuario=self.request.user).first()

@@ -9,7 +9,7 @@ urlpatterns = [
     #Administrador
 
         ###____________________________________Usuarios________________________________________''
-    path('lista_usuarios/',views.ListaUsuarios.as_view(), name="lista_usuarios"), #Para decorar #Con un detalle en el filtro
+    path('lista_usuarios/',views.ListaUsuarios.as_view(), name="lista_usuarios"), #Para decorar
     path('nuevo_usuario/',views.NuevoUsuario.as_view(), name="nuevo_usuario"), #Para decorar
     path('editar_usuario/<int:pk>', views.EditarUsuario.as_view(), name="editar_usuario"), #Para decorar
     path('detalles_usuario/<int:pk>', views.DetallesUsuario.as_view(), name="detalles_usuario"), #Para decorar
@@ -24,20 +24,21 @@ urlpatterns = [
     #Recepcionista
 
         ###____________________________________Pacientes____________________________________''
-    path('lista_pacientes/', views.ListaPacientes.as_view(), name="lista_pacientes"),#Para decorar
-    path('editar_paciente/<int:pk>/', views.EditarPaciente.as_view(), name="editar_paciente"),#Para decorar
-    path('detalles_paciente/<int:pk>/', views.DetallesPaciente.as_view(), name="detalles_paciente"),#Para decorar
-    path('crear_paciente/', views.CrearPaciente.as_view(), name="crear_paciente"),#Para decorar
+    path('lista_pacientes/', views.ListaPacientes.as_view(), name="lista_pacientes"),
+    path('editar_paciente/<int:pk>/', views.EditarPaciente.as_view(), name="editar_paciente"),
+    path('detalles_paciente/<int:pk>/', views.DetallesPaciente.as_view(), name="detalles_paciente"),
+    path('crear_paciente/', views.CrearPaciente.as_view(), name="crear_paciente"),
         ###_____________________________Citas_________________________________________
     path('crear_cita/', views.CrearCita.as_view(), name="crear_cita"),#De lista citas y del menu (Incompleto)
+    #Falta crear citas desde pacientes
     path('lista_citas/', views.ListaCitas.as_view(), name="lista_citas"),
     path('editar_cita/<int:pk>', views.EditarCita.as_view(), name="editar_cita"),
     path('borrar_cita/<int:pk>', views.BorrarCita.as_view(), name="borrar_cita"),
     path('detalles_cita/<int:pk>/', views.DetallesCita.as_view(), name="detalles_cita"),
 
         ###_____________________________Doctores_________________________________________
-    path('lista_doctores/', views.ListaDoctores.as_view(), name="lista_doctores"),#Para decorar
-    path('detalles_doctor/<int:pk>/', views.DetallesDoctor.as_view(), name="detalles_doctor"),#Para decorar
+    path('lista_doctores/', views.ListaDoctores.as_view(), name="lista_doctores"), #Para decorar
+    path('detalles_doctor/<int:pk>/', views.DetallesDoctor.as_view(), name="detalles_doctor"), #Para decorar
 
     #Doctor
 
@@ -59,4 +60,5 @@ urlpatterns = [
         ###_____________________________Notas___________________________________
     #path('doctor_notas', views.VerNotas.as_view(), name="doctor_notas"), #No implementado #Ver notas del paciente
     #path('crear_notas', views.CrearNota.as_view(), name="crear_notas"), #No implementado #Crear nota al paciente
+
 ]
