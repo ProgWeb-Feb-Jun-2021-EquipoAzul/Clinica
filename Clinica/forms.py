@@ -9,7 +9,6 @@ Nota, Cita, Tratamiento, Doctor_Tratamiento, Hora)
 
 
 TIPO_EMPLEADO = (
-        ('A', 'Administrador'),
         ('R', 'Recepcionista'),
         ('D', 'Doctor'),
     )
@@ -58,18 +57,18 @@ class NuevoUsuarioForm(forms.ModelForm):
         max_length=50,
         label="Nombres",
         required=True,
-        widget=forms.TextInput(attrs={"placeholder": "Jesús Manuel", "class": "form-control"})
+        widget=forms.TextInput(attrs={"placeholder": "Nombre(s)", "class": "form-control"})
         )
     ApellidoPaterno = forms.CharField(
         max_length=50,
         label="Apellido Paterno",
         required=True,
-        widget=forms.TextInput(attrs={"placeholder": "Cota", "class": "form-control"}))
+        widget=forms.TextInput(attrs={"placeholder": "Apellido Paterno", "class": "form-control"}))
     ApellidoMaterno = forms.CharField(
         max_length=50,
         label="Apellido Materno",
         required=True,
-        widget=forms.TextInput(attrs={"placeholder": "Villa", "class": "form-control"}))
+        widget=forms.TextInput(attrs={"placeholder": "Apellido Materno", "class": "form-control"}))
     Genero = forms.ChoiceField(
         choices = GENERO,
         label="Género",
@@ -87,7 +86,7 @@ class NuevoUsuarioForm(forms.ModelForm):
         max_length=12,
         label="Telefono",
         required=True,
-        widget=forms.TextInput(attrs={"placeholder": "6642545896", "class": "form-control"})
+        widget=forms.TextInput(attrs={"placeholder": "Teléfono", "class": "form-control"})
         )
     class Meta:
         model = Usuario
@@ -138,15 +137,15 @@ class EditarUsuarioForm(forms.ModelForm):
         required=True)
     Nacimiento = forms.DateField(
         required=True,
-        label="Fecha de nacimiento",
-        widget=forms.DateInput(format='%d/%m/%Y',attrs={'type': 'date'}))
+        label="Fecha de nacimiento"
+        )
     email = forms.EmailField(
         max_length=50,
         label="Correo electrónico",
         required=True,
         widget=forms.TextInput(attrs={"placeholder": "correo@sitio.com", "class": "form-control"}))
     Telefono = forms.CharField(
-        max_length=12,
+        max_length=10,
         label="Telefono",
         required=True,
         widget=forms.TextInput(attrs={"placeholder": "6642545896", "class": "form-control"})
@@ -165,7 +164,7 @@ class EditarUsuarioForm(forms.ModelForm):
 
     def save(self, commit=True):
         # Save the provided password in hashed format
-        Usuario = super(UsuarioForm, self).save(commit=False)
+        Usuario = super(EditarUsuarioForm, self).save(commit=False)
         Usuario.set_password(self.cleaned_data["password1"])
         if commit:
             Usuario.save()
@@ -328,7 +327,7 @@ class TratamientoForm(forms.ModelForm):
         max_length=200,
         label="Descripción del tratamiento",
         required=True,
-        widget=forms.Textarea(attrs={"placeholder": "Aqui esta la explicacion del tratamiento.", "class":"form-control"})
+        widget=forms.Textarea(attrs={"placeholder": "Descripción del tratamiento", "class":"form-control"})
         )
     class Meta:
         model = Tratamiento
@@ -346,7 +345,7 @@ class EditarTratamientoForm(forms.ModelForm):
         max_length=200,
         label="Descripción del tratamiento",
         required=True,
-        widget=forms.Textarea(attrs={"placeholder": "Aqui esta la explicacion del tratamiento.", "class":"form-control"})
+        widget=forms.Textarea(attrs={"placeholder": "Descripción del tratamiento", "class":"form-control"})
         )
     class Meta:
         model = Tratamiento

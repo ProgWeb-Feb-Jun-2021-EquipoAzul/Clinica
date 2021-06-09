@@ -10,7 +10,7 @@
       <form method="post">
         {% csrf_token %}
         <h4>¿Deseas borrar al usuario? {{ object }}</h4><br>
-        <button type="submit" class="btn btn-success btn-rounded">Borrar </button>
+        <button type="submit" class="btn btn-success btn-rounded">Si </button>
         <a href="{% url 'Clinica:lista_usuarios' %}"><input type="button" class="btn btn-danger btn-rounded" name="Cancel" value="Cancelar"></a>
       </form>
   </div><!--end container-->

@@ -64,3 +64,5 @@ urlpatterns = [
     #path('crear_notas', views.CrearNota.as_view(), name="crear_notas"), #No implementado #Crear nota al paciente
 
 ]
+
+#quitar la barra superior 

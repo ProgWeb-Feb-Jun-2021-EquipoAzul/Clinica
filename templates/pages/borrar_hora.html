@@ -10,7 +10,7 @@
       <form method="post">
         {% csrf_token %}
         <h2>¿Deseas borrar esta hora?: {{ object }}</h2>
-        <button type="submit">Delete</button>
+        <button type="submit">Si</button>
         <a href="{% url 'Clinica:horario' %}"><input type="button" class="btn btn-danger btn-rounded" name="Cancel" value="Cancelar"></a>
       </form>
   </div><!--end container-->
