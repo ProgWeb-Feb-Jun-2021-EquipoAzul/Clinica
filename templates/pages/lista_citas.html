@@ -10,6 +10,11 @@
         <a href="{% url 'Clinica:crear_cita' %}"><div class="btn btn-primary mybutton">Crear Cita</div></a>
       </div>
       <div class="">
+        <form class="row">
+            {{ form.search }}
+            {{ form.filter_field }}
+            <input type="submit" class="btn btn-default" value="Buscar">
+        </form>
         <table class="table">
           <th>Paciente</th>
           <th>Fecha</th>

@@ -131,6 +131,7 @@ class Cita(models.Model):
     ExpedientePaciente= models.ForeignKey(ExpedientePaciente, verbose_name="Expediente del paciente", on_delete=models.RESTRICT)
     Doctor =models.ForeignKey(Doctor, verbose_name="Doctor", on_delete=models.RESTRICT)
     Fecha= models.DateField(verbose_name="Fecha")
+    
     '''Tratamiento = ChainedManyToManyField(
         Doctor,
         horizontal=True,
@@ -142,7 +143,7 @@ class Cita(models.Model):
         Tratamiento,
         chained_field="Doctor",
         chained_model_field="Doctor",
-        show_all=False,
+        show_all=True,
         auto_choose=True,
         sort=True)
     HoraInicio = ChainedForeignKey(
@@ -154,6 +155,5 @@ class Cita(models.Model):
         sort=True)
     FechaCreacion = models.DateTimeField(auto_now_add=True)
 
-
     def __str__(self):
-        return self.ExpedientePaciente
+        return self.ExpedientePaciente.Nombres +" con "+self.Doctor.Usuario.Nombres +" la fecha "+self.Fecha.strftime("%V,%G,%Y")

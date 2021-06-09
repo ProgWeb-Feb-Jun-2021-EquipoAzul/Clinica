@@ -15,7 +15,7 @@ Nota, Cita, Tratamiento, Doctor_Tratamiento, Hora)
 from .forms import (NuevoUsuarioForm, EditarUsuarioForm, ExpedientePacienteForm, NotaForm, CitaForm, DoctorForm,
 HoraForms,EditarPacienteForm,CitaForm, EditarTratamientoForm, TratamientoForm, CitaForm, PerfilDoctorForm
 
-,FiltroUsuarios,FiltroTratamientos, FiltroPacientes, FiltroDoctores)
+,FiltroUsuarios,FiltroTratamientos, FiltroPacientes, FiltroDoctores, FiltroCitas)
 
 
 URL_LOGIN='login'
@@ -194,6 +194,30 @@ class CrearPaciente(LoginRequiredMixin,generic.CreateView):
 class ListaCitas(generic.ListView):
     template_name = "pages/lista_citas.html"
     model = Cita
+
+    def get_queryset(self):
+        query = self.request.GET.get('search')
+        filter_field = self.request.GET.get('filter_field')
+        # Do your filter and search here
+        if filter_field == "all":
+            return Cita.objects.filter(Q(ExpedientePaciente__Nombres__icontains=query)|Q(Doctor__Usuario__Nombres__icontains=query)|Q(Fecha__icontains=query)).order_by("ExpedientePaciente__Nombres")
+        elif filter_field == "Paciente":
+            return Cita.objects.filter(Q(ExpedientePaciente__Nombres__icontains=query)).order_by("ExpedientePaciente__Nombres")
+        elif filter_field == "Doctor":
+            return Cita.objects.filter(Q(Doctor__Usuario__Nombres__icontains=query)).order_by("ExpedientePaciente__Nombres")
+        elif filter_field == "Fecha":
+            return Cita.objects.filter(Q(Fecha__icontains=query)).order_by("ExpedientePaciente__Nombres")
+        else:
+            return Cita.objects.all()
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['form'] = FiltroCitas(initial={
+            'search': self.request.GET.get('search', ''),
+            'filter_field': self.request.GET.get('filter_field', ''),
+        })
+
+        return context
 
 #Falta crear citas desde pacientes
 

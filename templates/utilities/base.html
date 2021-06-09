@@ -74,10 +74,10 @@
                             <a href="{% url 'Clinica:crear_paciente' %}"><i class="mdi mdi-face"></i> <span>Crear paciente</span></a>
                         </li>
                         <li>
-                            <a href="#"><i class="mdi mdi-calendar-multiple"></i> <span>Citas</span></a>
+                            <a href="{% url 'Clinica:lista_citas' %}"><i class="mdi mdi-calendar-multiple"></i> <span>Citas</span></a>
                         </li>
                         <li>
-                            <a href="#"><i class="mdi mdi-calendar-plus"></i> <span>Crear cita</span></a>
+                            <a href="{% url 'Clinica:crear_cita' %}"><i class="mdi mdi-calendar-plus"></i> <span>Crear cita</span></a>
                         </li>
                         <li>
                             <a href="{% url 'Clinica:lista_doctores' %}"><i class="mdi mdi-pill"></i> <span>Doctores</span></a>
@@ -90,7 +90,7 @@
                             <a href="{% url 'Clinica:horario' %}"><i class="mdi mdi-alarm"></i> <span>Horario</span></a>
                         </li>
                         <li>
-                            <a href="#"><i class="mdi mdi-alarm-plus"></i> <span>Editar horario</span></a>
+                            <a href="{% url 'Clinica:crear_horario' %}"><i class="mdi mdi-alarm-plus"></i> <span>Agregar hora</span></a>
                         </li>
                         <li>{% load filters %}
                             <a href="{% url 'Clinica:perfil' user.id|pk_doctor %}"><i class="mdi mdi-account-circle"></i> <span>Ver perfil</span></a>
@@ -101,7 +101,7 @@
                             <a href="{% url 'Clinica:lista_usuarios' %}"><i class="mdi mdi-account-box"></i> <span>Usuarios</span></a>
                         </li>
                         <li>
-                            <a href="{% url 'Clinica:nuevo_usuario' %}"><i class="mdi mdi-account-plus"></i> <span>Crear Usuario</span></a>
+                            <a href="{% url 'Clinica:nuevo_usuario' %}"><i class="mdi mdi-account-plus"></i> <span>Crear usuario</span></a>
                         </li>
                         <li>
                             <a href="{% url 'Clinica:lista_tratamientos' %}"><i class="mdi mdi-needle"></i> <span>Tratamientos</span></a>

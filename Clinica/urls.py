@@ -47,7 +47,7 @@ urlpatterns = [
     path('editar_perfil/<int:pk>/', views.EditarPerfil.as_view(), name="editar_perfil"), #Para decorar
 
         ###_____________________________Horario___________________________________
-    path('horario/', views.HorarioDoctor.as_view(), name="horario"), #Para decorar
+    path('horario/', views.HorarioDoctor.as_view(), name="horario"), #Para decorar #Falta barra de busqueda
     path('crear_horario/',views.AgregarHorario.as_view(), name="crear_horario"), #Para decorar
     path('editar_horario/<int:pk>/', views.EditarHorario.as_view(), name='editar_horario'), #Para decorar
     path('borrar_horario/<int:pk>/', views.BorrarHora.as_view(), name='borrar_horario'), #Para decorar
