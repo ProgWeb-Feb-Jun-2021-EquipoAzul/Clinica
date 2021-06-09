@@ -1,5 +1,31 @@
-<form method="post">
-    {%csrf_token%}
-    {{form}}
-    <input type="button" value="Cancelar" onclick="history.back()">
-</form>
+{% extends "utilities/base.html" %}
+
+{% block titulo %}Lista de Citas{% endblock %}
+
+{% block contenido %}
+
+  <div class="container-fluid">
+      <div class="page-head">
+        <h1>Horario</h1>
+        <a href="{% url 'Clinica:crear_horario' %}"><div class="btn btn-primary mybutton">Agregar hora</div></a>
+      </div>
+      <div class="">
+        <table class="table">
+          <th>Dia</th>
+          <th>Hora</th>
+          {% for Hora in object_list %}
+          <tr>
+            <td>{{ Hora.Dia }}</td>
+            <td>{{ Hora.Hora }}</td>
+            <td><a href="{% url 'Clinica:detalles_cita' Cita.pk%}">Detalles</a></td>
+            <td><a href="{% url 'Clinica:editar_cita' Cita.pk%}">Editar</a></td>
+            <td><a href="{% url 'Clinica:borrar_cita' Cita.pk%}">Eliminar</a></td>
+          </tr>
+          {% endfor %}
+        </table>
+      </div>
+  </div><!--end container-->
+
+{% endblock contenido%}
+
+<!--BOrrar tratamiento url -->

@@ -103,7 +103,7 @@ class NuevoUsuarioForm(forms.ModelForm):
 
     def save(self, commit=True):
         # Save the provided password in hashed format
-        Usuario = super(UsuarioForm, self).save(commit=False)
+        Usuario = super(NuevoUsuarioForm, self).save(commit=False)
         Usuario.set_password(self.cleaned_data["password1"])
         if commit:
             Usuario.save()
@@ -353,19 +353,38 @@ class EditarTratamientoForm(forms.ModelForm):
         fields = "__all__"
         exclude = []
 
-'''
-Los tratamientos se llenarian con una tabla
-'''
+class FiltroDoctores(Form):
+    FILTER_CHOICES = (
+        ("all", 'Todo los campos'),
+        ("Nombres", 'Nombres'),
+        ("Especialidad", 'Especialidad'),
+        ("Correo", 'Correo'),
+        ("Telefono", 'Telefono'),
+    )
+    search = forms.CharField(required=False)
+    filter_field = forms.ChoiceField(choices=FILTER_CHOICES)
+
 class DoctorForm(forms.ModelForm):
     Usuario = forms.ModelChoiceField(
         queryset=Usuario.objects.all(),
-        label="Empleado",
+        label="Doctor",
         required=True,
         )
     class Meta:
         model = Doctor
         fields = "__all__"
         exclude = []
+
+class PerfilDoctorForm(forms.ModelForm):
+    Tratamientos = forms.ModelMultipleChoiceField(
+            queryset=Tratamiento.objects.all(),
+            widget=forms.CheckboxSelectMultiple,
+            required=True)
+    class Meta:
+        model = Doctor
+        fields = "__all__"
+        exclude = ["Usuario"]
+
 
 '''
 Buscar como hacer eventos para hacer los queries de las horas y
@@ -376,10 +395,6 @@ class CitaForm(forms.ModelForm):
         queryset=ExpedientePaciente.objects.all(),
         label="Paciente",
         required=True)
-    Doctor = forms.ModelChoiceField(
-        queryset=Doctor.objects.all(),
-        label="Doctor",
-        required=True)
     Fecha = forms.DateField(
         required=True,
         label="Fecha de la cita",
@@ -387,10 +402,6 @@ class CitaForm(forms.ModelForm):
     '''HoraInicio = forms.ChoiceField(
         label="Hora de Inicio",
         required=True)'''
-    Tratamiento = forms.ModelChoiceField(
-        queryset=Tratamiento.objects.all(),
-        label="Tratamiento",
-        required=True)
     class Meta:
         model = Cita
         fields = "__all__"

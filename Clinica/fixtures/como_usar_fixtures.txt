@@ -14,4 +14,4 @@ _________________________________________________________________________
 _puedes ser mas especifico sobre que modelo quieres descargar datos asi:_
 _________________________________________________________________________
 
-python manage.py dumpdata --format=json Clinica:Usuario/ > Clinicafixtures/usuario_data.json
+python manage.py dumpdata --format=json Clinica:Usuario/ > Clinica/fixtures/usuario_data.json

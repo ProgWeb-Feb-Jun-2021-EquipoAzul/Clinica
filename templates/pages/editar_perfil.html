@@ -1,11 +1,11 @@
 {% extends "utilities/base.html" %}
-
-{% block titulo %}Detalles doctor{% endblock %}
+{% load filters %}
+{% block titulo %}Editar Perfil{% endblock %}
 
 {% block contenido %}
   <div class="container-fluid">
       <div class="page-head">
-        <h1>Detalles del doctor</h1>
+        <h1>Editar Perfil</h1>
       </div>
       <div class="h5 mb-0 font-weight-bold text-gray-800">
         Nombres: {{ object.Usuario.Nombres}}<br>
@@ -14,17 +14,13 @@
         Genero: {{ object.Usuario.Genero}}<br>
         Correo: {{ object.Usuario.email}}<br>
         Telefono: {{ object.Usuario.Telefono}}<br>
-         Especialidad: {{ object.Especialidad}}<br>
 
-          <table class="table">
-            <th>Tratamiento</th>
-            {% for Tratamiento in object.Tratamientos.all %}
-            <tr>
-              <td>{{ Tratamiento }}</td>
-            </tr>
-          {% endfor %}
-          </table>
-        <a href="{% url 'Clinica:lista_doctores' %}"><input type="button" name="Return" value="Regresar"></a>
       </div>
+      <form method="post">
+          {%csrf_token%}
+          {{form}}
+          <button type="submit">Guardar cambios</button>
+          <a href="{% url 'Clinica:perfil' user.id|pk_doctor %}"><input type="button" name="Cancel" value="Cancelar"></a>
+      </form>
   </div><!--end container-->
 {% endblock contenido%}

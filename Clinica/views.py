@@ -1,18 +1,21 @@
 from django.shortcuts import render
 from django.views import generic
 from django.urls import reverse_lazy
+from django.urls import reverse
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect
 from django.db.models import Q
 
+
+
 from .models import (Usuario, ExpedientePaciente, Doctor,
 Nota, Cita, Tratamiento, Doctor_Tratamiento, Hora)
 
 from .forms import (NuevoUsuarioForm, EditarUsuarioForm, ExpedientePacienteForm, NotaForm, CitaForm, DoctorForm,
-HoraForms,EditarPacienteForm,CitaForm, EditarTratamientoForm, TratamientoForm, CitaForm
+HoraForms,EditarPacienteForm,CitaForm, EditarTratamientoForm, TratamientoForm, CitaForm, PerfilDoctorForm
 
-,FiltroUsuarios,FiltroTratamientos, FiltroPacientes)
+,FiltroUsuarios,FiltroTratamientos, FiltroPacientes, FiltroDoctores)
 
 
 URL_LOGIN='login'
@@ -219,26 +222,55 @@ class ListaDoctores(generic.ListView):
     template_name = "pages/lista_doctores.html"
     model = Doctor
 
+    def get_queryset(self):
+        query = self.request.GET.get('search')
+        filter_field = self.request.GET.get('filter_field')
+        # Do your filter and search here
+
+        #CHEEEEECAR filtro all muestra a todos los tipos de usuario
+        if filter_field == "all":
+            return Doctor.objects.filter(Q(Usuario__Nombres__icontains=query) | Q(Especialidad__icontains=query)| Q(Usuario__email__icontains=query)| Q(Usuario__Telefono__icontains=query)).order_by("Usuario__Nombres")
+        elif filter_field == "Nombres":
+            return Doctor.objects.filter(Q(Usuario__Nombres__icontains=query) ).order_by("Usuario__Nombres")
+        elif filter_field == "Especialidad":
+            return Doctor.objects.filter(Q(Especialidad__icontains=query)).order_by("Usuario__Nombres")
+        elif filter_field == "Correo":
+            return Doctor.objects.filter(Q(Usuario__email__icontains=query)).order_by("Usuario__Nombres")
+        elif filter_field == "Telefono":
+            return Doctor.objects.filter(Q(Usuario__Telefono__icontains=query)).order_by("Usuario__Nombres")
+        else:
+            return Doctor.objects.all().order_by("Usuario__Nombres")
+
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['form'] = FiltroDoctores(initial={
+            'search': self.request.GET.get('search', ''),
+            'filter_field': self.request.GET.get('filter_field', ''),
+        })
+
+        return context
+
 class DetallesDoctor(generic.DetailView):
     template_name = "pages/detalles_doctor.html"
     model = Doctor
     success_url = reverse_lazy("Clinica:lista_doctores")
 
 #-----------------VIEWS DOCTOR-----------------
-
     ###_____________________________Perfil_________________________________________
-'''#No implementado
+#No implementado
 class PerfilDoctor(generic.DetailView):
-    template_name = "pages/doctor.html"
+    template_name = "pages/perfil.html"
     model = Doctor
-'''
-    ###_____________________________Tratamientos___________________________________
-'''#No implementa
-class TramientosDoctor(generic.ListView):
-    template_name = "pages/doctor_tratamientos.html"
-    model = Tratamiento
-    success_url = reverse_lazy("Clinica:doctor")
-'''
+
+class EditarPerfil(generic.UpdateView):
+    template_name = "pages/editar_perfil.html"
+    model = Doctor
+    form_class=PerfilDoctorForm
+
+    def get_success_url(self):
+          doctor=self.kwargs['pk']
+          return reverse_lazy('Clinica:perfil', kwargs={'pk': doctor})
 
     ###_____________________________Horario___________________________________
 #Mas o menos implementado solo debe de dejar entrar a doctores
@@ -260,6 +292,7 @@ class EditarHorario(generic.UpdateView): ###requiere pk de doctor, aun no funcio
     model = Hora
     form_class=HoraForms
     success_url = reverse_lazy("Clinica:horario_doctor")
+
     def form_valid(self, form):
         obj = form.save(commit=False)
         obj.Doctor = Doctor.objects.filter(Usuario=self.request.user).first()
@@ -270,11 +303,10 @@ class HorarioDoctor(generic.ListView):  ###Aun no hereda el form falta hacer  qu
     template_name = "pages/horario_doctor.html"
     model = Hora
     success_url = reverse_lazy("Clinica:doctor")
-    def form_valid(self, form):
-        obj = form.save(commit=False)
-        obj.Doctor = Doctor.objects.filter(Usuario=self.request.user).first()
-        obj.save()
-        return super().form_valid(form)
+
+    def get_queryset(self):
+        doctor = Doctor.objects.filter(Usuario=self.request.user).first()
+        return Hora.objects.filter(Q(Doctor=doctor)).order_by("Dia")
 
     ###_____________________________Citas___________________________________
 '''#No implementado

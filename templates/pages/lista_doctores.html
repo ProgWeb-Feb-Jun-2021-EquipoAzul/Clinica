@@ -1,6 +1,6 @@
 {% extends "utilities/base.html" %}
 
-{% block titulo %}Lista de Doctores {% endblock %}
+{% block titulo %}Lista de doctores {% endblock %}
 
 {% block contenido %}
   <div class="container-fluid">
@@ -8,6 +8,11 @@
         <h1>Lista de doctores</h1>
       </div>
       <div class="">
+        <form class="row">
+            {{ form.search }}
+            {{ form.filter_field }}
+            <input type="submit" class="btn btn-default" value="Buscar">
+        </form>
         <table class="table">
           <th>Nombre</th>
           <th>Especialidad</th>
@@ -18,7 +23,7 @@
             <td>{{ Doctor.Usuario.Nombres }} {{ Doctor.Usuario.ApellidoPaterno }}</td>
             <td>{{ Doctor.Especialidad }}</td>
             <td>{{ Doctor.Usuario.Correo }}</td>
-            <td>{{ Doctor.Usuario.Telefono}}</td>          
+            <td>{{ Doctor.Usuario.Telefono}}</td>
             <td><a href="{% url 'Clinica:detalles_doctor' Doctor.pk%}">Detalles</a></td>
 
 

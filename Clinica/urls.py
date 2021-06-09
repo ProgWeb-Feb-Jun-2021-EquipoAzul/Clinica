@@ -24,10 +24,10 @@ urlpatterns = [
     #Recepcionista
 
         ###____________________________________Pacientes____________________________________''
-    path('lista_pacientes/', views.ListaPacientes.as_view(), name="lista_pacientes"),
-    path('editar_paciente/<int:pk>/', views.EditarPaciente.as_view(), name="editar_paciente"),
-    path('detalles_paciente/<int:pk>/', views.DetallesPaciente.as_view(), name="detalles_paciente"),
-    path('crear_paciente/', views.CrearPaciente.as_view(), name="crear_paciente"),
+    path('lista_pacientes/', views.ListaPacientes.as_view(), name="lista_pacientes"),#Para decorar
+    path('editar_paciente/<int:pk>/', views.EditarPaciente.as_view(), name="editar_paciente"),#Para decorar
+    path('detalles_paciente/<int:pk>/', views.DetallesPaciente.as_view(), name="detalles_paciente"),#Para decorar
+    path('crear_paciente/', views.CrearPaciente.as_view(), name="crear_paciente"),#Para decorar
         ###_____________________________Citas_________________________________________
     path('crear_cita/', views.CrearCita.as_view(), name="crear_cita"),#De lista citas y del menu (Incompleto)
     #Falta crear citas desde pacientes
@@ -37,27 +37,25 @@ urlpatterns = [
     path('detalles_cita/<int:pk>/', views.DetallesCita.as_view(), name="detalles_cita"),
 
         ###_____________________________Doctores_________________________________________
-    path('lista_doctores/', views.ListaDoctores.as_view(), name="lista_doctores"),
-    path('detalles_doctor/<int:pk>/', views.DetallesDoctor.as_view(), name="detalles_doctor"),
-    path('horario_doctor/', views.HorarioDoctor.as_view(), name="horario_doctor"),
-    path('editar_horario/<int:pk>/', views.EditarHorario.as_view(), name="editar_horario"),
+    path('lista_doctores/', views.ListaDoctores.as_view(), name="lista_doctores"), #Para decorar
+    path('detalles_doctor/<int:pk>/', views.DetallesDoctor.as_view(), name="detalles_doctor"), #Para decorar
 
     #Doctor
 
         ###_____________________________Perfil_________________________________________
-    #path('doctor/<int:pk>/', views.PerfilDoctor.as_view(), name="doctor"), #No implementado
-
-        ###_____________________________Tratamientos___________________________________
-    #path('doctor_tratamientos/', view.TramientosDoctor.as_view(), name="doctor_tratamientos"), #No implementado
+    path('perfil/<int:pk>/', views.PerfilDoctor.as_view(), name="perfil"), #Para decorar
+    path('editar_perfil/<int:pk>/', views.EditarPerfil.as_view(), name="editar_perfil"), #Para decorar
 
         ###_____________________________Horario___________________________________
+    path('horario/', views.HorarioDoctor.as_view(), name="horario"), #No implementado
     #path('agregar_horario/',views.AgregarHorario.as_view(), name="agregar_horario"), #No implementado
     #path('editar_horario/<int:pk>/', views.EditarHorario.as_view(), name='editar_horario'), #No implementado
-    #path('horario_doctor/', views.HorarioDoctor.as_view(), name="horario_doctor"), #No implementado
 
         ###_____________________________Citas___________________________________
     #path('doctor_citas/', views.CitasDoctor.as_view(), name="doctor_citas"), #No implementado #Citas del doctor
     #path('expedientepaciente/<int:pk>/', views.VerPaciente.as_view(), name="expedientepaciente") #No implementado #Expediente de la cita del doc
+
+        ###_____________________________Pacientes___________________________________
 
         ###_____________________________Notas___________________________________
     #path('doctor_notas', views.VerNotas.as_view(), name="doctor_notas"), #No implementado #Ver notas del paciente

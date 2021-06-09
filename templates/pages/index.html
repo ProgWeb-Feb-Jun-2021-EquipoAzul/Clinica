@@ -5,8 +5,9 @@
 {% block contenido %}
         <div class="container-fluid">
             <div class="page-head">
-                {% if user.is_authenticated %}
+                {% if user.TipoEmpleado == 'R' %}
                     <h1>Auntenticado</h1>
+
                 {% endif %}
             </div>
         </div><!--end container-->

@@ -80,20 +80,20 @@
                             <a href="#"><i class="mdi mdi-calendar-plus"></i> <span>Crear cita</span></a>
                         </li>
                         <li>
-                            <a href="#"><i class="mdi mdi-pill"></i> <span>Doctores</span></a>
+                            <a href="{% url 'Clinica:lista_doctores' %}"><i class="mdi mdi-pill"></i> <span>Doctores</span></a>
                         </li>
                         {% elif user.TipoEmpleado == 'D'%}
                         <li>
                             <a href="#"><i class="mdi mdi-calendar-multiple"></i> <span>Citas</span></a>
                         </li>
                         <li>
-                            <a href="#"><i class="mdi mdi-alarm"></i> <span>Horario</span></a>
+                            <a href="{% url 'Clinica:horario' %}"><i class="mdi mdi-alarm"></i> <span>Horario</span></a>
                         </li>
                         <li>
                             <a href="#"><i class="mdi mdi-alarm-plus"></i> <span>Editar horario</span></a>
                         </li>
-                        <li>
-                            <a href="#"><i class="mdi mdi-account-circle"></i> <span>Ver perfil</span></a>
+                        <li>{% load filters %}
+                            <a href="{% url 'Clinica:perfil' user.id|pk_doctor %}"><i class="mdi mdi-account-circle"></i> <span>Ver perfil</span></a>
                         </li>
                         <li>
                             <a href="#"><i class="mdi mdi-needle"></i> <span>Tratamientos</span></a>
