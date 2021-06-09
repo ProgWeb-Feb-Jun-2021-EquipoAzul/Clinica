@@ -13,7 +13,7 @@
         <form method="post">
             {%csrf_token%}
             {{form}}<br>
-            <button type="submit" class="btn btn-success btn-rounded">Crear</button>
+            <button type="submit" class="btn btn-success btn-rounded">Guardar cambios</button>
             <a href="{% url 'Clinica:lista_usuarios' %}"><input type="button" class="btn btn-danger btn-rounded"name="Cancel" value="Cancelar"></a>
         </form>
     </div>
@@ -21,5 +21,3 @@
     </div>
 </div><!--end container-->
 {% endblock contenido%}
-
-

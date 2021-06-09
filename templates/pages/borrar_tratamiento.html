@@ -11,7 +11,7 @@
       <form method="post">
         {% csrf_token %}
         <h3>¿Deseas borrar al tratamiento? {{ object }}</h3>
-        <button type="submit" class="btn btn-success btn-rounded">Delete</button>
+        <button type="submit" class="btn btn-success btn-rounded">Si</button>
         <a href="{% url 'Clinica:lista_tratamientos' %}"><input type="button" class="btn btn-danger btn-rounded" name="Cancel" value="Cancelar"></a>
       </form>
   </div><!--end container-->
