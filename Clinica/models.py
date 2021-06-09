@@ -131,6 +131,7 @@ class Cita(models.Model):
     ExpedientePaciente= models.ForeignKey(ExpedientePaciente, verbose_name="Expediente del paciente", on_delete=models.RESTRICT)
     Doctor =models.ForeignKey(Doctor, verbose_name="Doctor", on_delete=models.RESTRICT)
     Fecha= models.DateField(verbose_name="Fecha")
+    
     '''Tratamiento = ChainedManyToManyField(
         Doctor,
         horizontal=True,
