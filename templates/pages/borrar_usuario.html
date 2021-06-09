@@ -1,17 +1,17 @@
 {% extends "utilities/base.html" %}
 
-{% block titulo %}Borrar usuario{% endblock %}
+{% block titulo %}Borrar cita{% endblock %}
 
 {% block contenido %}
   <div class="container-fluid">
       <div class="page-head">
-        <h2>Borrar usuario</h2>
+        <h2>Borrar cita</h2>
       </div>
       <form method="post">
         {% csrf_token %}
-        <h4>¿Deseas borrar al usuario? {{ object }}</h4><br>
+        <h4>¿Deseas borrar la cita? {{ object }}</h4><br>
         <button type="submit" class="btn btn-success btn-rounded">Borrar </button>
-        <a href="{% url 'Clinica:lista_usuarios' %}"><input type="button" class="btn btn-danger btn-rounded" name="Cancel" value="Cancelar"></a>
+        <a href="{% url 'Clinica:lista_citas' %}"><input type="button" class="btn btn-danger btn-rounded" name="Cancel" value="Cancelar"></a>
       </form>
   </div><!--end container-->
 {% endblock contenido%}

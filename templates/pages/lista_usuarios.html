@@ -5,18 +5,17 @@
 {% block contenido %}
   <div class="container-fluid">
       <div class="page-head">
-        <h1>Lista de usuarios</h1>    
-        <a href="{% url 'Clinica:nuevo_usuario' %}"><input type="button" class="btn btn-success btn-rounded" name="crear" value="Crear usuario"></a>
+        <h1>Lista de usuarios</h1>
+
       </div>
       <div class="">
         <form class="form-group mb-1">
           <h5>Ingrese el campo</h5>
-            {{ form.search }} 
+            {{ form.search }}
             {{ form.filter_field }}
             <input type="submit" class="btn btn-success btn-rounded" value="Buscar">
-            
-            
         </form>
+        <a href="{% url 'Clinica:nuevo_usuario' %}"><input type="button" class="btn btn-success btn-rounded" name="crear" value="Crear usuario"></a>
         <table id="table_id" class="table table-striped table-sm table-bordered">
           <th>Nombre</th>
           <th>Correo</th>

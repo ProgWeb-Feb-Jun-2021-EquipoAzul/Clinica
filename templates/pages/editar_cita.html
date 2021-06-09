@@ -1,6 +1,18 @@
-<form method="post">
-    {%csrf_token%}
-    {{form}}
-    <button type="submit">Editar</button>
-    <input type="button" value="Cancelar" onclick="history.back()">
-</form>
+{% extends "utilities/base.html" %}
+
+{% block titulo %}Editar cita{% endblock %}
+
+{% block contenido %}
+<div class="container-fluid">
+    <div class="page-head">
+        <h1>Editar cita</h1>
+    </div>
+    <div class="">
+      <form method="post">
+          {{form}}
+          <button type="submit">Editar</button>
+          <a href="{% url 'Clinica:lista_citas' %}"><input type="button" name="Cancel" value="Cancelar"></a>
+      </form>
+    </div>
+</div><!--end container-->
+{% endblock contenido%}

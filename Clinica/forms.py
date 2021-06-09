@@ -390,6 +390,17 @@ class PerfilDoctorForm(forms.ModelForm):
 Buscar como hacer eventos para hacer los queries de las horas y
 tratamientos del Doctor cuando se selecciona el doctor
 '''
+
+class FiltroCitas(Form):
+    FILTER_CHOICES = (
+        ("all", 'Todo los campos'),
+        ("Paciente", 'Doctor'),
+        ("Doctor", 'Doctor'),
+        ("Fecha", 'Fecha'),
+    )
+    search = forms.CharField(required=False)
+    filter_field = forms.ChoiceField(choices=FILTER_CHOICES)
+
 class CitaForm(forms.ModelForm):
     ExpedientePaciente = forms.ModelChoiceField(
         queryset=ExpedientePaciente.objects.all(),
