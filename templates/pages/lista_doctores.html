@@ -22,7 +22,7 @@
           <tr>
             <td>{{ Doctor.Usuario.Nombres }} {{ Doctor.Usuario.ApellidoPaterno }}</td>
             <td>{{ Doctor.Especialidad }}</td>
-            <td>{{ Doctor.Usuario.Correo }}</td>
+            <td>{{ Doctor.Usuario.email }}</td>
             <td>{{ Doctor.Usuario.Telefono}}</td>
             <td><a href="{% url 'Clinica:detalles_doctor' Doctor.pk%}">Detalles</a></td>
 

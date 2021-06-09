@@ -17,9 +17,8 @@
           <tr>
             <td>{{ Hora.Dia }}</td>
             <td>{{ Hora.Hora }}</td>
-            <td><a href="{% url 'Clinica:detalles_cita' Cita.pk%}">Detalles</a></td>
-            <td><a href="{% url 'Clinica:editar_cita' Cita.pk%}">Editar</a></td>
-            <td><a href="{% url 'Clinica:borrar_cita' Cita.pk%}">Eliminar</a></td>
+            <td><a href="{% url 'Clinica:editar_horario' Hora.pk%}">Editar</a></td>
+            <td><a href="{% url 'Clinica:borrar_horario' Hora.pk%}">Eliminar</a></td>
           </tr>
           {% endfor %}
         </table>

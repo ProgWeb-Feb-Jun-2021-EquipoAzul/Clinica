@@ -133,6 +133,7 @@ class CrearTratamiento(LoginRequiredMixin,generic.CreateView):
     login_url = URL_LOGIN
     model = Tratamiento
     form_class = TratamientoForm
+    success_url = reverse_lazy("Clinica:lista_tratamientos")
 
 #--------------VIEWS RECEPCIONISTA-------------
 
@@ -187,6 +188,7 @@ class CrearPaciente(LoginRequiredMixin,generic.CreateView):
     login_url = URL_LOGIN
     model = ExpedientePaciente
     form_class = ExpedientePacienteForm
+    success_url = reverse_lazy("Clinica:lista_pacientes")
 
     ###_____________________________Citas_________________________________________
 class ListaCitas(generic.ListView):
@@ -278,7 +280,7 @@ class AgregarHorario(generic.CreateView):
     template_name = "pages/agregar_horario.html"
     model = Hora
     form_class = HoraForms
-    success_url = reverse_lazy("Clinica:index")
+    success_url = reverse_lazy("Clinica:horario")
 
     #Agrega la pk de doctor a la que pertenece la hora agregada
     def form_valid(self, form):
@@ -302,11 +304,16 @@ class EditarHorario(generic.UpdateView): ###requiere pk de doctor, aun no funcio
 class HorarioDoctor(generic.ListView):  ###Aun no hereda el form falta hacer  que acepte un pk de doctor aun no funciona
     template_name = "pages/horario_doctor.html"
     model = Hora
-    success_url = reverse_lazy("Clinica:doctor")
 
     def get_queryset(self):
         doctor = Doctor.objects.filter(Usuario=self.request.user).first()
         return Hora.objects.filter(Q(Doctor=doctor)).order_by("Dia")
+
+class BorrarHora(LoginRequiredMixin,generic.DeleteView): ###Falta completar
+    template_name = "pages/borrar_hora.html"
+    login_url = URL_LOGIN
+    model = Hora
+    success_url = reverse_lazy("Clinica:horario_doctor")
 
     ###_____________________________Citas___________________________________
 '''#No implementado

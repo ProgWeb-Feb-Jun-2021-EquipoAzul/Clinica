@@ -47,15 +47,17 @@ urlpatterns = [
     path('editar_perfil/<int:pk>/', views.EditarPerfil.as_view(), name="editar_perfil"), #Para decorar
 
         ###_____________________________Horario___________________________________
-    path('horario/', views.HorarioDoctor.as_view(), name="horario"), #No implementado
-    #path('agregar_horario/',views.AgregarHorario.as_view(), name="agregar_horario"), #No implementado
-    #path('editar_horario/<int:pk>/', views.EditarHorario.as_view(), name='editar_horario'), #No implementado
+    path('horario/', views.HorarioDoctor.as_view(), name="horario"), #Para decorar
+    path('crear_horario/',views.AgregarHorario.as_view(), name="crear_horario"), #Para decorar
+    path('editar_horario/<int:pk>/', views.EditarHorario.as_view(), name='editar_horario'), #Para decorar
+    path('borrar_horario/<int:pk>/', views.BorrarHora.as_view(), name='borrar_horario'), #Para decorar
 
         ###_____________________________Citas___________________________________
     #path('doctor_citas/', views.CitasDoctor.as_view(), name="doctor_citas"), #No implementado #Citas del doctor
     #path('expedientepaciente/<int:pk>/', views.VerPaciente.as_view(), name="expedientepaciente") #No implementado #Expediente de la cita del doc
 
         ###_____________________________Pacientes___________________________________
+
 
         ###_____________________________Notas___________________________________
     #path('doctor_notas', views.VerNotas.as_view(), name="doctor_notas"), #No implementado #Ver notas del paciente

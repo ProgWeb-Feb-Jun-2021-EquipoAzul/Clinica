@@ -2,16 +2,17 @@
 
 {% block titulo %}Crear usuario{% endblock %}
 
-<div class="page-head">
-    </div><!--end container-->
+{% block contenido%}
+{% csrf_token %}
+<div class="container-fluid">
+    <div class="page-head">
         <h2 class="my-2">Crear nuevo usuario</h2>
-    <div class="container-fluid">
-    {% csrf_token %}
-    <form method="post">
-        {{ form }}<br>
-        <button type="submit" class="btn btn-success btn-rounded">Crear</button>
-        <a href="{% url 'Clinica:lista_usuarios' %}"><input type="button" class="btn btn-danger btn-rounded" name="Cancel" value="Cancelar"></a>
-    </form>
+        <form method="post">
+          {% csrf_token %}
+          {{ form }}<br>
+          <button type="submit" class="btn btn-success btn-rounded">Crear</button>
+          <a href="{% url 'Clinica:lista_usuarios' %}"><input type="button" class="btn btn-danger btn-rounded" name="Cancel" value="Cancelar"></a>
+        </form>
+    </div>
 </div>
-
 {% endblock contenido%}
