@@ -7,13 +7,19 @@
     <div class="page-head">
             <h1>Editar usuario</h1>
     </div>
+    <div class="edit-table">
+        <div class="row">
     <div class="">
         <form method="post">
             {%csrf_token%}
-            {{form}}
-            <button type="submit">Crear</button>
-            <a href="{% url 'Clinica:lista_usuarios' %}"><input type="button" name="Cancel" value="Cancelar"></a>
+            {{form}}<br>
+            <button type="submit" class="btn btn-success btn-rounded">Crear</button>
+            <a href="{% url 'Clinica:lista_usuarios' %}"><input type="button" class="btn btn-danger btn-rounded"name="Cancel" value="Cancelar"></a>
         </form>
+    </div>
+        </div>
     </div>
 </div><!--end container-->
 {% endblock contenido%}
+
+

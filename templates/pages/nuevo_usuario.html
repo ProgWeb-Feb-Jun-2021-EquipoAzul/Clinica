@@ -1,8 +1,20 @@
+
 {% load static %}
+
 
 <!DOCTYPE html>
 <html lang="en">
-    <head>
+    <head >
+        <style>
+            body,
+            html {
+                margin: 0;
+                padding: 0;
+                height: 100%;
+                background: #1b97f0 !important;
+            }
+        </style>
+
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
         <meta name="description" content="">
@@ -17,6 +29,7 @@
         <link href="{% static '/css/icons.css' %}" rel="stylesheet">
         <link href="{% static '/css/menu.css' %}" rel="stylesheet" type="text/css">
         <link href="{% static '/css/style.css' %}" rel="stylesheet">
+    
     </head>
     <body class="sticky-header bg-gradient-primary">
         <div class="topbar">
@@ -34,16 +47,17 @@
         <div class="body-content">
             <div class="container-fluid">
                 <div class="page-head">
-                    <h4 class="my-2">Starter Page</h4>
+                    <h2 class="my-2">Crear nuevo usuario</h2>
                     <form method="post">
                       {% csrf_token %}
-                      {{ form }}
-                      <button type="submit">Crear</button>
-                      <a href="{% url 'Clinica:lista_usuarios' %}"><input type="button" name="Cancel" value="Cancelar"></a>
+                      {{ form }}<br>
+                      <button type="submit" class="btn btn-success btn-rounded">Crear</button>
+                      <a href="{% url 'Clinica:lista_usuarios' %}"><input type="button" class="btn btn-danger btn-rounded" name="Cancel" value="Cancelar"></a>
                     </form>
                 </div>
             </div><!--end container-->
         </div>
+        
           <!--end body content-->
 
       <!-- jQuery -->

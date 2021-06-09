@@ -6,23 +6,26 @@
 
   <div class="container-fluid">
       <div class="page-head">
-        <h1>Lista de tratamientos</h1>
+        <h2>Lista de tratamientos</h2><br>
+        <h5>Ingrese el campo</h5>
       </div>
       <div class="">
         <form class="row">
             {{ form.search }}
-            <input type="submit" class="btn btn-default" value="Buscar">
-            <a href="{% url 'Clinica:crear_tratamiento' %}"><input type="button" name="crear" value="Crear tratamiento"></a>
-        </form>
-        <table class="table">
+            <input type="submit" class="btn btn-success btn-rounded" value="Buscar">
+            <br><a href="{% url 'Clinica:crear_tratamiento' %}"><input type="button"  class="btn btn-success btn-rounded"name="crear" value="Crear tratamiento"></a>
+        </form><br>
+        <table id="table_id" class="table table-striped table-sm table-bordered">
           <th>Tratamiento</th>
           <th>Descripcion</th>
+          <th>Editar</th>
+          <th>Elimimar</th>
           {% for Tratamiento in object_list %}
           <tr>
             <td>{{ Tratamiento.Tratamiento }}</td>
             <td>{{ Tratamiento.Descripcion }}</td>
-            <td><a href="{% url 'Clinica:editar_tratamiento' Tratamiento.pk%}">Editar</a></td>
-            <td><a href="{% url 'Clinica:borrar_tratamiento' Tratamiento.pk%}">Eliminar</a></td>
+            <td><a href="{% url 'Clinica:editar_tratamiento' Tratamiento.pk%}">Editar</a><i class="mdi mdi-border-color"></i></td>
+            <td><a href="{% url 'Clinica:borrar_tratamiento' Tratamiento.pk%}">Eliminar</a><i class="mdi mdi-delete-forever"></i></td>
           </tr>
           {% endfor %}
         </table>

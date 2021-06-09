@@ -6,13 +6,13 @@
 
   <div class="container-fluid">
       <div class="page-head">
-        <h1>Borrar tratamiento</h1>
+        <h2>Borrar tratamiento</h2>
       </div>
       <form method="post">
         {% csrf_token %}
-        <h2>¿Deseas borrar al tratamiento?: {{ object }}</h2>
-        <button type="submit">Delete</button>
-        <a href="{% url 'Clinica:lista_tratamientos' %}"><input type="button" name="Cancel" value="Cancelar"></a>
+        <h3>¿Deseas borrar al tratamiento? {{ object }}</h3>
+        <button type="submit" class="btn btn-success btn-rounded">Delete</button>
+        <a href="{% url 'Clinica:lista_tratamientos' %}"><input type="button" class="btn btn-danger btn-rounded" name="Cancel" value="Cancelar"></a>
       </form>
   </div><!--end container-->
 {% endblock contenido%}

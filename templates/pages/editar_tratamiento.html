@@ -4,13 +4,13 @@
 {% block contenido %}
 <div class="container-fluid">
       <div class="page-head">
-        <h1>Editar tratamiento</h1>
+        <h2>Editar tratamiento</h2>
       </div>
     <form method="post">
         {%csrf_token%}
         {{form}}
-        <button type="submit">Editar</button>
-        <a href="{% url 'Clinica:lista_tratamientos' %}"><input type="button" name="Cancel" value="Cancelar"></a>
+        <button type="submit" class="btn btn-success btn-rounded">Editar</button>
+        <a href="{% url 'Clinica:lista_tratamientos' %}"><input type="button" class="btn btn-danger btn-rounded" name="Cancel" value="Cancelar"></a>
     </form>
 </div>
 <!--end container-->

@@ -5,13 +5,13 @@
 {% block contenido %}
   <div class="container-fluid">
       <div class="page-head">
-        <h1>Borrar usuario</h1>
+        <h2>Borrar usuario</h2>
       </div>
       <form method="post">
         {% csrf_token %}
-        <h2>¿Deseas borrar al usuario?: {{ object }}</h2>
-        <button type="submit">Borrar</button>
-        <a href="{% url 'Clinica:lista_usuarios' %}"><input type="button" name="Cancel" value="Cancelar"></a>
+        <h4>¿Deseas borrar al usuario? {{ object }}</h4><br>
+        <button type="submit" class="btn btn-success btn-rounded">Borrar </button>
+        <a href="{% url 'Clinica:lista_usuarios' %}"><input type="button" class="btn btn-danger btn-rounded" name="Cancel" value="Cancelar"></a>
       </form>
   </div><!--end container-->
 {% endblock contenido%}
