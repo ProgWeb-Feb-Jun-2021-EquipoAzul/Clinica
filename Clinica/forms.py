@@ -376,6 +376,10 @@ class DoctorForm(forms.ModelForm):
         exclude = []
 
 class PerfilDoctorForm(forms.ModelForm):
+    Tratamientos = forms.ModelMultipleChoiceField(
+            queryset=Tratamiento.objects.all(),
+            widget=forms.CheckboxSelectMultiple,
+            required=True)
     class Meta:
         model = Doctor
         fields = "__all__"
@@ -391,10 +395,6 @@ class CitaForm(forms.ModelForm):
         queryset=ExpedientePaciente.objects.all(),
         label="Paciente",
         required=True)
-    Doctor = forms.ModelChoiceField(
-        queryset=Doctor.objects.all(),
-        label="Doctor",
-        required=True)
     Fecha = forms.DateField(
         required=True,
         label="Fecha de la cita",
@@ -402,10 +402,6 @@ class CitaForm(forms.ModelForm):
     '''HoraInicio = forms.ChoiceField(
         label="Hora de Inicio",
         required=True)'''
-    Tratamiento = forms.ModelChoiceField(
-        queryset=Tratamiento.objects.all(),
-        label="Tratamiento",
-        required=True)
     class Meta:
         model = Cita
         fields = "__all__"

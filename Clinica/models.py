@@ -4,8 +4,8 @@ from django.db.models.signals import post_save
 
 from django.contrib.auth.validators import UnicodeUsernameValidator
 
-#from smart_selects.db_fields import ChainedForeignKey
-#from smart_selects.db_fields import ChainedManyToManyField
+from smart_selects.db_fields import ChainedForeignKey
+from smart_selects.db_fields import ChainedManyToManyField
 
 # Create your models here.
 
@@ -100,8 +100,6 @@ class Tratamiento(models.Model):
     Tratamiento = models.CharField(max_length=50, verbose_name="Tratamiento")
     Descripcion = models.CharField(max_length=200, verbose_name="Descripcion")
 
-
-
     def __str__(self):
         return self.Tratamiento
 
@@ -126,26 +124,36 @@ class Hora(models.Model):
 class Doctor_Tratamiento(models.Model):
     Doctor= models.ForeignKey(Doctor, verbose_name="Doctor", on_delete=models.CASCADE)
     Tratamiento= models.ForeignKey(Tratamiento, verbose_name="Tratamiento", on_delete=models.CASCADE)
+    class Meta:
+        unique_together = ('Doctor','Tratamiento')
 
 class Cita(models.Model):
     ExpedientePaciente= models.ForeignKey(ExpedientePaciente, verbose_name="Expediente del paciente", on_delete=models.RESTRICT)
     Doctor =models.ForeignKey(Doctor, verbose_name="Doctor", on_delete=models.RESTRICT)
     Fecha= models.DateField(verbose_name="Fecha")
     '''Tratamiento = ChainedManyToManyField(
-        Tratamiento,
+        Doctor,
         horizontal=True,
         verbose_name='Tratamiento',
         chained_field="Doctor",
-        chained_model_field="Doctor")
+        chained_model_field="Tratamientos",
+        )'''
+    Tratamiento = ChainedForeignKey(
+        Tratamiento,
+        chained_field="Doctor",
+        chained_model_field="Doctor",
+        show_all=False,
+        auto_choose=True,
+        sort=True)
     HoraInicio = ChainedForeignKey(
         Hora,
         chained_field="Doctor",
         chained_model_field="Doctor",
         show_all=False,
         auto_choose=True,
-        sort=True)'''
-    Tratamiento= models.ForeignKey(Tratamiento, verbose_name="Tratamiento", on_delete=models.CASCADE)
+        sort=True)
     FechaCreacion = models.DateTimeField(auto_now_add=True)
+
 
     def __str__(self):
         return self.ExpedientePaciente

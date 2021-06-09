@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.views import generic
 from django.urls import reverse_lazy
+from django.urls import reverse
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect
@@ -266,15 +267,10 @@ class EditarPerfil(generic.UpdateView):
     template_name = "pages/editar_perfil.html"
     model = Doctor
     form_class=PerfilDoctorForm
-    success_url = reverse_lazy("Clinica:detalles_perfil")
 
-    ###_____________________________Tratamientos___________________________________
-'''#No implementa
-class TramientosDoctor(generic.ListView):
-    template_name = "pages/doctor_tratamientos.html"
-    model = Tratamiento
-    success_url = reverse_lazy("Clinica:doctor")
-'''
+    def get_success_url(self):
+          doctor=self.kwargs['pk']
+          return reverse_lazy('Clinica:perfil', kwargs={'pk': doctor})
 
     ###_____________________________Horario___________________________________
 #Mas o menos implementado solo debe de dejar entrar a doctores
@@ -307,11 +303,10 @@ class HorarioDoctor(generic.ListView):  ###Aun no hereda el form falta hacer  qu
     template_name = "pages/horario_doctor.html"
     model = Hora
     success_url = reverse_lazy("Clinica:doctor")
-    def form_valid(self, form):
-        obj = form.save(commit=False)
-        obj.Doctor = Doctor.objects.filter(Usuario=self.request.user).first()
-        obj.save()
-        return super().form_valid(form)
+
+    def get_queryset(self):
+        doctor = Doctor.objects.filter(Usuario=self.request.user).first()
+        return Hora.objects.filter(Q(Doctor=doctor)).order_by("Dia")
 
     ###_____________________________Citas___________________________________
 '''#No implementado

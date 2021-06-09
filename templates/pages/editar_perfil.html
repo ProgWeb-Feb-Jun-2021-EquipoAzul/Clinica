@@ -1,5 +1,5 @@
 {% extends "utilities/base.html" %}
-
+{% load filters %}
 {% block titulo %}Editar Perfil{% endblock %}
 
 {% block contenido %}
@@ -20,7 +20,7 @@
           {%csrf_token%}
           {{form}}
           <button type="submit">Guardar cambios</button>
-          <a href="{% url 'Clinica:lista_pacientes' %}"><input type="button" name="Cancel" value="Cancelar"></a>
+          <a href="{% url 'Clinica:perfil' user.id|pk_doctor %}"><input type="button" name="Cancel" value="Cancelar"></a>
       </form>
   </div><!--end container-->
 {% endblock contenido%}
