@@ -72,7 +72,7 @@
                         </li>
                         {% elif user.TipoEmpleado == 'D'%}
                         <li>
-                            <a href="#"><i class="mdi mdi-calendar-multiple"></i> <span>Citas</span></a>
+                            <a href="{% url 'Clinica:doctor_citas' %}"><i class="mdi mdi-calendar-multiple"></i> <span>Citas</span></a>
                         </li>
                         <li>
                             <a href="{% url 'Clinica:horario' %}"><i class="mdi mdi-alarm"></i> <span>Horario</span></a>
