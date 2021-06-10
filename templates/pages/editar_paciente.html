@@ -10,7 +10,26 @@
     <div class="">
         <form method="post">
             {%csrf_token%}
-            {{form}}
+            {{form.Nombres.label}}
+            {{form.Nombres}}
+            {{form.ApellidoPaterno.label}}
+            {{form.ApellidoPaterno}}
+            {{form.ApellidoMaterno.label}}
+            {{form.ApellidoMaterno}}
+            {{form.Genero.label}}
+            {{form.Genero}}
+            {{form.Nacimiento.label}}
+            {{form.Nacimiento}}
+            {{form.Direccion.label}}
+            {{form.Direccion}}
+            {{form.Correo.label}}
+            {{form.Correo}}
+            {{form.Telefono.label}}
+            {{form.Telefono}}
+            {{form.Alergias.label}}
+            {{form.Alergias}}
+            {{form.Padecimientos.label}}
+            {{form.Padecimientos}}
             <button type="submit">Guardar cambios</button>
             <a href="{% url 'Clinica:lista_pacientes' %}"><input type="button" name="Cancel" value="Cancelar"></a>
         </form>

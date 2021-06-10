@@ -13,9 +13,9 @@ from .models import (Usuario, ExpedientePaciente, Doctor,
 Nota, Cita, Tratamiento, Doctor_Tratamiento, Hora)
 
 from .forms import (NuevoUsuarioForm, EditarUsuarioForm, ExpedientePacienteForm, NotaForm, CitaForm, DoctorForm,
-HoraForms,EditarPacienteForm,CitaForm, EditarTratamientoForm, TratamientoForm, CitaForm, PerfilDoctorForm
+HoraForms,EditarPacienteForm,CitaForm, EditarTratamientoForm, TratamientoForm, CitaForm, PerfilDoctorForm, EditarCitaForm
 
-,FiltroUsuarios,FiltroTratamientos, FiltroPacientes, FiltroDoctores, FiltroCitas)
+,FiltroUsuarios,FiltroTratamientos, FiltroPacientes, FiltroDoctores, FiltroCitas, EditarHoraForms)
 
 
 URL_LOGIN='login'
@@ -234,7 +234,7 @@ class DetallesCita(generic.DetailView):
 class EditarCita(generic.UpdateView):
     template_name = "pages/editar_cita.html"
     model = Cita
-    form_class=CitaForm
+    form_class=EditarCitaForm
     success_url = reverse_lazy("Clinica:lista_citas")
 
 class BorrarCita(LoginRequiredMixin,generic.DeleteView): ###Falta completar
@@ -316,7 +316,7 @@ class AgregarHorario(generic.CreateView):
 class EditarHorario(generic.UpdateView): ###requiere pk de doctor, aun no funciona
     template_name = "pages/editar_horario.html"
     model = Hora
-    form_class=HoraForms
+    form_class=EditarHoraForms
     success_url = reverse_lazy("Clinica:horario_doctor")
 
     def form_valid(self, form):
