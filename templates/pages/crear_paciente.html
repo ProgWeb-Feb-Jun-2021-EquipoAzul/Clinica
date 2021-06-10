@@ -6,6 +6,9 @@
       <div class="page-head">
         <h1>Crear paciente</h1>
       </div>
+      <div class="edit-table">
+        <div class="table">
+    <div class="">
   <form method="post">
       {%csrf_token%}
       {{form.Nombres.label}}
@@ -28,9 +31,11 @@
       {{form.Alergias}}
       {{form.Padecimientos.label}}
       {{form.Padecimientos}}
-      <button type="submit">Crear</button>
-      <a href="{% url 'Clinica:lista_pacientes' %}"><input type="button" name="Cancel" value="Cancelar"></a>
+      <a href="{% url 'Clinica:lista_pacientes' %}"><input type="button" class="btn btn-danger" name="Cancel" value="Cancelar"></a>
+      <button type="submit" class="btn btn-success">Crear</button>
   </form>
+</div>
+</div>
  </div>
 <!--end container-->
 {% endblock contenido%}
