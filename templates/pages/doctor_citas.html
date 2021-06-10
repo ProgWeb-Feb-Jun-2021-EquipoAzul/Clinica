@@ -1,0 +1,36 @@
+{% extends "utilities/base.html" %}
+
+{% block titulo %}Lista de Citas{% endblock %}
+
+{% block contenido %}
+
+  <div class="container-fluid">
+      <div class="page-head">
+        <h1>Lista de Citas</h1>
+        <a href="{% url 'Clinica:crear_cita' %}"><div class="btn btn-primary mybutton">Crear Cita</div></a>
+      </div>
+      <div class="">
+        <form class="row">
+            {{ form.search }}
+            {{ form.filter_field }}
+            <input type="submit" class="btn btn-default" value="Buscar">
+        </form>
+        <table class="table">
+          <th>Paciente</th>
+          <th>Fecha</th>
+          <th>Hora</th>
+          {% for Cita in object_list %}
+          <tr>
+            <td>{{ Cita.ExpedientePaciente }}</td>
+            <td>{{ Cita.Fecha }}</td>
+            <td>{{ Cita.HoraInicio }}</td>
+            <td><a href="{% url 'Clinica:detalles_cita_doctor' Cita.pk%}">Detalles</a></td>
+          </tr>
+          {% endfor %}
+        </table>
+      </div>
+  </div><!--end container-->
+
+{% endblock contenido%}
+
+<!--BOrrar tratamiento url -->

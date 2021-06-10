@@ -1,0 +1,19 @@
+{% extends "utilities/base.html" %}
+
+{% block titulo %}Agregar a horario{% endblock %}
+
+{% block contenido %}
+    <div class="container-fluid">
+        <div class="page-head">
+          <h1>Agregar hora</h1>
+        </div>
+        <div class="">
+          <form method="post">
+              {%csrf_token%}
+              {{form}}
+              <button type="submit">Crear</button>
+              <a href="{% url 'Clinica:horario' %}"><input type="button" name="Cancel" value="Cancelar"></a>
+          </form>
+        </div>
+    </div>
+{% endblock contenido%}
