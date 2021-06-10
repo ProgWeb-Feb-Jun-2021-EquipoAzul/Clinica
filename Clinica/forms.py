@@ -175,18 +175,18 @@ class ExpedientePacienteForm(forms.ModelForm):
         max_length=50,
         label="Nombres",
         required=True,
-        widget=forms.TextInput(attrs={"placeholder": "Jesús Manuel", "class": "form-control"})
+        widget=forms.TextInput(attrs={"placeholder": "Nombre(s)", "class": "form-control"})
         )
     ApellidoPaterno = forms.CharField(
         max_length=50,
         label="Apellido Paterno",
         required=True,
-        widget=forms.TextInput(attrs={"placeholder": "Cota", "class": "form-control"}))
+        widget=forms.TextInput(attrs={"placeholder": "Apellido Paterno", "class": "form-control"}))
     ApellidoMaterno = forms.CharField(
         max_length=50,
         label="Apellido Materno",
         required=True,
-        widget=forms.TextInput(attrs={"placeholder": "Villa", "class": "form-control"}))
+        widget=forms.TextInput(attrs={"placeholder": "Apellido Materno", "class": "form-control"}))
     Genero = forms.ChoiceField(
         choices = GENERO,
         label="Género",
@@ -199,17 +199,17 @@ class ExpedientePacienteForm(forms.ModelForm):
         max_length=80,
         label="Dirección",
         required=True,
-        widget=forms.TextInput(attrs={"placeholder": "Avenida San Juan", "class": "form-control"}))
+        widget=forms.TextInput(attrs={"placeholder": "Dirección", "class": "form-control"}))
     Correo = forms.EmailField(
         max_length=50,
         label="Correo electrónico",
         required=True,
         widget=forms.TextInput(attrs={"placeholder": "correo@sitio.com", "class": "form-control"}))
     Telefono = forms.CharField(
-        max_length=12,
+        max_length=10,
         label="Telefono",
         required=True,
-        widget=forms.TextInput(attrs={"placeholder": "6642545896", "class": "form-control"})
+        widget=forms.TextInput(attrs={"placeholder": "Telefono", "class": "form-control"})
         )
     Alergias = forms.CharField(
         max_length=200,
@@ -221,7 +221,7 @@ class ExpedientePacienteForm(forms.ModelForm):
         max_length=200,
         label="Padecimientos",
         required=True,
-        widget=forms.Textarea(attrs={"placeholder": "Descripción de Padecimientos del paciente.", "class": "form-control"})
+        widget=forms.Textarea(attrs={"placeholder": "Descripción de padecimientos del paciente.", "class": "form-control"})
         )
     class Meta:
         model = ExpedientePaciente
@@ -243,7 +243,7 @@ class EditarPacienteForm(forms.ModelForm):
         max_length=50,
         label="Nombres",
         required=True,
-        widget=forms.TextInput(attrs={"placeholder": "Jesús Manuel", "class": "form-control"})
+        widget=forms.TextInput(attrs={"placeholder": "Avellano", "class": "form-control"})
         )
     ApellidoPaterno = forms.CharField(
         max_length=50,
@@ -296,11 +296,6 @@ class EditarPacienteForm(forms.ModelForm):
         exclude = ["FechaCreacion"]
 
 class NotaForm(forms.ModelForm):
-    Expedientepaciente = forms.ModelChoiceField(
-        queryset=Usuario.objects.all(),
-        label="Paciente",
-        required=True,
-        )
     Nota = forms.CharField(
         max_length=200,
         label="Contenido de la nota del paciente",
@@ -310,7 +305,7 @@ class NotaForm(forms.ModelForm):
     class Meta:
         model = Nota
         fields = "__all__"
-        exclude = ["FechaCreacion"]
+        exclude = ["FechaCreacion, Expedientepaciente"]
 
 class FiltroTratamientos(Form):
     search = forms.CharField(required=False)

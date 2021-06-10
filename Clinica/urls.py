@@ -53,16 +53,14 @@ urlpatterns = [
     path('borrar_horario/<int:pk>/', views.BorrarHora.as_view(), name='borrar_horario'), #Para decorar
 
         ###_____________________________Citas___________________________________
-    #path('doctor_citas/', views.CitasDoctor.as_view(), name="doctor_citas"), #No implementado #Citas del doctor
-    #path('expedientepaciente/<int:pk>/', views.VerPaciente.as_view(), name="expedientepaciente") #No implementado #Expediente de la cita del doc
-
-        ###_____________________________Pacientes___________________________________
-
+    path('doctor_citas/', views.CitasDoctor.as_view(), name="doctor_citas"), #No implementado
+    path('detalles_cita_doctor/<int:pk>/', views.DetallesCitaDoctor.as_view(), name="detalles_cita_doctor"), #No implementado #Citas del doctor
+    path('expedientepaciente/<int:pk>/', views.VerPaciente.as_view(), name="expedientepaciente"), #No implementado #Expediente de la cita del doc
 
         ###_____________________________Notas___________________________________
-    #path('doctor_notas', views.VerNotas.as_view(), name="doctor_notas"), #No implementado #Ver notas del paciente
-    #path('crear_notas', views.CrearNota.as_view(), name="crear_notas"), #No implementado #Crear nota al paciente
+    path('ver_notas/<int:id>', views.VerNotas.as_view(), name="ver_notas"), #No implementado #Ver notas del paciente
+    path('crear_notas/<int:id>', views.CrearNota.as_view(), name="crear_notas"), #No implementado #Crear nota al paciente
 
 ]
 
-#quitar la barra superior 
+#quitar la barra superior

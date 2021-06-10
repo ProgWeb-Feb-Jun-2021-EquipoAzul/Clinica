@@ -1,0 +1,28 @@
+{% extends "utilities/base.html" %}
+
+{% block titulo %}Lista de notas{% endblock %}
+
+{% block contenido %}
+  <div class="container-fluid">
+      <div class="page-head">
+        <h1>Lista de notas</h1>
+      </div>
+      <div class="">
+        <td><a href="{% url 'Clinica:crear_notas' view.kwargs.id%}">Crear nota</a></td>
+        <table class="table">
+          <th>Nombre</th>
+          <th>Teléfono</th>
+          <th>Correo</th>
+          {% for Notas in object_list %}
+          <tr>
+            <td>{{ Nota.Nota}}</td>
+          </tr>
+
+          {% endfor %}
+          <td><a href="{% url 'Clinica:detalles_paciente' view.kwargs.id%}">Ver paciente</a></td>
+        </table>
+      </div>
+  </div><!--end container-->
+
+{% endblock contenido%}
+<!--Falta el borrar paciente y poner funcionales editar y crear cita-->

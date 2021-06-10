@@ -83,7 +83,7 @@
                         <li>{% load filters %}
                             <a href="{% url 'Clinica:perfil' user.id|pk_doctor %}"><i class="mdi mdi-account-circle"></i> <span>Ver perfil</span></a>
                         </li>
-        
+
                         {% else %}
                         <li>
                             <a href="{% url 'Clinica:lista_usuarios' %}"><i class="mdi mdi-account-box"></i> <span>Usuarios</span></a>

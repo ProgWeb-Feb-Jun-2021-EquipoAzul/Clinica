@@ -1,0 +1,17 @@
+{% extends "utilities/base.html" %}
+{% block titulo %}Crear nota{% endblock %}
+
+{% block contenido %}
+  <div class="container-fluid">
+      <div class="page-head">
+        <h1>Crear nota</h1>
+      </div>
+  <form method="post">
+      {%csrf_token%}
+      {{form}}
+      <button type="submit">Crear nota</button>
+      <a href="{% url 'Clinica:ver_notas' view.kwargs.id %}"><input type="button" name="Cancel" value="Cancelar"></a>
+  </form>
+ </div>
+<!--end container-->
+{% endblock contenido%}

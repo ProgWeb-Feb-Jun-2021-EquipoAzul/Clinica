@@ -313,7 +313,12 @@ class AgregarHorario(generic.CreateView):
         obj.save()
         return super().form_valid(form)
 
-class EditarHorario(generic.UpdateView): ###requiere pk de doctor, aun no funciona
+class DetallesCitaDoctor(generic.DetailView):
+    template_name = "pages/detalles_cita_doctor.html"
+    model = Cita
+    success_url = reverse_lazy("Clinica:lista_citas")
+
+class EditarHorario(generic.UpdateView):
     template_name = "pages/editar_horario.html"
     model = Hora
     form_class=EditarHoraForms
@@ -325,7 +330,7 @@ class EditarHorario(generic.UpdateView): ###requiere pk de doctor, aun no funcio
         obj.save()
         return super().form_valid(form)
 
-class HorarioDoctor(generic.ListView):  ###Aun no hereda el form falta hacer  que acepte un pk de doctor aun no funciona
+class HorarioDoctor(generic.ListView):
     template_name = "pages/horario_doctor.html"
     model = Hora
 
@@ -333,42 +338,52 @@ class HorarioDoctor(generic.ListView):  ###Aun no hereda el form falta hacer  qu
         doctor = Doctor.objects.filter(Usuario=self.request.user).first()
         return Hora.objects.filter(Q(Doctor=doctor)).order_by("Dia")
 
-class BorrarHora(LoginRequiredMixin,generic.DeleteView): ###Falta completar
+class BorrarHora(LoginRequiredMixin,generic.DeleteView):
     template_name = "pages/borrar_hora.html"
     login_url = URL_LOGIN
     model = Hora
     success_url = reverse_lazy("Clinica:horario_doctor")
 
     ###_____________________________Citas___________________________________
-'''#No implementado
-class CitasDoctor(generic.ListView):
+
+class CitasDoctor(generic.ListView):#No implementado
     template_name = "pages/doctor_citas.html"
     model = Cita
-    success_url = reverse_lazy("Clinica:doctor")
-'''
 
-'''#No implementado
+    def get_queryset(self):
+        doctor = Doctor.objects.filter(Usuario=self.request.user).first()
+        return Cita.objects.filter(Q(Doctor=doctor)).order_by("Fecha")
+
+
 class VerPaciente(generic.DetailView):
     template_name = "pages/expedientepaciente.html"
     model = ExpedientePaciente
     success_url = reverse_lazy("Clinica:doctor_citas")
-'''
 
-        ###_____________________________Notas___________________________________
-#path('doctor_notas', views.VerNotas.as_view(), name="doctor_notas"), #No implementado #Ver notas del paciente
-#path('crear_notas', views.CrearNota.as_view(), name="crear_notas"), #No implementado #Crear nota al paciente
+    ###_____________________________Notas___________________________________
 
-'''#No implementado
 class VerNotas(generic.ListView):
-    template_name = "pages/doctor_notas.html"
+    template_name = "pages/lista_notas.html"
     model = Nota
     success_url = reverse_lazy("Clinica:doctor_citas")
-'''
 
-'''#No implementado
+    def get_queryset(self):
+        paciente= ExpedientePaciente.objects.get(pk=self.kwargs['id'])
+        return Nota.objects.filter(Q(Expedientepaciente=paciente)).order_by("FechaCreacion")
+
+
 class CrearNota(generic.CreateView):
     template_name = "pages/crear_notas.html"
     model = Nota
-    #form_class
-    success_url = reverse_lazy("Clinica:doctor_citas")
-'''
+    form_class = NotaForm
+    success_url = reverse_lazy("Clinica:lista_notas")
+
+    def form_valid(self, form):
+        paciente= ExpedientePaciente.objects.get(pk=self.kwargs['id'])
+        self.object = form.save(commit=False)
+        self.object.Expedientepaciente = paciente
+        self.object.save()
+
+    def get_success_url(self):
+          doctor=self.kwargs['pk']
+          return reverse_lazy('Clinica:lista_notas', pk=self.kwargs['id'])

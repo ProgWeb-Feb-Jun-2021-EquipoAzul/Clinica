@@ -14,7 +14,8 @@
         Termino: {{ object.HoraFin}} <br>
         Tratamiento: {{ object.Tratamiento}} <br>
         Cita Creada: {{ object.FechaCreacion}} <br>
-     <td><a href="{% url 'Clinica:lista_citas' %}">Regresar</a></td>
+     <td><a href="{% url 'Clinica:doctor_citas'%}">Regresar</a></td>
+     <td><a href="{% url 'Clinica:expedientepaciente' object.ExpedientePaciente.id %}">Ver paciente</a></td>
       </div>
   </div><!--end container-->
 {% endblock contenido%}
