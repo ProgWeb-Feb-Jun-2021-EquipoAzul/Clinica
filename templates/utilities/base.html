@@ -8,18 +8,6 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <style>
-            body,
-            html {
-                margin: 0;
-                padding: 0;
-                height: 100%;
-                background: #1b97f0 !important;
-            }
-
-
-        </style>
-
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
         <meta name="description" content="">
@@ -29,7 +17,7 @@
         <title>{% block titulo %}{% endblock %}</title>
 
         <!-- Theme icon -->
-        <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}">
+        <link rel="shortcut icon" href="{% static 'images/tooth.ico' %}">
 
         <link href="{% static 'plugins/morris-chart/morris.css' %}" rel="stylesheet">
 
@@ -117,7 +105,7 @@
             <!-- body content start-->
             <div class="body-content">
                 <!-- header section start-->
-                <div class="header-section" style=background-color:#1b97f0;>
+                <div class="header-section">
                     <!--logo and logo icon start-->
                     <div class="logo">
                         <a href="index.html">
@@ -133,10 +121,9 @@
                     <a class="toggle-btn"><i class="ti ti-menu"></i></a>
                     <!--toggle button end-->
 
-                    <!--mega menu start-->
+                    <!--mega menu start
                     <div id="navbar-collapse-1" class="navbar-collapse collapse mega-menu">
-                        <ul class="nav navbar-nav " style=background-color:#1b97f0;>
-                             <!-- Classic list -->
+                        <ul class="nav navbar-nav ">
                             <li>
                                 <form class="search-content" action="index.html" method="post">
 
@@ -146,12 +133,13 @@
                             </li>
                         </ul>
                     </div>
-                    <!--mega menu end-->
+                    mega menu end-->
 
                     <div class="notification-wrap">
                         <!--right notification start-->
                         <div class="right-notification">
                             <ul class="notification-menu">
+                                <!--
                                 <li>
                                     <a href="javascript:;" class="notification" data-toggle="dropdown">
                                         <i class="mdi mdi-bell-outline"></i>
@@ -208,7 +196,7 @@
                                         </li>
                                     </ul>
                                 </li>
-
+                                
                                 <li>
                                     <a href="javascript:;" class="notification" data-toggle="dropdown">
                                         <i class="mdi mdi-email-outline"></i>
@@ -269,16 +257,14 @@
                                         </li>
                                     </ul>
                                 </li>
-
+                                -->
                                 <li>
                                     <a href="javascript:;" data-toggle="dropdown">
                                         <img src="{% static '/images/aduse.png' %}" alt="">
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-right profile-menu">
-                                        <a class="dropdown-item" href="#"><i class="mdi mdi-account-circle m-r-5 text-muted"></i> Profile</a>
-                                        <a class="dropdown-item" href="#"><span class="badge badge-success pull-right">5</span><i class="mdi mdi-settings m-r-5 text-muted"></i> Settings</a>
-                                        <a class="dropdown-item" href="#"><i class="mdi mdi-lock-open-outline m-r-5 text-muted"></i> Lock screen</a>
-                                        <a class="dropdown-item" href="{% url 'logout' %}"><i class="mdi mdi-logout m-r-5 text-muted"></i> Logout</a>
+                                        <a class="dropdown-item" href="#"><i class="mdi mdi-account-circle m-r-5 text-muted"></i> Perfil</a>
+                                        <a class="dropdown-item" href="{% url 'logout' %}"><i class="mdi mdi-logout m-r-5 text-muted"></i> Cerrar Sesión</a>
                                     </div>
                                 </li>
                             </ul>
@@ -292,7 +278,7 @@
 
                 <!--footer section start-->
                 <footer class="footer">
-                    2018 &copy; Syntra.
+                    2021 &copy; Dental Clinic.
                 </footer>
                 <!--footer section end-->
             </div>
