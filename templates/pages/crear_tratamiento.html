@@ -8,7 +8,11 @@
       </div>
   <form method="post">
       {%csrf_token%}
-      {{form}}<br>
+      {{form.Tratamiento.label}}
+      {{form.Tratamiento}}
+      {{form.Descripcion.label}}
+      {{form.Descripcion}}
+
       <button type="submit" class="btn btn-success btn-rounded">Crear</button>
       <a href="{% url 'Clinica:lista_tratamientos' %}"><input type="button" name="Cancel"  class="btn btn-danger btn-rounded" value="Cancelar"></a>
   </form>
