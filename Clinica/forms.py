@@ -261,8 +261,7 @@ class EditarPacienteForm(forms.ModelForm):
         required=True)
     Nacimiento = forms.DateField(
         required=True,
-        label="Fecha de nacimiento",
-        widget=forms.DateInput(format='%d/%m/%Y',attrs={'type': 'date'}))
+        label="Fecha de nacimiento")
     Direccion = forms.CharField(
         max_length=80,
         label="Dirección",
@@ -417,8 +416,38 @@ class CitaForm(forms.ModelForm):
         fields = "__all__"
         exclude = ["FechaCreacion"]
 
+class EditarCitaForm(forms.ModelForm):
+    ExpedientePaciente = forms.ModelChoiceField(
+        queryset=ExpedientePaciente.objects.all(),
+        label="Paciente",
+        required=True)
+    Fecha = forms.DateField(
+        required=True,
+        label="Fecha de la cita")
+    '''HoraInicio = forms.ChoiceField(
+        label="Hora de Inicio",
+        required=True)'''
+    class Meta:
+        model = Cita
+        fields = "__all__"
+        exclude = ["FechaCreacion"]
 
 class HoraForms(forms.ModelForm):
+    Dia = forms.ChoiceField(
+        choices = DIAS,
+        label="Dia",
+        required=True)
+    Hora = forms.ChoiceField(
+        choices = HORAS,
+        label="Hossra",
+        required=True)
+
+    class Meta:
+        model = Hora
+        fields = 'Dia','Hora'
+        exclude = []
+
+class EditarHoraForms(forms.ModelForm):
     Dia = forms.ChoiceField(
         choices = DIAS,
         label="Dia",

@@ -10,7 +10,16 @@
       <form method="post">
           {% csrf_token %}
           {{ form.media.js }}
-          {{form}}
+          {{form.ExpedientePaciente.label}}
+          {{form.ExpedientePaciente}}
+          {{form.Doctor.label}}
+          {{form.Doctor}}
+          {{form.Fecha.label}}
+          {{form.Fecha}}
+          {{form.Tratamiento.label}}
+          {{form.Tratamiento}}
+          {{form.HoraInicio.label}}
+          {{form.HoraInicio}}
           <button type="submit">Crear</button>
          <a href="{% url 'Clinica:lista_citas' %}"><input type="button" class="btn btn-danger btn-rounded" name="Cancel" value="Cancelar"></a>
       </form>

@@ -10,7 +10,10 @@
     <div class="">
       <form method="post">
           {%csrf_token%}
-          {{form}}
+          {{form.Dia.label}}
+          {{form.Dia}}
+          {{form.Hora.label}}
+          {{form.Hora}}
           <button type="submit">Editar</button>
           <a href="{% url 'Clinica:horario' %}"><input type="button" name="Cancel" value="Cancelar"></a>
       </form>

@@ -12,7 +12,29 @@
     <div class="">
         <form method="post">
             {%csrf_token%}
-            {{form}}<br>
+            {% csrf_token %}
+            {{ form.username.label}}
+            {{ form.username}}
+            {{ form.password1.label }}
+            {{ form.password1 }}
+            {{ form.password2.label }}
+            {{ form.password2 }}
+            {{ form.TipoEmpleado.label }}
+            {{ form.TipoEmpleado }}
+            {{ form.Nombres.label }}
+            {{ form.Nombres }}
+            {{ form.ApellidoPaterno.label }}
+            {{ form.ApellidoPaterno }}
+            {{ form.ApellidoMaterno.label }}
+            {{ form.ApellidoMaterno }}
+            {{ form.Genero.label }}
+            {{ form.Genero }}
+            {{ form.Nacimiento.label }}
+            {{ form.Nacimiento }}
+            {{ form.email.label }}
+            {{ form.email }}
+            {{ form.Telefono.label }}
+            {{ form.Telefono }}
             <button type="submit" class="btn btn-success btn-rounded">Guardar cambios</button>
             <a href="{% url 'Clinica:lista_usuarios' %}"><input type="button" class="btn btn-danger btn-rounded"name="Cancel" value="Cancelar"></a>
         </form>
