@@ -371,4 +371,5 @@ class CrearNota(generic.CreateView):
     model = Nota
     #form_class
     success_url = reverse_lazy("Clinica:doctor_citas")
+    
 '''

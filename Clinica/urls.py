@@ -65,4 +65,4 @@ urlpatterns = [
 
 ]
 
-#quitar la barra superior 
+#quitar la barra superior
