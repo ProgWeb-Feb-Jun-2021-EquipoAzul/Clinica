@@ -109,46 +109,65 @@ class NuevoUsuarioForm(forms.ModelForm):
         return Usuario
 
 class EditarUsuarioForm(forms.ModelForm):
-    password1 = forms.CharField(label='Password', widget=forms.PasswordInput)
-    password2 = forms.CharField(label='Password confirmation', widget=forms.PasswordInput)
+    username = forms.CharField(
+        max_length=50,
+        label="username",
+        required=True,
+        widget=forms.TextInput(attrs={"placeholder": "Usuario...", "class": "form-control-sm", "style": "border: 1px solid #dee2e6; border-width: 1px; margin-bottom: 10px;", "aria-controls": "datatable"})
+    )
+    password1 = forms.CharField(
+        label='Password', 
+        widget=forms.PasswordInput(attrs={"placeholder": "Contraseña...", "class": "form-control-sm", "style": "border: 1px solid #dee2e6; border-width: 1px; margin-bottom: 10px;", "aria-controls": "datatable"})
+        )
+    password2 = forms.CharField(
+        label='Password confirmation', 
+        widget=forms.PasswordInput(attrs={"placeholder": "Contraseña...", "class": "form-control-sm", "style": "border: 1px solid #dee2e6; border-width: 1px; margin-bottom: 10px;", "aria-controls": "datatable"})
+    )
     TipoEmpleado = forms.ChoiceField(
         choices = TIPO_EMPLEADO,
         label="Tipo de empleado",
-        required=True)
+        required=True,
+        widget=forms.Select(attrs={"aria-controls": "datatable", "class": "form-control-sm", "style": "margin-bottom: 10px; border: 1px solid #dee2e6;"})
+        )
     Nombres = forms.CharField(
         max_length=50,
         label="Nombres",
         required=True,
-        widget=forms.TextInput(attrs={"placeholder": "Jesús Manuel", "class": "form-control"})
+        widget=forms.TextInput(attrs={"placeholder": "Nombre(s)...", "class": "form-control form-control-sm", "style": "display: inline; border: 1px solid #dee2e6; border-width: 1px;", "aria-controls": "datatable"})
         )
     ApellidoPaterno = forms.CharField(
         max_length=50,
         label="Apellido Paterno",
         required=True,
-        widget=forms.TextInput(attrs={"placeholder": "Cota", "class": "form-control"}))
+        widget=forms.TextInput(attrs={"placeholder": "ApellidoPaterno...", "class": "form-control form-control-sm", "style": "display: inline; border: 1px solid #dee2e6; border-width: 1px;", "aria-controls": "datatable"})
+        )
     ApellidoMaterno = forms.CharField(
         max_length=50,
         label="Apellido Materno",
         required=True,
-        widget=forms.TextInput(attrs={"placeholder": "Villa", "class": "form-control"}))
+        widget=forms.TextInput(attrs={"placeholder": "ApellidoMaterno...", "class": "form-control form-control-sm", "style": "display: inline; border: 1px solid #dee2e6; border-width: 1px; margin-bottom: 10px;", "aria-controls": "datatable"}))
     Genero = forms.ChoiceField(
         choices = GENERO,
         label="Género",
-        required=True)
+        required=True,
+        widget=forms.Select(attrs={"aria-controls": "datatable", "class": "form-control-sm", "style": "margin-bottom: 10px; border: 1px solid #dee2e6;"})
+        )
     Nacimiento = forms.DateField(
         required=True,
-        label="Fecha de nacimiento"
+        label="Fecha de nacimiento",
+        widget=forms.widgets.DateInput(attrs={'type': 'date', "class": "form-control-sm", "style": "margin-bottom: 5px; border: 1px solid #dee2e6;"})
         )
     email = forms.EmailField(
         max_length=50,
         label="Correo electrónico",
         required=True,
-        widget=forms.TextInput(attrs={"placeholder": "correo@sitio.com", "class": "form-control"}))
+        widget=forms.TextInput(attrs={"placeholder": "ejemplo@dominio.com...", "class": "form-control form-control-sm", "style": "display: inline; border: 1px solid #dee2e6; border-width: 1px;", "aria-controls": "datatable"})
+        )
     Telefono = forms.CharField(
         max_length=10,
         label="Telefono",
         required=True,
-        widget=forms.TextInput(attrs={"placeholder": "6642545896", "class": "form-control"})
+        widget=forms.TextInput(attrs={"placeholder": "0000000000...", "class": "form-control form-control-sm", "style": "display: inline; border: 1px solid #dee2e6; border-width: 1px;", "aria-controls": "datatable"})
         )
     class Meta:
         model = Usuario

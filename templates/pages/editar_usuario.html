@@ -1,45 +1,46 @@
 {% extends "utilities/base.html" %}
 
-{% block titulo %}Editar usuario{% endblock %}
-
 {% block contenido %}
 <div class="container-fluid">
     <div class="page-head">
-            <h1>Editar usuario</h1>
-    </div>
-    <div class="edit-table">
+        <p class="h1">Editar Usuario</p>
         <div class="row">
-    <div class="">
-        <form method="post">
-            {%csrf_token%}
-            {% csrf_token %}
-            {{ form.username.label}}
-            {{ form.username}}
-            {{ form.password1.label }}
-            {{ form.password1 }}
-            {{ form.password2.label }}
-            {{ form.password2 }}
-            {{ form.TipoEmpleado.label }}
-            {{ form.TipoEmpleado }}
-            {{ form.Nombres.label }}
-            {{ form.Nombres }}
-            {{ form.ApellidoPaterno.label }}
-            {{ form.ApellidoPaterno }}
-            {{ form.ApellidoMaterno.label }}
-            {{ form.ApellidoMaterno }}
-            {{ form.Genero.label }}
-            {{ form.Genero }}
-            {{ form.Nacimiento.label }}
-            {{ form.Nacimiento }}
-            {{ form.email.label }}
-            {{ form.email }}
-            {{ form.Telefono.label }}
-            {{ form.Telefono }}
-            <button type="submit" class="btn btn-success btn-rounded">Guardar cambios</button>
-            <a href="{% url 'Clinica:lista_usuarios' %}"><input type="button" class="btn btn-danger btn-rounded"name="Cancel" value="Cancelar"></a>
-        </form>
-    </div>
-        </div>
+            <div class="col-lg-12 col-sm-12">
+                <div class="card m-b-30">
+                    <div class="card-body table-responsive">
+                        <form method="post">
+                            {% csrf_token %}
+                            <p class="h6" style="display: inline; margin-bottom: 10px;">Usuario: </p>
+                            {{ form.username }}
+                            <p class="h6" style="display: inline; margin-bottom: 10px;">Contraseña: </p>
+                            {{ form.password1 }}
+                            <p class="h6" style="display: inline; margin-bottom: 10px;">Confirmar contraseña: </p>
+                            {{ form.password2 }}
+                            <p class="h6" style="display: inline; margin-bottom: 10px;">Tipo empleado: </p>
+                            {{ form.TipoEmpleado }}
+                            <p class="h6" style="margin-bottom: 5px;">Nombre: </p>
+                            {{ form.Nombres }}
+                            <p class="h6" style="margin-bottom: 5px; margin-top: 10px;">Apellido Paterno: </p>
+                            {{ form.ApellidoPaterno }}
+                            <p class="h6" style="margin-bottom: 5px; margin-top: 10px;">Apellido Materno: </p>
+                            {{ form.ApellidoMaterno }}
+                            <br>
+                            <p class="h6" style="display: inline; margin-bottom: 10px;">Género: </p>
+                            {{ form.Genero }}
+                            <p class="h6" style="display: inline; margin-bottom: 10px;">Fecha de nacimiento: </p>
+                            {{ form.Nacimiento }}
+                            <p class="h6" style="margin-bottom: 5px;">Correo: </p>
+                            {{ form.email }}
+                            <p class="h6" style="margin-bottom: 5px; margin-top: 10px;">Teléfono: </p>
+                            {{ form.Telefono }}
+                            <br><br><br>
+                            <button type="submit" class="btn btn-success">Guardar cambios</button>
+                            <a href="{% url 'Clinica:lista_usuarios' %}"><input type="button" class="btn btn-danger"name="Cancel" value="Cancelar"></a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div><!--end row-->
     </div>
 </div><!--end container-->
 {% endblock contenido%}
