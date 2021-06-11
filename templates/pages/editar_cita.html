@@ -5,7 +5,7 @@
 {% block contenido %}
 <div class="container-fluid">
     <div class="page-head">
-        <h1>Editar cita</h1>
+        <h2>Editar cita</h2>
     </div>
     <div class="">
       <form method="post">
@@ -19,9 +19,9 @@
         {{form.Tratamiento.label}}
         {{form.Tratamiento}}
         {{form.HoraInicio.label}}
-        {{form.HoraInicio}}
-          <button type="submit">Editar</button>
-          <a href="{% url 'Clinica:lista_citas' %}"><input type="button" name="Cancel" value="Cancelar"></a>
+        {{form.HoraInicio}}<br><br>
+        <button type="submit" class="btn btn-success btn-sm">Editar</button>
+        <a href="{% url 'Clinica:lista_citas' %}"><input type="button" class="btn btn-danger btn-danger btn-sm" name="Cancel" value="Cancelar"></a>
       </form>
     </div>
 </div><!--end container-->

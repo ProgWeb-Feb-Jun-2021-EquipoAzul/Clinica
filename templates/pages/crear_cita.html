@@ -19,9 +19,9 @@
           {{form.Tratamiento.label}}
           {{form.Tratamiento}}
           {{form.HoraInicio.label}}
-          {{form.HoraInicio}}
-          <button type="submit">Crear</button>
-         <a href="{% url 'Clinica:lista_citas' %}"><input type="button" class="btn btn-danger btn-rounded" name="Cancel" value="Cancelar"></a>
+          {{form.HoraInicio}}<br><br>
+          <button type="submit" class="btn btn-success btn-sm">Crear</button>
+         <a href="{% url 'Clinica:lista_citas' %}"><input type="button" class="btn btn-danger btn-danger btn-sm" name="Cancel" value="Cancelar"></a>
       </form>
   </div><!--end container-->
 {% endblock contenido%}

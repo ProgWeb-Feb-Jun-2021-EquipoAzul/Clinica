@@ -3,9 +3,10 @@
 {% block titulo %}Detalles doctor{% endblock %}
 
 {% block contenido %}
+<justify>
   <div class="container-fluid">
       <div class="page-head">
-        <h1>Detalles del doctor</h1>
+        <h2>Detalles del doctor</h2>
       </div>
       <div class="h5 mb-0 font-weight-bold text-gray-800">
         Nombres: {{ object.Usuario.Nombres}}<br>
@@ -14,17 +15,11 @@
         Genero: {{ object.Usuario.Genero}}<br>
         Correo: {{ object.Usuario.email}}<br>
         Telefono: {{ object.Usuario.Telefono}}<br>
-         Especialidad: {{ object.Especialidad}}<br>
+        Especialidad: {{ object.Especialidad}}<br><br>
 
-          <table class="table">
-            <th>Tratamiento</th>
-            {% for Tratamiento in object.Tratamientos.all %}
-            <tr>
-              <td>{{ Tratamiento }}</td>
-            </tr>
-          {% endfor %}
-          </table>
-        <a href="{% url 'Clinica:lista_doctores' %}"><input type="button" name="Return" value="Regresar"></a>
+          <a href="{% url 'Clinica:lista_doctores' %}"><input type="button"  class="btn btn-success btn-lg"name="Return" value="Regresar"></a>
+       
       </div>
   </div><!--end container-->
+</justify>
 {% endblock contenido%}

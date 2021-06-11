@@ -5,7 +5,7 @@
 {% block contenido %}
 <div class="container-fluid">
     <div class="page-head">
-            <h1>Editar paciente</h1>
+            <h2>Editar paciente</h2>
     </div>
     <div class="">
         <form method="post">
@@ -29,10 +29,12 @@
             {{form.Alergias.label}}
             {{form.Alergias}}
             {{form.Padecimientos.label}}
-            {{form.Padecimientos}}
-            <button type="submit">Guardar cambios</button>
-            <a href="{% url 'Clinica:lista_pacientes' %}"><input type="button" name="Cancel" value="Cancelar"></a>
+            {{form.Padecimientos}}<br>
+            <button type="submit" class="btn btn-success btn-sm">Guardar cambios</button>.
+            <a href="{% url 'Clinica:lista_pacientes' %}"><input type="button" class="btn btn-danger btn-sm" name="Cancel" value="Cancelar"></a>
         </form>
     </div>
 </div><!--end container-->
 {% endblock contenido%}
+
+

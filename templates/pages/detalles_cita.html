@@ -2,19 +2,22 @@
 {% block titulo %}Detalles Cita{% endblock %}
 
 {% block contenido %}
+<justify>
   <div class="container-fluid">
       <div class="page-head">
-        <h1>Detalles de la Cita</h1>
+        <h2>Detalles de cita</h2>
       </div>
-      <div class="h5 mb-0 font-weight-bold text-gray-800">
+      <div class="h5 mb-0 font-weight-bold text-gray-700">
         Paciente:   {{ object.ExpedientePaciente}} <br>
-        Doctor   {{ object.Doctor}} <br>
+        Doctor:   {{ object.Doctor}} <br>
         Fecha: {{ object.Fecha}} <br>
         Hora: {{ object.HoraInicio}} <br>
         Termino: {{ object.HoraFin}} <br>
         Tratamiento: {{ object.Tratamiento}} <br>
-        Cita Creada: {{ object.FechaCreacion}} <br>
-     <td><a href="{% url 'Clinica:lista_citas' %}">Regresar</a></td>
+        Cita Creada: {{ object.FechaCreacion}} <br><br>
+     
+     <a href="{% url 'Clinica:lista_citas' %}"><input type="button"  class="btn btn-success btn-lg"name="Return" value="Regresar"></a>
       </div>
   </div><!--end container-->
+</justify>
 {% endblock contenido%}
