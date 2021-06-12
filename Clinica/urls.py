@@ -60,7 +60,8 @@ urlpatterns = [
         ###_____________________________Notas___________________________________
     path('ver_notas/<int:id>', views.VerNotas.as_view(), name="ver_notas"), #No implementado #Ver notas del paciente
     path('crear_notas/<int:id>', views.CrearNota.as_view(), name="crear_notas"), #No implementado #Crear nota al paciente
-
+        ###_____________________________API___________________________________
+    path('client/Usuarios', views.wsClient, name="wsClient"),
 ]
 
 #quitar la barra superior
