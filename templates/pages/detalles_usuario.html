@@ -1,22 +1,46 @@
 {% extends "utilities/base.html" %}
-
+{% load static %}
 {% block titulo %}Detalles usuario{% endblock %}
 
 {% block contenido %}
-  <div class="container-fluid">
-      <div class="page-head">
-        <h1>Detalles del usuario</h1>
+<div class="container-fluid">
+  <div class="page-head">
+    <h1>Detalles del usuario</h1>
+  </div>
+  <div class="modal-1" tabindex="-1" role="dialog">
+      <div class="modal-dialog mb-0" role="document">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h3 class="modal-title">{{ object.Nombres}} {{ object.ApellidoPaterno}} {{ object.ApellidoMaterno}}</h5>
+              </div>
+              <div class="modal-body">
+                <div class="h5">
+                  Sexo:
+                  {% if object.Genero == 'M' %}
+                    Mujer
+                  {% elif object.Genero == 'H' %}
+                    Hombre
+                  {% endif %}
+                  <br>
+                  Tipo de empleado:
+                  {% if object.TipoEmpleado == 'R' %}
+                      Recepcionista
+                  {% elif object.TipoEmpleado == 'D' %}
+                      Doctor
+                  {% else %}
+                      Administrador
+                  {% endif %}
+                  <br>
+                  Fecha de Nacimiento: {{ object.Nacimiento}} <br>
+                  Correo: {{ object.email}} <br>
+                  Teléfono: {{ object.Telefono}} <br>
+                  Creación de usuario: {{ object.date_joined}} <br>
+                </div>
+              <div class="modal-footer">
+                  <a href="{% url 'Clinica:lista_usuarios' %}"><input type="button" class= "btn btn-success" name="Return" value="Regresar"></a>
+              </div>
+          </div>
       </div>
-      <div class="h5 mb-0 font-weight-bold text-gray-800">
-        {{ object.Nombres}} <br>
-        {{ object.ApellidoPaterno}} <br>
-        {{ object.ApellidoMaterno}} <br>
-        {{ object.Genero}} <br>
-        {{ object.Nacimiento}} <br>
-        {{ object.email}} <br>
-        {{ object.Telefono}} <br>
-        {{ object.date_joined}} <br>
-        <a href="{% url 'Clinica:lista_usuarios' %}"><input type="button" class= "btn btn-success btn-rounded" name="Return" value="Regresar"></a>
-      </div>
-  </div><!--end container-->
+  </div>                                                           
+</div><!--end container-->
 {% endblock contenido%}

@@ -334,13 +334,13 @@ class TratamientoForm(forms.ModelForm):
         max_length=50,
         label="Nombre del tratamiento",
         required=True,
-        widget=forms.Textarea(attrs={"placeholder": "Tratamiento", "class": "form-control"})
+        widget=forms.TextInput(attrs={"placeholder": "Tratamiento...", "class": "form-control form-control-sm", "style": "display: inline; border: 1px solid #dee2e6; border-width: 1px;", "aria-controls": "datatable"})
         )
     Descripcion = forms.CharField(
         max_length=200,
         label="Descripción del tratamiento",
         required=True,
-        widget=forms.Textarea(attrs={"placeholder": "Descripción del tratamiento", "class":"form-control"})
+        widget=forms.Textarea(attrs={"placeholder": "Nombre(s)...", "class": "form-control form-control-sm", "style": "display: inline; border: 1px solid #dee2e6; border-width: 1px;", "aria-controls": "datatable"})
         )
     class Meta:
         model = Tratamiento
@@ -352,13 +352,13 @@ class EditarTratamientoForm(forms.ModelForm):
         max_length=50,
         label="Nombre del tratamiento",
         required=True,
-        widget=forms.Textarea(attrs={"placeholder": "Tratamiento", "class": "form-control"})
+        widget=forms.TextInput(attrs={"placeholder": "Tratamiento...", "class": "form-control form-control-sm", "style": "display: inline; border: 1px solid #dee2e6; border-width: 1px;", "aria-controls": "datatable"})
         )
     Descripcion = forms.CharField(
         max_length=200,
         label="Descripción del tratamiento",
         required=True,
-        widget=forms.Textarea(attrs={"placeholder": "Descripción del tratamiento", "class":"form-control"})
+        widget=forms.Textarea(attrs={"placeholder": "Nombre(s)...", "class": "form-control form-control-sm", "style": "display: inline; border: 1px solid #dee2e6; border-width: 1px;", "aria-controls": "datatable"})
         )
     class Meta:
         model = Tratamiento

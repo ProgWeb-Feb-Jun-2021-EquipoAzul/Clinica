@@ -1,17 +1,51 @@
 {% extends "utilities/base.html" %}
 
-{% block titulo %}Borrar cita{% endblock %}
+{% load static %}
 
 {% block contenido %}
-  <div class="container-fluid">
-      <div class="page-head">
-        <h2>Borrar cita</h2>
+<div class="container-fluid">
+  <div class="page-head">
+    <h1>Eliminar Usuario</h1>
+  </div>
+  <div class="modal-1" tabindex="-1" role="dialog">
+      <div class="modal-dialog mb-0" role="document">
+          <div class="modal-content">
+            <form method="post">
+              {% csrf_token %}
+              <div class="modal-header">
+                <h3 class="modal-title">¿Deseas eliminar este usuario?</h3>
+              </div>
+              <div class="modal-body">
+                <p class="h5" align="right">{{ object.Nombres }} {{ object.ApellidoPaterno }} {{ object.ApellidoMaterno }}</p>
+                <div class="h5">
+                  Sexo:
+                  {% if object.Genero == 'M' %}
+                    Mujer
+                  {% elif object.Genero == 'H' %}
+                    Hombre
+                  {% endif %}
+                  <br>
+                  Tipo de empleado:
+                  {% if object.TipoEmpleado == 'R' %}
+                      Recepcionista
+                  {% elif object.TipoEmpleado == 'D' %}
+                      Doctor
+                  {% else %}
+                      Administrador
+                  {% endif %}
+                  <br>
+                  Fecha de Nacimiento: {{ object.Nacimiento}} <br>
+                  Correo: {{ object.email}} <br>
+                  Teléfono: {{ object.Telefono}} <br>
+                  Creación de usuario: {{ object.date_joined}} <br>
+                </div>
+              <div class="modal-footer">
+                  <button type="submit" class="btn btn-success">Eliminar</button>
+                  <a href="{% url 'Clinica:lista_usuarios' %}"><input type="button" class="btn btn-danger" name="Cancel" value="Cancelar"></a>
+              </div>
+            </form>
+          </div>
       </div>
-      <form method="post">
-        {% csrf_token %}
-        <h4>¿Deseas borrar al usuario? {{ object }}</h4><br>
-        <button type="submit" class="btn btn-success btn-rounded">Si </button>
-        <a href="{% url 'Clinica:lista_usuarios' %}"><input type="button" class="btn btn-danger btn-rounded" name="Cancel" value="Cancelar"></a>
-      </form>
-  </div><!--end container-->
+  </div>                                                           
+</div><!--end container-->
 {% endblock contenido%}

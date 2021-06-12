@@ -40,8 +40,11 @@
                       <p class="h6" style="margin-bottom: 5px;">Teléfono: </p>
                       <input type="text" name="Telefono" id="id_Telefono" class="form-control form-control-sm" style="display: inline; border: 1px solid #dee2e6; border-width: 1px; margin-bottom: 10px;" placeholder="Teléfono..." aria-controls="datatable">
                       <br><br>
-                      <button type="submit" class="btn btn-success">Crear</button>
-                      <a href="{% url 'Clinica:lista_usuarios' %}"><input type="button" class="btn btn-danger" name="Cancel" value="Cancelar"></a>
+                      <div align="right">
+                        <button type="submit" class="btn btn-success">Crear</button>
+                        <a href="{% url 'Clinica:lista_usuarios' %}"><input type="button" class="btn btn-danger" name="Cancel" value="Cancelar"></a>
+                      </div>
+                      
                     </form>
                   </div>
               </div>

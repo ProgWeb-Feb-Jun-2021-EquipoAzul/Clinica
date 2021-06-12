@@ -1,20 +1,30 @@
 {% extends "utilities/base.html" %}
-{% block titulo %}Editar tratamiento{% endblock %}
 
 {% block contenido %}
 <div class="container-fluid">
-      <div class="page-head">
-        <h2>Editar tratamiento</h2>
-      </div>
-    <form method="post">
-        {%csrf_token%}
-        {{form.Tratamiento.label}}
-        {{form.Tratamiento}}
-        {{form.Descripcion.label}}
-        {{form.Descripcion}
-        <button type="submit" class="btn btn-success btn-rounded">Guardar cambios</button>
-        <a href="{% url 'Clinica:lista_tratamientos' %}"><input type="button" class="btn btn-danger btn-rounded" name="Cancel" value="Cancelar"></a>
-    </form>
+  <div class="page-head">
+      <p class="h1">Editar tratamiento</p>
+      <div class="row">
+        <div class="col-lg-12 col-sm-12">
+            <div class="card m-b-30">
+                <div class="card-body table-responsive">
+                  <form method="post">
+                    {% csrf_token %}
+                    <p class="h6" style="margin-bottom: 5px;">Nombre del tratamiento: </p>
+                    {{form.Tratamiento}}
+                    <p class="h6" style="margin-bottom: 5px;margin-top: 10px;">Descripción: </p>
+                    {{form.Descripcion}}
+                    <br><br>
+                    <div align="right">
+                      <button type="submit" class="btn btn-success">Editar</button>
+                      <a href="{% url 'Clinica:lista_tratamientos' %}"><input type="button" name="Cancel" class="btn btn-danger" value="Cancelar"></a>
+                    </div>
+                  </form>
+                </div>
+            </div>
+        </div>
+    </div><!--end row-->
+  </div>
 </div>
 <!--end container-->
 {% endblock contenido%}

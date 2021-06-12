@@ -4,15 +4,37 @@
 
 {% block contenido %}
 
-  <div class="container-fluid">
-      <div class="page-head">
-        <h2>Borrar tratamiento</h2>
+
+
+
+
+
+
+<div class="container-fluid">
+  <div class="page-head">
+    <h1>Eliminar tratamiento</h1>
+  </div>
+  <br><br><br>
+  <div class="modal-1" tabindex="-1" role="dialog">
+      <div class="modal-dialog mb-0" role="document">
+          <div class="modal-content">
+            <form method="post">
+              {% csrf_token %}
+              <div class="modal-header">
+                <h3 class="modal-title">¿Deseas eliminar este tratamiento?</h3>
+              </div>
+              <div class="modal-body">
+                <p class="h5" align="right">{{ object.Nombres }} {{ object.ApellidoPaterno }} {{ object.ApellidoMaterno }}</p>
+                <div class="h5">
+                  {{ object }}
+                </div>
+              <div class="modal-footer">
+                <button type="submit" class="btn btn-success">Eliminar</button>
+                <a href="{% url 'Clinica:lista_tratamientos' %}"><input type="button" class="btn btn-danger" name="Cancel" value="Cancelar"></a>
+              </div>
+            </form>
+          </div>
       </div>
-      <form method="post">
-        {% csrf_token %}
-        <h3>¿Deseas borrar al tratamiento? {{ object }}</h3>
-        <button type="submit" class="btn btn-success btn-rounded">Si</button>
-        <a href="{% url 'Clinica:lista_tratamientos' %}"><input type="button" class="btn btn-danger btn-rounded" name="Cancel" value="Cancelar"></a>
-      </form>
-  </div><!--end container-->
+  </div>                                                           
+</div><!--end container-->
 {% endblock contenido%}

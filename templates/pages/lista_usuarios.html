@@ -40,7 +40,15 @@
                               <tr>
                                 <td>{{ Usuario.Nombres }} {{ Usuario.ApellidoPaterno }}</td>
                                 <td>{{ Usuario.email }}</td>
-                                <td>{{ Usuario.TipoEmpleado }}</td>
+                                <td>
+                                  {% if Usuario.TipoEmpleado == 'R' %}
+                                    Recepcionista
+                                  {% elif Usuario.TipoEmpleado == 'D' %}
+                                    Doctor
+                                  {% else %}
+                                    Administrador
+                                  {% endif %}
+                                </td>
                                 <td>{{ Usuario.date_joined }}</td>
                                 <td><center><a href="{% url 'Clinica:detalles_usuario' Usuario.pk%}"><span class="mdi mdi-eye"></span></a></center></td>
                                 <td><center><a href="{% url 'Clinica:editar_usuario' Usuario.pk%}"><span class="ti-pencil"></span></a></center></td>
@@ -53,6 +61,6 @@
                 </div>
             </div>
         </div>
-    </div><!--end row-->
+      </div><!--end row-->
   </div>
 {% endblock contenido%}
