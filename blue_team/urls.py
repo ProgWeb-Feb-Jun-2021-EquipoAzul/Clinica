@@ -19,6 +19,8 @@ from django.contrib.auth import views as auth_views
 from django.contrib.auth.views import logout_then_login
 from django.conf.urls import url
 
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('clinica/', include("Clinica.urls")),
