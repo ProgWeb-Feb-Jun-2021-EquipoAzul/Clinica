@@ -1,40 +1,50 @@
-{% extends "utilities/base.html" %}
 
+
+{% extends "utilities/base.html" %}
 {% block titulo %}Editar paciente{% endblock %}
 
 {% block contenido %}
 <div class="container-fluid">
     <div class="page-head">
-            <h2>Editar paciente</h2>
-    </div>
-    <div class="">
-        <form method="post">
-            {%csrf_token%}
-            {{form.Nombres.label}}
-            {{form.Nombres}}
-            {{form.ApellidoPaterno.label}}
-            {{form.ApellidoPaterno}}
-            {{form.ApellidoMaterno.label}}
-            {{form.ApellidoMaterno}}
-            {{form.Genero.label}}
-            {{form.Genero}}
-            {{form.Nacimiento.label}}
-            {{form.Nacimiento}}
-            {{form.Direccion.label}}
-            {{form.Direccion}}
-            {{form.Correo.label}}
-            {{form.Correo}}
-            {{form.Telefono.label}}
-            {{form.Telefono}}
-            {{form.Alergias.label}}
-            {{form.Alergias}}
-            {{form.Padecimientos.label}}
-            {{form.Padecimientos}}<br>
-            <button type="submit" class="btn btn-success btn-sm">Guardar cambios</button>.
-            <a href="{% url 'Clinica:lista_pacientes' %}"><input type="button" class="btn btn-danger btn-sm" name="Cancel" value="Cancelar"></a>
-        </form>
+        <p class="h1">Editar Paciente</p>
+        <div class="row">
+            <div class="col-lg-12 col-sm-12">
+                <div class="card m-b-30">
+                    <div class="card-body table-responsive">
+                        <form method="post">
+                            {% csrf_token %}
+                            <p class="h6" style="margin-bottom: 5px;">Nombre: </p>
+                            {{ form.Nombres }}
+                            <p class="h6" style="margin-bottom: 5px; margin-top: 10px;">Apellido Paterno: </p>
+                            {{ form.ApellidoPaterno }}
+                            <p class="h6" style="margin-bottom: 5px; margin-top: 10px;">Apellido Materno: </p>
+                            {{ form.ApellidoMaterno }}
+                            <br>
+                            <p class="h6" style="display: inline; margin-bottom: 10px;">Género: </p>
+                            {{ form.Genero }}
+                            <p class="h6" style="display: inline; margin-bottom: 10px;">Fecha de nacimiento: </p>
+                            {{ form.Nacimiento }}
+                            <p class="h6" style="margin-bottom: 5px;">Dirección: </p>
+                            {{form.Direccion}}
+                            <p class="h6" style="margin-bottom: 5px;">Correo: </p>
+                            {{form.Correo}}
+                            <p class="h6" style="margin-bottom: 5px; margin-top: 10px;">Teléfono: </p>
+                            {{ form.Telefono }}
+                            <br>
+                            <p class="h6" style="margin-bottom: 5px; margin-top: 10px">Alergias: </p>
+                            {{ form.Alergias }}
+                            <br>
+                            <p class="h6" style="margin-bottom: 5px; margin-top: 10px ">Padecimientos: </p>
+                            {{ form.Padecimientos }}
+                            <br><br><br>
+                            <button type="submit" class="btn btn-success">Guardar cambios</button>
+                            <a href="{% url 'Clinica:lista_pacientes' %}"><input type="button" class="btn btn-danger"name="Cancel" value="Cancelar"></a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div><!--end row-->
     </div>
 </div><!--end container-->
 {% endblock contenido%}
-
 
