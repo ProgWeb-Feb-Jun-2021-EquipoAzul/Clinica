@@ -387,3 +387,18 @@ class CrearNota(generic.CreateView):
     def get_success_url(self):
           doctor=self.kwargs['pk']
           return reverse_lazy('Clinica:lista_notas', pk=self.kwargs['id'])
+
+
+
+
+    ###_____________________________API___________________________________
+
+
+def wsClient(request):
+    url="http://localhost:8000/api/usuarios_list/"
+    response = requests.get(url)
+    response = response.json()
+    context = {
+        "object_list":response
+    }
+    return render(request,"base/client.html",context)

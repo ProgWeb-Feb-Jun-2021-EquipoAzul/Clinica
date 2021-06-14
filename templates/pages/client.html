@@ -1,0 +1,30 @@
+{% extends 'base/base.html' %}
+{% block title %}WSClient{% endblock title %}
+
+{% block content %}
+    <h3>Objetos del EndPoint</h3>
+    <table class="table">
+        <thead class="table table-dark">
+            <th>username</th>
+            <th>TipoEmpleado</th>
+            <th>Nombres</th>
+            <th>ApellidoPaterno</th>
+            <th>ApellidoPaterno</th>
+            <th>Genero</th>
+            <th>Nacimiento</th>
+            <th>email</th>
+            <th>Telefono</th>
+            <th>date_joined</th>
+
+        </thead>
+
+        {% for Usuario in object_list %}
+            <tr>
+                <td>{{ Empleado.id }}</td>
+                <td>{{ Empleado.nombre }}</td>
+                <td>{{ Empleado.edad }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+{% endblock content %

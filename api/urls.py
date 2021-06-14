@@ -1,9 +1,13 @@
 from django.urls import path
-from api import views
+from rest_framework.urlpatterns import format_suffix_patterns
+from api  import views
 
-app_name = "api"
+api_name = 'api'
+
 
 urlpatterns = [
-    path('usuario_list/', views.UsuarioList.as_view(), name ="usuario_list"),
-    path('usuario_detail/<int:pk>/', views.UsuarioDetail.as_view(), name ="usuario_detail"),
+    path('lista_usuario', views.UsuarioListSet.as_view(), name ="lista_usuario"),
+    path('detalles_usuario/<int:pk>', views.UsuarioDetailSet.as_view(), name ="detalles_usuario"),
+    #path('usuario_detail/<int:pk>/', views.UsuarioDetail.as_view(), name ="usuario_detail"),
 ]
+urlpatterns = format_suffix_patterns(urlpatterns)
