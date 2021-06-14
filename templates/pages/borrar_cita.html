@@ -1,17 +1,33 @@
-{% extends "utilities/base.html" %}
+{% extends "utilities/base.html" %}.
 
-{% block titulo %}Borrar Cita{% endblock %}
+{% load static %}
+
+{% block titulo %}Borrar cita{% endblock %}
+
 
 {% block contenido %}
-  <div class="container-fluid">
-      <div class="page-head">
-        <h1>Borrar cita</h1>
+<div class="container-fluid">
+  <div class="page-head">
+    <h1>Eliminar Cita</h1>
+  </div>
+  <div class="modal-1" tabindex="-1" role="dialog">
+      <div class="modal-dialog mb-0" role="document">
+          <div class="modal-content">
+            <form method="post">
+              {% csrf_token %}
+              <div class="modal-header">
+                <h3 class="modal-title">¿Deseas eliminar la cita?</h3>
+              </div>
+              <div class="modal-body">
+                   {{ object}} <br>
+                </div>
+              <div class="modal-footer">
+                  <button type="submit" class="btn btn-success">Eliminar</button>
+                  <a href="{% url 'Clinica:lista_citas' %}"><input type="button" class="btn btn-danger" name="Cancel" value="Cancelar"></a>
+              </div>
+            </form>
+          </div>
       </div>
-      <form method="post">
-        {% csrf_token %}
-        <h2>¿Deseas borrar al cita?: {{ object }}</h2>
-        <button type="submit">Delete</button>
-        <a href="{% url 'Clinica:lista_citas' %}"><input type="button" class="btn btn-danger btn-rounded" name="Cancel" value="Cancelar"></a>
-      </form>
-  </div><!--end container-->
+  </div>                                                           
+</div><!--end container-->
 {% endblock contenido%}

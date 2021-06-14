@@ -1,25 +1,33 @@
-{% extends "utilities/base.html" %}
-
+{% extends "utilities/base.html" %}.
+{% load static %}
 {% block titulo %}Detalles doctor{% endblock %}
 
 {% block contenido %}
-<justify>
-  <div class="container-fluid">
-      <div class="page-head">
-        <h2>Detalles del doctor</h2>
+<div class="container-fluid">
+  <div class="page-head">
+    <h1>Detalles del doctor</h1>
+  </div>
+  <div class="modal-1" tabindex="-1" role="dialog">
+      <div class="modal-dialog mb-0" role="document">
+          <div class="modal-content">
+              <div class="modal-header">
+                <h3 class="modal-title">{{ object.Usuario.Nombres}} </h5>
+              </div>
+              <div class="modal-body">
+                <div class="h5">
+                 
+                  ApellidoPaterno: {{ object.Usuario.ApellidoPaterno}}<br>
+                  ApellidoMaterno: {{ object.Usuario.ApellidoMaterno}}<br>
+                  Genero: {{ object.Usuario.Genero}}<br>
+                  Correo: {{ object.Usuario.email}}<br>
+                  Telefono: {{ object.Usuario.Telefono}}<br>
+                  Especialidad: {{ object.Especialidad}}<br><br>
+                </div>
+              <div class="modal-footer">
+                  <a href="{% url 'Clinica:lista_doctores' %}"><input type="button" class= "btn btn-success" name="Return" value="Regresar"></a>
+              </div>
+          </div>
       </div>
-      <div class="h5 mb-0 font-weight-bold text-gray-800">
-        Nombres: {{ object.Usuario.Nombres}}<br>
-        ApellidoPaterno: {{ object.Usuario.ApellidoPaterno}}<br>
-        ApellidoMaterno: {{ object.Usuario.ApellidoMaterno}}<br>
-        Genero: {{ object.Usuario.Genero}}<br>
-        Correo: {{ object.Usuario.email}}<br>
-        Telefono: {{ object.Usuario.Telefono}}<br>
-        Especialidad: {{ object.Especialidad}}<br><br>
-
-          <a href="{% url 'Clinica:lista_doctores' %}"><input type="button"  class="btn btn-success btn-lg"name="Return" value="Regresar"></a>
-       
-      </div>
-  </div><!--end container-->
-</justify>
+  </div>                                                           
+</div><!--end container-->
 {% endblock contenido%}

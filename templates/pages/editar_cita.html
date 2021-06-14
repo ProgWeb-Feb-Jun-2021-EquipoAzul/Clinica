@@ -1,4 +1,4 @@
-{% extends "utilities/base.html" %}
+{% extends "utilities/base.html" %}.
 
 {% block titulo %}Editar cita{% endblock %}
 
@@ -7,7 +7,10 @@
     <div class="page-head">
         <h2>Editar cita</h2>
     </div>
-    <div class="">
+    <div class="row">
+      <div class="col-lg-12 col-sm-12">
+          <div class="card m-b-30">
+              <div class="card-body table-responsive">
       <form method="post">
         {% csrf_token %}
         {{form.ExpedientePaciente.label}}
@@ -22,7 +25,11 @@
         {{form.HoraInicio}}<br><br>
         <button type="submit" class="btn btn-success btn-sm">Editar</button>
         <a href="{% url 'Clinica:lista_citas' %}"><input type="button" class="btn btn-danger btn-danger btn-sm" name="Cancel" value="Cancelar"></a>
+      </div>
       </form>
+    </div>
+  </div>
+</div>
     </div>
 </div><!--end container-->
 {% endblock contenido%}

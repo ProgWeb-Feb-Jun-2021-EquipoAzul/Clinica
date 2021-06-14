@@ -1,23 +1,33 @@
-{% extends "utilities/base.html" %}
-{% block titulo %}Detalles Cita{% endblock %}
+{% extends "utilities/base.html" %}.
+{% load static %}
+{% block titulo %}Detalles cita{% endblock %}
 
 {% block contenido %}
-<justify>
-  <div class="container-fluid">
-      <div class="page-head">
-        <h2>Detalles de cita</h2>
+<div class="container-fluid">
+  <div class="page-head">
+    <h1>Detalles de la cita</h1>
+  </div>
+  <div class="modal-1" tabindex="-1" role="dialog">
+      <div class="modal-dialog mb-0" role="document">
+          <div class="modal-content">
+              <div class="modal-header">
+                <h3 class="modal-title">{{ object.ExpedientePaciente}} </h5>
+              </div>
+              <div class="modal-body">
+                <div class="h5">
+                 
+                  Doctor:   {{ object.Doctor}} <br>
+                  Fecha: {{ object.Fecha}} <br>
+                  Hora: {{ object.HoraInicio}} <br>
+                  Termino: {{ object.HoraFin}} <br>
+                  Tratamiento: {{ object.Tratamiento}} <br>
+                  Cita Creada: {{ object.FechaCreacion}} <br><br>
+                </div>
+              <div class="modal-footer">
+                  <a href="{% url 'Clinica:lista_citas' %}"><input type="button" class= "btn btn-success" name="Return" value="Regresar"></a>
+              </div>
+          </div>
       </div>
-      <div class="h5 mb-0 font-weight-bold text-gray-700">
-        Paciente:   {{ object.ExpedientePaciente}} <br>
-        Doctor:   {{ object.Doctor}} <br>
-        Fecha: {{ object.Fecha}} <br>
-        Hora: {{ object.HoraInicio}} <br>
-        Termino: {{ object.HoraFin}} <br>
-        Tratamiento: {{ object.Tratamiento}} <br>
-        Cita Creada: {{ object.FechaCreacion}} <br><br>
-     
-     <a href="{% url 'Clinica:lista_citas' %}"><input type="button"  class="btn btn-success btn-lg"name="Return" value="Regresar"></a>
-      </div>
-  </div><!--end container-->
-</justify>
+  </div>                                                           
+</div><!--end container-->
 {% endblock contenido%}
