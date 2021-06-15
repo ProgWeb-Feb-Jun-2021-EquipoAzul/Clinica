@@ -147,7 +147,7 @@ FIXTURE_DIRS = (
    os.path.join(PROJECT_DIR, 'fixtures'),
 )'''
 
-'''Version Prueba''''
+'''Version Prueba'''
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 
