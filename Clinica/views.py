@@ -191,8 +191,9 @@ class CrearPaciente(LoginRequiredMixin,generic.CreateView):
     success_url = reverse_lazy("Clinica:lista_pacientes")
 
     ###_____________________________Citas_________________________________________
-class ListaCitas(generic.ListView):
+class ListaCitas(LoginRequiredMixin,generic.ListView):
     template_name = "pages/lista_citas.html"
+    login_url = URL_LOGIN
     model = Cita
 
     def get_queryset(self):
@@ -221,18 +222,21 @@ class ListaCitas(generic.ListView):
 
 #Falta crear citas desde pacientes
 
-class CrearCita(generic.CreateView):
+class CrearCita(LoginRequiredMixin,generic.CreateView):
     template_name = "pages/crear_cita.html"
+    login_url = URL_LOGIN
     model =  Cita
     form_class = CitaForm
     success_url = reverse_lazy("Clinica:lista_citas")
-class DetallesCita(generic.DetailView):
+class DetallesCita(LoginRequiredMixin,generic.DetailView):
     template_name = "pages/detalles_cita.html"
+    login_url = URL_LOGIN
     model = Cita
     success_url = reverse_lazy("Clinica:lista_citas")
 
-class EditarCita(generic.UpdateView):
+class EditarCita(LoginRequiredMixin,generic.UpdateView):
     template_name = "pages/editar_cita.html"
+    login_url = URL_LOGIN
     model = Cita
     form_class=EditarCitaForm
     success_url = reverse_lazy("Clinica:lista_citas")
@@ -244,8 +248,9 @@ class BorrarCita(LoginRequiredMixin,generic.DeleteView): ###Falta completar
     success_url = reverse_lazy("Clinica:lista_citas")
 
     ###_____________________________Doctores_________________________________________
-class ListaDoctores(generic.ListView):
+class ListaDoctores(LoginRequiredMixin,generic.ListView):
     template_name = "pages/lista_doctores.html"
+    login_url = URL_LOGIN
     model = Doctor
 
     def get_queryset(self):
@@ -277,20 +282,23 @@ class ListaDoctores(generic.ListView):
 
         return context
 
-class DetallesDoctor(generic.DetailView):
+class DetallesDoctor(LoginRequiredMixin,generic.DetailView):
     template_name = "pages/detalles_doctor.html"
+    login_url = URL_LOGIN
     model = Doctor
     success_url = reverse_lazy("Clinica:lista_doctores")
 
 #-----------------VIEWS DOCTOR-----------------
     ###_____________________________Perfil_________________________________________
 #No implementado
-class PerfilDoctor(generic.DetailView):
+class PerfilDoctor(LoginRequiredMixin,generic.DetailView):
     template_name = "pages/perfil.html"
+    login_url = URL_LOGIN
     model = Doctor
 
-class EditarPerfil(generic.UpdateView):
+class EditarPerfil(LoginRequiredMixin,generic.UpdateView):
     template_name = "pages/editar_perfil.html"
+    login_url = URL_LOGIN
     model = Doctor
     form_class=PerfilDoctorForm
 
@@ -300,8 +308,9 @@ class EditarPerfil(generic.UpdateView):
 
     ###_____________________________Horario___________________________________
 #Mas o menos implementado solo debe de dejar entrar a doctores
-class AgregarHorario(generic.CreateView):
+class AgregarHorario(LoginRequiredMixin,generic.CreateView):
     template_name = "pages/agregar_horario.html"
+    login_url = URL_LOGIN
     model = Hora
     form_class = HoraForms
     success_url = reverse_lazy("Clinica:horario")
@@ -313,13 +322,15 @@ class AgregarHorario(generic.CreateView):
         obj.save()
         return super().form_valid(form)
 
-class DetallesCitaDoctor(generic.DetailView):
+class DetallesCitaDoctor(LoginRequiredMixin,generic.DetailView):
     template_name = "pages/detalles_cita_doctor.html"
+    login_url = URL_LOGIN
     model = Cita
     success_url = reverse_lazy("Clinica:lista_citas")
 
-class EditarHorario(generic.UpdateView):
+class EditarHorario(LoginRequiredMixin,generic.UpdateView):
     template_name = "pages/editar_horario.html"
+    login_url = URL_LOGIN
     model = Hora
     form_class=EditarHoraForms
     success_url = reverse_lazy("Clinica:horario_doctor")
@@ -330,8 +341,9 @@ class EditarHorario(generic.UpdateView):
         obj.save()
         return super().form_valid(form)
 
-class HorarioDoctor(generic.ListView):
+class HorarioDoctor(LoginRequiredMixin,generic.ListView):
     template_name = "pages/horario_doctor.html"
+    login_url = URL_LOGIN
     model = Hora
 
     def get_queryset(self):
@@ -346,8 +358,9 @@ class BorrarHora(LoginRequiredMixin,generic.DeleteView):
 
     ###_____________________________Citas___________________________________
 
-class CitasDoctor(generic.ListView):#No implementado
+class CitasDoctor(LoginRequiredMixin,generic.ListView):#No implementado
     template_name = "pages/doctor_citas.html"
+    login_url = URL_LOGIN
     model = Cita
 
     def get_queryset(self):
@@ -355,14 +368,16 @@ class CitasDoctor(generic.ListView):#No implementado
         return Cita.objects.filter(Q(Doctor=doctor)).order_by("Fecha")
 
 
-class VerPaciente(generic.DetailView):
+class VerPaciente(LoginRequiredMixin,generic.DetailView):
+    login_url = URL_LOGIN
     template_name = "pages/expedientepaciente.html"
     model = ExpedientePaciente
     success_url = reverse_lazy("Clinica:doctor_citas")
 
     ###_____________________________Notas___________________________________
 
-class VerNotas(generic.ListView):
+class VerNotas(LoginRequiredMixin,generic.ListView):
+    login_url = URL_LOGIN
     template_name = "pages/lista_notas.html"
     model = Nota
     success_url = reverse_lazy("Clinica:doctor_citas")
@@ -372,7 +387,8 @@ class VerNotas(generic.ListView):
         return Nota.objects.filter(Q(Expedientepaciente=paciente)).order_by("FechaCreacion")
 
 
-class CrearNota(generic.CreateView):
+class CrearNota(LoginRequiredMixin,generic.CreateView):
+    login_url = URL_LOGIN
     template_name = "pages/crear_notas.html"
     model = Nota
     form_class = NotaForm
@@ -387,7 +403,6 @@ class CrearNota(generic.CreateView):
     def get_success_url(self):
           doctor=self.kwargs['pk']
           return reverse_lazy('Clinica:lista_notas', pk=self.kwargs['id'])
-
 
 
 

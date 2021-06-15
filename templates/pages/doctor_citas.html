@@ -30,11 +30,6 @@
                                 <th>Fecha</th>
                                 <th>Hora</th>
                                 <th>Detalle</th>
-                                <th>Editar</th>
-                                <th>Eliminar</th>
-                               
-                               
-                               
                               </tr>
                             </thead>
                             <tbody>
@@ -43,9 +38,7 @@
                                 <td>{{ Cita.ExpedientePaciente }}</td>
                                 <td>{{ Cita.Fecha }}</td>
                                 <td>{{ Cita.HoraInicio }}</td>
-                                <td><center><a href="{% url 'Clinica:detalles_cita' Cita.pk%}"><span class="mdi mdi-eye"></span></a></center></td>
-                                <td><center><a href="{% url 'Clinica:editar_cita' Cita.pk%}"><span class="ti-pencil"></span></a></center></td>
-                                <td><center><a href="{% url 'Clinica:borrar_cita' Cita.pk%}"><span class="mdi mdi-delete-forever"></span></a></center></td>
+                                <td><center><a href="{% url 'Clinica:detalles_cita_doctor' Cita.pk%}"><span class="mdi mdi-eye"></span></a></center></td>
                               </tr>
                               {% endfor %}
                             </tbody>
