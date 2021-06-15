@@ -26,7 +26,7 @@ SECRET_KEY = '5@(j6=efd-)tg2e&%q1)vv-3r3%_*olla+z!=vru!r(_tk6(ep'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []''''jmu-cera.herokuapp.com', '127.0.0.1''''
+ALLOWED_HOSTS = []'''jmu-cera.herokuapp.com', '127.0.0.1'''
 
 
 # Application definition
