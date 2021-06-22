@@ -1,22 +1,29 @@
-{% extends "utilities/base.html" %}
+{% extends "utilities/base.html" %}.
 
-{% block titulo %}Agregar a horario{% endblock %}
+{% block titulo %}Agregar horario{% endblock %}
 
 {% block contenido %}
-    <div class="container-fluid">
-        <div class="page-head">
-          <h1>Agregar hora</h1>
+  <div class="container-fluid">
+      <div class="page-head">
+        <h2>Agregar horario</h2>
+      </div>
+      <div class="row">
+        <div class="col-lg-12 col-sm-12">
+            <div class="card m-b-30">
+                <div class="card-body table-responsive">
+      <form method="post">
+          {% csrf_token %}
+          {{form.Dia.label}}
+          {{form.Dia}}
+          {{form.Hora.label}}
+          {{form.Hora}}
+         
+          <button type="submit" class="btn btn-success btn-sm">Agregar</button>
+          <a href="{% url 'Clinica:horario' %}"><input type="button" class="btn btn-danger btn-danger btn-sm" name="Cancel" value="Cancelar"></a>
+         </div>
+      </form>
+                </div>
+            </div>
         </div>
-        <div class="">
-          <form method="post">
-              {%csrf_token%}
-              {{form.Dia.label}}
-              {{form.Dia}}
-              {{form.Hora.label}}
-              {{form.Hora}}
-              <button type="submit">Crear</button>
-              <a href="{% url 'Clinica:horario' %}"><input type="button" name="Cancel" value="Cancelar"></a>
-          </form>
-        </div>
-    </div>
+  </div><!--end container-->
 {% endblock contenido%}

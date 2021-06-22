@@ -1,28 +1,54 @@
 {% extends "utilities/base.html" %}
 
-{% block titulo %}Lista de Citas{% endblock %}
+{% block titulo %}Horario doctor{% endblock %}
 
 {% block contenido %}
-
   <div class="container-fluid">
       <div class="page-head">
-        <h1>Horario</h1>
-        <a href="{% url 'Clinica:crear_horario' %}"><div class="btn btn-primary mybutton">Agregar horas de disponibilidad</div></a>
-      </div>
-      <div class="">
-        <table class="table">
-          <th>Dia</th>
-          <th>Hora</th>
-          {% for Hora in object_list %}
-          <tr>
-            <td>{{ Hora.Dia }}</td>
-            <td>{{ Hora.Hora }}</td>
-            <td><a href="{% url 'Clinica:editar_horario' Hora.pk%}">Editar</a></td>
-            <td><a href="{% url 'Clinica:borrar_horario' Hora.pk%}">Eliminar</a></td>
-          </tr>
-          {% endfor %}
-        </table>
-      </div>
-  </div><!--end container-->
+        <p class="h2">Horario doctor</p>
+      <div class="row">
+        <div class="col-lg-12 col-sm-12">
+            <div class="card m-b-30">
+                <div class="card-body table-responsive">
 
-{% endblock contenido%}.
+
+
+
+
+
+
+
+
+
+
+
+                    <div class="table-odd">
+                        <table id="datatable" class="table table-bordered">
+                            <thead>
+                              <tr>
+                               
+                                <th>Día</th>
+                                <th>Hora</th>
+                                <th>Editar</th>
+                                <th>Eliminar</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {% for Hora in object_list %}
+                              <tr>
+                                <td>{{ Hora.Dia }}</td>
+                                <td>{{ Hora.Hora }}</td>
+                                <td><center><a href="{% url 'Clinica:editar_horario' Hora.pk%}"><span class="ti-pencil"></span></a></center></td>
+                                <td><center><a href="{% url 'Clinica:borrar_horario' Hora.pk%}"><span class="mdi mdi-delete-forever"></span></a></center></td>
+                              </tr>
+                              </tr>
+                              {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!--end row-->
+  </div>
+{% endblock contenido%}

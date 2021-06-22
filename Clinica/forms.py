@@ -453,7 +453,7 @@ class HoraForms(forms.ModelForm):
         required=True)
     Hora = forms.ChoiceField(
         choices = HORAS,
-        label="Hossra",
+        label="Hora",
         required=True)
 
     class Meta:
