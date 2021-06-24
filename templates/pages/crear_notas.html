@@ -1,17 +1,25 @@
-{% extends "utilities/base.html" %}
-{% block titulo %}Crear nota{% endblock %}
+{% extends "utilities/base.html" %}.
+
+{% block titulo %}Crear notas{% endblock %}
 
 {% block contenido %}
   <div class="container-fluid">
       <div class="page-head">
         <h2>Crear nota</h2>
       </div>
-  <form method="post">
-      {%csrf_token%}
-      {{form}}
-      <button type="submit">Crear nota</button>
-      <a href="{% url 'Clinica:ver_notas' view.kwargs.id %}"><input type="button" name="Cancel" value="Cancelar"></a>
-  </form>
- </div>
-<!--end container-->
+      <div class="row">
+        <div class="col-lg-12 col-sm-12">
+            <div class="card m-b-30">
+                <div class="card-body table-responsive">
+                      <form method="post">
+                          {% csrf_token %}
+                          {{form}}
+                          <button type="submit" class="btn btn-success btn-sm">Crear Nota</button>
+                          <a href="{% url 'Clinica:ver_notas' view.kwargs.id %}"><input type="button" class="btn btn-danger btn-danger btn-sm" name="Cancel" value="Cancelar"></a>
+                      </form>
+                   </div>
+                </div>
+            </div>
+        </div>
+  </div><!--end container-->
 {% endblock contenido%}

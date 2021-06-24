@@ -1,23 +1,35 @@
-{% extends "utilities/base.html" %}
+{% extends "utilities/base.html" %}.
+{% load static %}
 {% block titulo %}Detalles paciente{% endblock %}
 
 {% block contenido %}
-  <div class="container-fluid">
-      <div class="page-head">
-        <h2>Detalles del paciente</h2>
+<div class="container-fluid">
+  <div class="page-head">
+    <h2>Detalles del paciente</h2>
+  </div>
+  <div class="modal-1" tabindex="-1" role="dialog">
+      <div class="modal-dialog mb-0" role="document">
+          <div class="modal-content">
+              <div class="modal-header">
+                <h3 class="modal-title"> {{ object.Nombres}} </h3>
+              </div>
+              <div class="modal-body">
+                <div class="h5">
+                  Apellido paterno:{{ object.ApellidoPaterno}} <br>
+                  Apellido materno:{{ object.ApellidoMaterno}} <br>
+                  Fecha de nacimiento:{{ object.Nacimiento}} <br>
+                  Genero: {{ object.Genero}} <br>
+                  Correo:{{ object.Correo}} <br>
+                  Telefono:{{ object.Telefono}} <br>
+                  Alergias{{ object.Alergias}} <br>
+                  Padecimientos: {{ object.Padecimientos}} <br>
+                </div>
+              <div class="modal-footer">
+                  <a href="{% url 'Clinica:lista_citas' %}"><input type="button" class= "btn btn-success" name="Return" value="Regresar"></a>
+                  <a href="{% url 'Clinica:ver_notas' view.kwargs.pk %}"><input type="button" class= "btn btn-success"  name="Return" value="Ver notas"></a>
+              </div>
+          </div>
       </div>
-      <div class="h5 mb-0 font-weight-bold text-gray-800">
-        {{ object.Nombres}} <br>
-        {{ object.ApellidoPaterno}} <br>
-        {{ object.ApellidoMaterno}} <br>
-        {{ object.Nacimiento}} <br>
-        {{ object.Genero}} <br>
-        {{ object.Correo}} <br>
-        {{ object.Telefono}} <br>
-        {{ object.Alergias}} <br>
-        {{ object.Padecimientos}} <br>
-        <a href="{% url 'Clinica:doctor_citas' %}"><input type="button" name="Return" value="Regresar"></a>
-        <a href="{% url 'Clinica:ver_notas' view.kwargs.pk %}"><input type="button" name="Return" value="Ver notas"></a>
-      </div>
-  </div><!--end container-->
+  </div>
+</div><!--end container-->
 {% endblock contenido%}
