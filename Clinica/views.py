@@ -128,7 +128,7 @@ class NuevoUsuario(TestAdministradorMixin, TestRecepcionistaMixin,generic.Create
     template_name = "pages/nuevo_usuario.html"
     model = Usuario
     form_class = NuevoUsuarioForm
-    success_url = reverse_lazy("Clinica:index")
+    success_url = reverse_lazy("Clinica:lista_usuarios")
 
 class EditarUsuario(TestAdministradorMixin, generic.UpdateView):
     template_name = "pages/editar_usuario.html"
@@ -208,12 +208,11 @@ class ListaPacientes(TestRecepcionistaMixin, generic.ListView):
         elif filter_field == "Nombres":
             return ExpedientePaciente.objects.filter(Q(Nombres__icontains=query) ).order_by("Nombres")
         elif filter_field == "email":
-            return ExpedientePaciente.objects.filter(Q(email__icontains=query)).order_by("Nombres")
+            return ExpedientePaciente.objects.filter(Q(Correo__icontains=query)).order_by("Nombres")
         elif filter_field == "Telefono":
             return ExpedientePaciente.objects.filter(Q(Telefono__icontains=query)).order_by("Nombres")
         else:
             return ExpedientePaciente.objects.all().order_by("Nombres")
-
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
@@ -298,7 +297,7 @@ class BorrarCita(TestRecepcionistaMixin, generic.DeleteView): ###Falta completar
     success_url = reverse_lazy("Clinica:lista_citas")
 
     ###_____________________________Doctores_________________________________________
-class ListaDoctores(TestDoctorMixin, generic.ListView):
+class ListaDoctores(TestRecepcionistaMixin, generic.ListView):
     template_name = "pages/lista_doctores.html"
     model = Doctor
 
@@ -442,7 +441,6 @@ class CrearNota(TestDoctorMixin, generic.CreateView):
           return reverse_lazy('Clinica:doctor_citas')
 
     ###_____________________________API___________________________________
-
 
 def wsClient(request):
     url="http://localhost:8000/api/usuarios_list/"

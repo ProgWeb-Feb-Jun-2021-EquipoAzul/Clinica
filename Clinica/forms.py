@@ -40,7 +40,7 @@ class FiltroUsuarios(Form):
     FILTER_CHOICES = (
         ("all", 'Todo los campos'),
         ("Nombres", 'Nombres'),
-        ("Telefono", 'email'),
+        ("email", 'Correo'),
         ("TipoEmpleado", 'Tipo de empleado'),
     )
     search = forms.CharField(required=False)
