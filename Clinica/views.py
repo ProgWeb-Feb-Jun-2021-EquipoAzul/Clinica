@@ -15,6 +15,8 @@ from .models import *
 #Importamos todos los forms de forms.py del app Clinica
 from .forms import *
 
+from django.core.mail import send_mail
+
 
 URL_LOGIN='Clinica:login'
 
@@ -281,6 +283,16 @@ class CrearCita(TestRecepcionistaMixin, generic.CreateView):
     model =  Cita
     form_class = CitaForm
     success_url = reverse_lazy("Clinica:lista_citas")
+
+    def form_valid(self, form):
+        doctor = form.cleaned_data['Doctor']
+        paciente = form.cleaned_data['ExpedientePaciente']
+        fecha = form.cleaned_data ['Fecha']
+        send_mail('Cita ah sido cambiada', 'Se han realizado cambios a tu cita con'+ paciente.Nombres + ' ' +
+        paciente.ApellidoPaterno + ' en la fecha '+  fecha.strftime("%V,%G,%Y") +'.', 'appclinicaproyectoweb2021@gmail.com',
+        [doctor.Usuario.email], fail_silently=False)
+        return super().form_valid(form)
+
 class DetallesCita(TestRecepcionistaMixin, generic.DetailView):
     template_name = "pages/detalles_cita.html"
     model = Cita
@@ -290,12 +302,33 @@ class EditarCita(TestRecepcionistaMixin, generic.UpdateView):
     template_name = "pages/editar_cita.html"
     model = Cita
     form_class=EditarCitaForm
-    success_url = reverse_lazy("Clinica:lista_citas")
+
+    def form_valid(self, form):
+        doctor = form.cleaned_data['Doctor']
+        paciente = form.cleaned_data['ExpedientePaciente']
+        fecha = form.cleaned_data ['Fecha']
+        send_mail('Cita ah sido cambiada', 'Se han realizado cambios a tu cita con'+ paciente.Nombres + ' ' +
+        paciente.ApellidoPaterno + ' en la fecha '+  fecha.strftime("%V,%G,%Y") +'.', 'appclinicaproyectoweb2021@gmail.com',
+        [doctor.Usuario.email], fail_silently=False)
+        return super().form_valid(form)
+
+    def get_success_url(self):
+          return reverse_lazy('Clinica:lista_citas')
 
 class BorrarCita(TestRecepcionistaMixin, generic.DeleteView): ###Falta completar
     template_name = "pages/borrar_cita.html"
     model = Cita
     success_url = reverse_lazy("Clinica:lista_citas")
+
+    def delete(self, request, *args, **kwargs):
+        obj = self.get_object()
+        doctor = obj.Doctor
+        paciente = obj.ExpedientePaciente
+        fecha = obj.Fecha
+        send_mail('Cita ah sido cambiada', 'Se han realizado cambios a tu cita con'+ paciente.Nombres + ' ' +
+        paciente.ApellidoPaterno + ' en la fecha '+  fecha.strftime("%V,%G,%Y") +'.', 'appclinicaproyectoweb2021@gmail.com',
+        [doctor.Usuario.email], fail_silently=False)
+        return super(BorrarCita, self).delete(request, *args, **kwargs)
 
     ###_____________________________Doctores_________________________________________
 class ListaDoctores(TestDoctorMixin, generic.ListView):
@@ -442,7 +475,6 @@ class CrearNota(TestDoctorMixin, generic.CreateView):
           return reverse_lazy('Clinica:doctor_citas')
 
     ###_____________________________API___________________________________
-
 
 def wsClient(request):
     url="http://localhost:8000/api/usuarios_list/"
