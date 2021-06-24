@@ -6,8 +6,8 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect
 from django.db.models import Q
-
-
+from django.shortcuts import HttpResponse
+import requests
 
 from .models import (Usuario, ExpedientePaciente, Doctor,
 Nota, Cita, Tratamiento, Doctor_Tratamiento, Hora)
@@ -394,11 +394,58 @@ class CrearNota(generic.CreateView):
     ###_____________________________API___________________________________
 
 
-def wsClient(request):
+'''def wsClient(request):
     url="http://localhost:8000/api/usuarios_list/"
     response = requests.get(url)
     response = response.json()
     context = {
         "object_list":response
     }
-    return render(request,"base/client.html",context)
+    return render(request,"base/client.html",context)'''
+
+
+
+def wsListaUsuarios(request):
+    url = "http://localhost:8000/api/lista_usuario"
+    response = requests.get(url)
+    response = response.json()
+    context = {
+        "object_list": response
+    }
+    return render(request, "pages/wscliente.html",context)
+
+def wsDetallesUsuario(request):
+    url = "http://localhost:8000/api/detalles_usuario/<int:pk/>"
+    response = requests.get(url)
+    response = response.json()
+    context = {
+        "object_list": response
+    }
+    return render(request, "pages/wscliente.html",context)
+
+def wsCrearUsuario(request):
+    url = "http://localhost:8000/api/crear_usuario"
+    response = requests.get(url)
+    response = response.json()
+    context = {
+        "object_list": response
+    }
+    return render(request, "pages/wscliente.html",context)
+
+def wsElminarUsuario(request):
+    url = "http://localhost:8000/api/eliminar_usuario/<int:pk/>"
+    response = requests.get(url)
+    response = response.json()
+    context = {
+        "object_list": response
+    }
+    return render(request, "pages/wscliente.html",context)
+
+def wsEditarsUsuario(request):
+    url = "http://localhost:8000/api/editar_usuario/<int:pk/>"
+    response = requests.get(url)
+    response = response.json()
+    context = {
+        "object_list": response
+    }
+    return render(request, "pages/wscliente.html",context)

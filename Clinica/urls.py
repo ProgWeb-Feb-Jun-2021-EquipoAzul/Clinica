@@ -61,7 +61,15 @@ urlpatterns = [
     path('ver_notas/<int:id>', views.VerNotas.as_view(), name="ver_notas"), #No implementado #Ver notas del paciente
     path('crear_notas/<int:id>', views.CrearNota.as_view(), name="crear_notas"), #No implementado #Crear nota al paciente
         ###_____________________________API___________________________________
-    path('client/Usuarios', views.wsClient, name="wsClient"),
+    #path('ws/client', views.wsClient, name="wsClient"),
+    path('ws/cliente/lista_usuarios', views.wsListaUsuarios, name="wslista_usuarios"),
+    path('ws/cliente/detalles_usuario/<int:pk>/', views.wsDetallesUsuario, name="wsdetalles_usuario"),
+    path('ws/cliente/crear_usuario', views.wsCrearUsuario, name="wscrear_usuario"),
+    path('ws/cliente/eliminar_usuario/<int:pk>/', views.wsElminarUsuario, name="wseliminar_usuario"),
+    path('ws/cliente/editar_usuario/<int:pk>/', views.wsEditarsUsuario, name="wseditar_usuario"),
+
 ]
+
+
 
 #quitar la barra superior

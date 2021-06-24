@@ -1,46 +1,53 @@
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from django.shortcuts import get_object_or_404
+from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST
+from rest_framework.generics import (
+    ListAPIView,
+    RetrieveAPIView,
+    UpdateAPIView,
+    DestroyAPIView,
+    CreateAPIView,
+    RetrieveUpdateAPIView,
+    RetrieveDestroyAPIView,
+
+    )
 from django.http import Http404
 from Clinica.models import Usuario
-from .serializers import UsuarioListSerializer, UsuarioDetailSerializer
+from .serializers import UsuarioListSerializer, UsuarioDetailSerializer, UsuarioCreateSerializer,UsuarioDelateSerializer
 
 # Create your views here.
-class UsuarioListSet(APIView):
-    def get(self, request, format=None):
-        usuarios = Usuario.objects.all()
-        serializer = UsuarioListSerializer(usuarios, many=True)
-        return Response(serializer.data)
-
-    def post(self, request, format=None):
-        serializer = UsuarioListSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+class UsuarioCreateSet(CreateAPIView):
+        #def get(self, request, format=None):
+        queryset = Usuario.objects.all()
+        serializer_class = UsuarioCreateSerializer
+        lookup_field = "sulgi"
 
 
-class UsuarioDetailSet(APIView):
-    def get_object(self, pk):
-        try:
-            return Usuario.objects.get(pk=pk)
-        except Usuario.DoesNotExist:
-            raise Http404
 
-    def get(self, request, pk, format=None):
-        usuarios = self.get_object(pk)
-        serializer = UsuarioDetailSerializer(usuarios)
-        return Response(serializer.data)
+class UsuarioListSet(ListAPIView):
+        #def get(self, request, format=None):
+        queryset = Usuario.objects.all()
+        serializer_class = UsuarioListSerializer
+        lookup_field = "sulgi"
+        #return Response(serializer.data)
 
-    def put(self, request, pk, format=None):
-        usuarios = self.get_object(pk)
-        serializer = UsuarioDetailSerializer(usuarios, data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+class UsuarioUpdateSet(RetrieveUpdateAPIView):
+        queryset = Usuario.objects.all()
+        serializer_class = UsuarioDetailSerializer
 
-    def delete(self, request, pk, format=None):
-        usuarios = self.get_object(pk)
-        snippet.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+    #def perform_update(self, serializer):
+        #serializer.save(user=self.request.user
+
+
+class UsuarioDetailSet(RetrieveAPIView):
+    def get(seft, request, pk):
+        user = get_object_or_404(Usuario, pk=pk)
+        serializer_class = UsuarioDelateSerializer(user).data
+        return Response(serializer_class)
+
+
+class UsuarioDeleteSet(RetrieveDestroyAPIView):
+        queryset = Usuario.objects.all()
+        serializer_class = UsuarioDelateSerializer
