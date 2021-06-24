@@ -135,8 +135,7 @@ STATICFILES_DIRS = [
 
 AUTH_USER_MODEL = 'Clinica.Usuario'
 
-LOGIN_REDIRECT_URL = 'Clinica:index'
-LOGOUT_REDIRECT_URL = 'login'
+LOGOUT_REDIRECT_URL = 'Clinica:login'
 
 USE_DJANGO_JQUERY = True
 

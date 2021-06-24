@@ -28,12 +28,12 @@ DIAS = (
         ('Sabado', 'Sabado'),
     )
 HORAS = (
-        ('00:00', '00:00 am'),('01:00', '01:00 am'),('02:00', '02:00 am'),('03:00', '03:00 am'),
-        ('04:00', '04:00 am'),('05:00', '05:00 am'),('06:00', '06:00 am'),('07:00', '07:00 am'),
-        ('08:00', '08:00 am'),('09:00', '09:00 am'),('10:00', '10:00 am'),('11:00', '11:00 am'),
-        ('12:00', '12:00 pm'),('13:00', '01:00 pm'),('14:00', '02:00 pm'),('15:00', '03:00 pm'),
-        ('16:00', '04:00 pm'),('17:00', '05:00 pm'),('18:00', '06:00 pm'),('19:00', '07:00 pm'),
-        ('20:00', '08:00 pm'),('21:00', '09:00 pm'),('22:00', '10:00 pm'),('23:00', '11:00 pm'),
+        ('00:00:00', '00:00 am'),('01:00:00', '01:00 am'),('02:00:00', '02:00 am'),('03:00:00', '03:00 am'),
+        ('04:00:00', '04:00 am'),('05:00:00', '05:00 am'),('06:00:00', '06:00 am'),('07:00:00', '07:00 am'),
+        ('08:00:00', '08:00 am'),('09:00:00', '09:00 am'),('10:00:00', '10:00 am'),('11:00:00', '11:00 am'),
+        ('12:00:00', '12:00 pm'),('13:00:00', '01:00 pm'),('14:00:00', '02:00 pm'),('15:00:00', '03:00 pm'),
+        ('16:00:00', '04:00 pm'),('17:00:00', '05:00 pm'),('18:00:00', '06:00 pm'),('19:00:00', '07:00 pm'),
+        ('20:00:00', '08:00 pm'),('21:00:00', '09:00 pm'),('22:00:00', '10:00 pm'),('23:00:00', '11:00 pm'),
     )
 
 class FiltroUsuarios(Form):
@@ -116,11 +116,11 @@ class EditarUsuarioForm(forms.ModelForm):
         widget=forms.TextInput(attrs={"placeholder": "Usuario...", "class": "form-control-sm", "style": "border: 1px solid #dee2e6; border-width: 1px; margin-bottom: 10px;", "aria-controls": "datatable"})
     )
     password1 = forms.CharField(
-        label='Password', 
+        label='Password',
         widget=forms.PasswordInput(attrs={"placeholder": "Contraseña...", "class": "form-control-sm", "style": "border: 1px solid #dee2e6; border-width: 1px; margin-bottom: 10px;", "aria-controls": "datatable"})
         )
     password2 = forms.CharField(
-        label='Password confirmation', 
+        label='Password confirmation',
         widget=forms.PasswordInput(attrs={"placeholder": "Contraseña...", "class": "form-control-sm", "style": "border: 1px solid #dee2e6; border-width: 1px; margin-bottom: 10px;", "aria-controls": "datatable"})
     )
     TipoEmpleado = forms.ChoiceField(

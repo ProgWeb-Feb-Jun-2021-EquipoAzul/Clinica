@@ -89,7 +89,7 @@ class ExpedientePaciente(models.Model):
         return self.Nombres + " " +self.ApellidoPaterno
 
 class Nota(models.Model):
-    Expedientepaciente= models.OneToOneField(ExpedientePaciente, verbose_name="Expediente del paciente", on_delete=models.RESTRICT)
+    Expedientepaciente= models.ForeignKey(ExpedientePaciente, verbose_name="Paciente", on_delete=models.CASCADE)
     Nota = models.CharField(max_length=200, verbose_name="Nota")
     FechaCreacion = models.DateTimeField(auto_now_add=True)
 

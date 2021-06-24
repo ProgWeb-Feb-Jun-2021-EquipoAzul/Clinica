@@ -13,13 +13,13 @@
           <th>Nombre</th>
           <th>Teléfono</th>
           <th>Correo</th>
-          {% for Notas in object_list %}
+          {% for Nota in object_list %}
           <tr>
             <td>{{ Nota.Nota}}</td>
           </tr>
           {% endfor %}
-          <td><a href="{% url 'Clinica:detalles_paciente' view.kwargs.id%}">Ver paciente</a></td>
         </table>
+        <td><a href="{% url 'Clinica:expedientepaciente' view.kwargs.id%}">Ver paciente</a></td>
       </div>
   </div><!--end container-->
 
