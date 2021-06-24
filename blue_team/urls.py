@@ -23,9 +23,9 @@ from django.conf.urls import url
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('clinica/', include("Clinica.urls")),
+    path('', include("Clinica.urls")),
     path('api/', include("api.urls")),
-    path('', auth_views.LoginView.as_view(), name="login"),
+    #path('', auth_views.LoginView.as_view(), name="login"),
     path('logout/', auth_views.LogoutView.as_view(), name="logout"),
     url(r'^chaining/', include('smart_selects.urls')),
 ]

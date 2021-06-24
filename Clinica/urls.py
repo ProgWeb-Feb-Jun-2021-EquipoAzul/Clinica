@@ -4,7 +4,8 @@ from Clinica import views
 app_name = "Clinica"
 
 urlpatterns = [
-    path('index/',views.Index.as_view(),name="index"),
+    path('redirect/',views.Redirect.as_view(),name="redirect"),
+    path('login/',views.LoginView.as_view(),name="login"),
 
     #Administrador
 
