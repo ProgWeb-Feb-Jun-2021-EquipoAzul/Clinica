@@ -146,4 +146,15 @@ FIXTURE_DIRS = (
    os.path.join(PROJECT_DIR, 'fixtures'),
 )
 
+#Email configuratios
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
+EMAIL_USE_TLS = True
+
+EMAIL_HOST = 'smtp.gmail.com'
+
+EMAIL_HOST_USER = 'appclinicaproyectoweb2021@gmail.com'
+
+EMAIL_HOST_PASSWORD = 'vzbyfgancldsjysc'
+
+EMAIL_PORT = 587
