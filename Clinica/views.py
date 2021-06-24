@@ -3,36 +3,94 @@ from django.views import generic
 from django.urls import reverse_lazy
 from django.urls import reverse
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.http import HttpResponseRedirect
 from django.db.models import Q
 
+from django.contrib.auth import views as auth_views
 
 
-from .models import (Usuario, ExpedientePaciente, Doctor,
-Nota, Cita, Tratamiento, Doctor_Tratamiento, Hora)
-
-from .forms import (NuevoUsuarioForm, EditarUsuarioForm, ExpedientePacienteForm, NotaForm, CitaForm, DoctorForm,
-HoraForms,EditarPacienteForm,CitaForm, EditarTratamientoForm, TratamientoForm, CitaForm, PerfilDoctorForm, EditarCitaForm
-
-,FiltroUsuarios,FiltroTratamientos, FiltroPacientes, FiltroDoctores, FiltroCitas, EditarHoraForms)
+#Importamos todos los modelos de models.py del app Clinica
+from .models import *
+#Importamos todos los forms de forms.py del app Clinica
+from .forms import *
 
 
-URL_LOGIN='login'
+URL_LOGIN='Clinica:login'
 
+#-----------------CLASES PRIVILEGIOS-----------------
+
+#Clase que se utiliza para comprobar si el usuario es un recepcionista
+class TestRecepcionistaMixin(UserPassesTestMixin):
+    def test_func(self):
+        return self.request.user.is_authenticated and self.request.user.TipoEmpleado == "R"
+
+    def handle_no_permission(self):
+        if self.raise_exception:
+            raise PermissionDenied(self.get_permission_denied_message())
+        if not self.request.user.is_authenticated:
+            return HttpResponseRedirect(reverse_lazy('Clinica:login'))
+        return HttpResponseRedirect(reverse_lazy('Clinica:redirect'))
+
+#Clase que se utiliza para comprobar si el usuario es un doctor
+class TestDoctorMixin(UserPassesTestMixin):
+    def test_func(self):
+        return self.request.user.is_authenticated and self.request.user.TipoEmpleado == "D"
+
+    def handle_no_permission(self):
+        if self.raise_exception:
+            raise PermissionDenied(self.get_permission_denied_message())
+        if not self.request.user.is_authenticated:
+            return HttpResponseRedirect(reverse_lazy('Clinica:login'))
+        return HttpResponseRedirect(reverse_lazy('Clinica:redirect'))
+
+#Clase que se utiliza para comprobar si el usuario es un administrador
+class TestAdministradorMixin(UserPassesTestMixin):
+    def test_func(self):
+        return self.request.user.is_authenticated and self.request.user.TipoEmpleado == "A"
+
+    def handle_no_permission(self):
+        if self.raise_exception:
+            raise PermissionDenied(self.get_permission_denied_message())
+        if not self.request.user.is_authenticated:
+            return HttpResponseRedirect(reverse_lazy('Clinica:login'))
+        return HttpResponseRedirect(reverse_lazy('Clinica:redirect'))
 
 #-----------------VIEWS GENERALES-----------------
 
-class Index(LoginRequiredMixin, generic.TemplateView):
-    template_name = "pages/index.html"
-    login_url = URL_LOGIN
+
+class Redirect(generic.TemplateView):
+    template_name = "pages/redirect.html"
+
+#Login con redireccion a la pagina principal de cada usuario
+class LoginView(auth_views.LoginView):
+    template_name = 'registration/login.html'
+
+    #Cuando abre el login si el usuario esta autenticado automaticamente te redirecciona a la pagina principal de cada uno
+    def get(self, request, *args, **kwargs):
+        if self.request.user.is_authenticated:
+            if self.request.user.TipoEmpleado == "R":
+                return HttpResponseRedirect(reverse_lazy('Clinica:lista_citas'))
+            elif self.request.user.TipoEmpleado == "D":
+                return HttpResponseRedirect(reverse_lazy('Clinica:doctor_citas'))
+            elif self.request.user.TipoEmpleado == "A":
+                return HttpResponseRedirect(reverse_lazy('Clinica:lista_usuarios'))
+        return super(LoginView, self).get(request, *args, **kwargs)
+
+    #Cuando el login es exitosos redirecciona a una de estas 3 paginas dependiendo que tipo de empleado es
+    def get_success_url(self):
+        if self.request.user.TipoEmpleado == "R":
+            return reverse_lazy('Clinica:lista_citas')
+        elif self.request.user.TipoEmpleado == "D":
+            return reverse_lazy('Clinica:doctor_citas')
+        elif self.request.user.TipoEmpleado == "A":
+            return reverse_lazy('Clinica:lista_usuarios')
 
 #--------------VIEWS ADMINISTRADOR-------------
 
     ###____________________________________Usuarios________________________________________''
-class ListaUsuarios(LoginRequiredMixin,generic.ListView):
+class ListaUsuarios(TestDoctorMixin, generic.ListView):
     template_name = "pages/lista_usuarios.html"
-    login_url = URL_LOGIN
 
 #Consultar Usuarios
 #Liga de donde lo consegui https://stackoverflow.com/questions/57554020/django-search-form-for-filtering
@@ -66,33 +124,29 @@ class ListaUsuarios(LoginRequiredMixin,generic.ListView):
 
         return context
 
-class NuevoUsuario(LoginRequiredMixin,generic.CreateView):
+class NuevoUsuario(TestAdministradorMixin, TestRecepcionistaMixin,generic.CreateView):
     template_name = "pages/nuevo_usuario.html"
-    login_url = URL_LOGIN
     model = Usuario
     form_class = NuevoUsuarioForm
     success_url = reverse_lazy("Clinica:index")
 
-class EditarUsuario(LoginRequiredMixin,generic.UpdateView):
+class EditarUsuario(TestAdministradorMixin, generic.UpdateView):
     template_name = "pages/editar_usuario.html"
-    login_url = URL_LOGIN
     model = Usuario
     form_class = EditarUsuarioForm
     success_url = reverse_lazy("Clinica:lista_usuarios")
 
-class DetallesUsuario(LoginRequiredMixin,generic.DetailView):
+class DetallesUsuario(TestAdministradorMixin, generic.DetailView):
     template_name = "pages/detalles_usuario.html"
-    login_url = URL_LOGIN
     model = Usuario
 
-class BorrarUsuario(LoginRequiredMixin,generic.DeleteView):
+class BorrarUsuario(TestAdministradorMixin, generic.DeleteView):
     template_name = "pages/borrar_usuario.html"
-    login_url = URL_LOGIN
     model = Usuario
     success_url = reverse_lazy("Clinica:lista_usuarios")
     ###____________________________________Tratamientos________________________________________''
 
-class ListaTratamiento(LoginRequiredMixin,generic.ListView):
+class ListaTratamiento(TestAdministradorMixin, generic.ListView):
     template_name = "pages/lista_tratamientos.html"
     login_url = URL_LOGIN
     model =  Tratamiento
@@ -115,20 +169,20 @@ class ListaTratamiento(LoginRequiredMixin,generic.ListView):
 
         return context
 
-class EditarTratamiento(LoginRequiredMixin,generic.UpdateView):
+class EditarTratamiento(TestAdministradorMixin, generic.UpdateView):
     template_name = "pages/editar_tratamiento.html"
     login_url = URL_LOGIN
     model = Tratamiento
     form_class = EditarTratamientoForm
     success_url = reverse_lazy("Clinica:lista_tratamientos")
 
-class borrar_tratamiento(LoginRequiredMixin,generic.DeleteView):
+class borrar_tratamiento(TestAdministradorMixin, generic.DeleteView):
     template_name = "pages/borrar_tratamiento.html"
     login_url = URL_LOGIN
     model = Tratamiento
     success_url = reverse_lazy("Clinica:lista_tratamientos")
 
-class CrearTratamiento(LoginRequiredMixin,generic.CreateView):
+class CrearTratamiento(TestAdministradorMixin, generic.CreateView):
     template_name = "pages/crear_tratamiento.html"
     login_url = URL_LOGIN
     model = Tratamiento
@@ -138,7 +192,7 @@ class CrearTratamiento(LoginRequiredMixin,generic.CreateView):
 #--------------VIEWS RECEPCIONISTA-------------
 
     ###____________________________________Pacientes____________________________________''
-class ListaPacientes(LoginRequiredMixin,generic.ListView):
+class ListaPacientes(TestRecepcionistaMixin, generic.ListView):
     template_name = "pages/lista_pacientes.html"
     login_url = URL_LOGIN
     model =  ExpedientePaciente
@@ -170,20 +224,20 @@ class ListaPacientes(LoginRequiredMixin,generic.ListView):
 
         return context
 
-class EditarPaciente(LoginRequiredMixin,generic.UpdateView):
+class EditarPaciente(TestRecepcionistaMixin, generic.UpdateView):
     template_name =  "pages/editar_paciente.html"
     login_url = URL_LOGIN
     model = ExpedientePaciente
     form_class = EditarPacienteForm
     success_url = reverse_lazy("Clinica:lista_pacientes")
 
-class DetallesPaciente(LoginRequiredMixin,generic.DetailView):
+class DetallesPaciente(TestRecepcionistaMixin, generic.DetailView):
     template_name = "pages/detalles_paciente.html"
     login_url = URL_LOGIN
     model =  ExpedientePaciente
     success_url = reverse_lazy("Clinica:lista_pacientes")
 
-class CrearPaciente(LoginRequiredMixin,generic.CreateView):
+class CrearPaciente(TestRecepcionistaMixin, generic.CreateView):
     template_name = "pages/crear_paciente.html"
     login_url = URL_LOGIN
     model = ExpedientePaciente
@@ -191,7 +245,7 @@ class CrearPaciente(LoginRequiredMixin,generic.CreateView):
     success_url = reverse_lazy("Clinica:lista_pacientes")
 
     ###_____________________________Citas_________________________________________
-class ListaCitas(LoginRequiredMixin,generic.ListView):
+class ListaCitas(TestRecepcionistaMixin, generic.ListView):
     template_name = "pages/lista_citas.html"
     login_url = URL_LOGIN
     model = Cita
@@ -222,33 +276,33 @@ class ListaCitas(LoginRequiredMixin,generic.ListView):
 
 #Falta crear citas desde pacientes
 
-class CrearCita(LoginRequiredMixin,generic.CreateView):
+class CrearCita(TestRecepcionistaMixin, generic.CreateView):
     template_name = "pages/crear_cita.html"
     login_url = URL_LOGIN
     model =  Cita
     form_class = CitaForm
     success_url = reverse_lazy("Clinica:lista_citas")
-class DetallesCita(LoginRequiredMixin,generic.DetailView):
+class DetallesCita(TestRecepcionistaMixin, generic.DetailView):
     template_name = "pages/detalles_cita.html"
     login_url = URL_LOGIN
     model = Cita
     success_url = reverse_lazy("Clinica:lista_citas")
 
-class EditarCita(LoginRequiredMixin,generic.UpdateView):
+class EditarCita(TestRecepcionistaMixin, generic.UpdateView):
     template_name = "pages/editar_cita.html"
     login_url = URL_LOGIN
     model = Cita
     form_class=EditarCitaForm
     success_url = reverse_lazy("Clinica:lista_citas")
 
-class BorrarCita(LoginRequiredMixin,generic.DeleteView): ###Falta completar
+class BorrarCita(TestRecepcionistaMixin, generic.DeleteView): ###Falta completar
     template_name = "pages/borrar_cita.html"
     login_url = URL_LOGIN
     model = Cita
     success_url = reverse_lazy("Clinica:lista_citas")
 
     ###_____________________________Doctores_________________________________________
-class ListaDoctores(LoginRequiredMixin,generic.ListView):
+class ListaDoctores(TestDoctorMixin, generic.ListView):
     template_name = "pages/lista_doctores.html"
     login_url = URL_LOGIN
     model = Doctor
@@ -282,7 +336,7 @@ class ListaDoctores(LoginRequiredMixin,generic.ListView):
 
         return context
 
-class DetallesDoctor(LoginRequiredMixin,generic.DetailView):
+class DetallesDoctor(TestDoctorMixin, generic.DetailView):
     template_name = "pages/detalles_doctor.html"
     login_url = URL_LOGIN
     model = Doctor
@@ -291,12 +345,12 @@ class DetallesDoctor(LoginRequiredMixin,generic.DetailView):
 #-----------------VIEWS DOCTOR-----------------
     ###_____________________________Perfil_________________________________________
 #No implementado
-class PerfilDoctor(LoginRequiredMixin,generic.DetailView):
+class PerfilDoctor(TestDoctorMixin, generic.DetailView):
     template_name = "pages/perfil.html"
     login_url = URL_LOGIN
     model = Doctor
 
-class EditarPerfil(LoginRequiredMixin,generic.UpdateView):
+class EditarPerfil(TestDoctorMixin, generic.UpdateView):
     template_name = "pages/editar_perfil.html"
     login_url = URL_LOGIN
     model = Doctor
@@ -308,7 +362,7 @@ class EditarPerfil(LoginRequiredMixin,generic.UpdateView):
 
     ###_____________________________Horario___________________________________
 #Mas o menos implementado solo debe de dejar entrar a doctores
-class AgregarHorario(LoginRequiredMixin,generic.CreateView):
+class AgregarHorario(TestDoctorMixin, generic.CreateView):
     template_name = "pages/agregar_horario.html"
     login_url = URL_LOGIN
     model = Hora
@@ -322,13 +376,13 @@ class AgregarHorario(LoginRequiredMixin,generic.CreateView):
         obj.save()
         return super().form_valid(form)
 
-class DetallesCitaDoctor(LoginRequiredMixin,generic.DetailView):
+class DetallesCitaDoctor(TestDoctorMixin, generic.DetailView):
     template_name = "pages/detalles_cita_doctor.html"
     login_url = URL_LOGIN
     model = Cita
     success_url = reverse_lazy("Clinica:lista_citas")
 
-class EditarHorario(LoginRequiredMixin,generic.UpdateView):
+class EditarHorario(TestDoctorMixin, generic.UpdateView):
     template_name = "pages/editar_horario.html"
     login_url = URL_LOGIN
     model = Hora
@@ -341,7 +395,7 @@ class EditarHorario(LoginRequiredMixin,generic.UpdateView):
         obj.save()
         return super().form_valid(form)
 
-class HorarioDoctor(LoginRequiredMixin,generic.ListView):
+class HorarioDoctor(TestDoctorMixin, generic.ListView):
     template_name = "pages/horario_doctor.html"
     login_url = URL_LOGIN
     model = Hora
@@ -350,7 +404,7 @@ class HorarioDoctor(LoginRequiredMixin,generic.ListView):
         doctor = Doctor.objects.filter(Usuario=self.request.user).first()
         return Hora.objects.filter(Q(Doctor=doctor)).order_by("Dia")
 
-class BorrarHora(LoginRequiredMixin,generic.DeleteView):
+class BorrarHora(TestDoctorMixin, generic.DeleteView):
     template_name = "pages/borrar_hora.html"
     login_url = URL_LOGIN
     model = Hora
@@ -358,7 +412,7 @@ class BorrarHora(LoginRequiredMixin,generic.DeleteView):
 
     ###_____________________________Citas___________________________________
 
-class CitasDoctor(LoginRequiredMixin,generic.ListView):#No implementado
+class CitasDoctor(TestDoctorMixin, generic.ListView):#No implementado
     template_name = "pages/doctor_citas.html"
     login_url = URL_LOGIN
     model = Cita
@@ -368,7 +422,7 @@ class CitasDoctor(LoginRequiredMixin,generic.ListView):#No implementado
         return Cita.objects.filter(Q(Doctor=doctor)).order_by("Fecha")
 
 
-class VerPaciente(LoginRequiredMixin,generic.DetailView):
+class VerPaciente(TestDoctorMixin, generic.DetailView):
     login_url = URL_LOGIN
     template_name = "pages/expedientepaciente.html"
     model = ExpedientePaciente
@@ -376,7 +430,7 @@ class VerPaciente(LoginRequiredMixin,generic.DetailView):
 
     ###_____________________________Notas___________________________________
 
-class VerNotas(LoginRequiredMixin,generic.ListView):
+class VerNotas(TestDoctorMixin, generic.ListView):
     login_url = URL_LOGIN
     template_name = "pages/lista_notas.html"
     model = Nota
@@ -387,7 +441,7 @@ class VerNotas(LoginRequiredMixin,generic.ListView):
         return Nota.objects.filter(Q(Expedientepaciente=paciente)).order_by("FechaCreacion")
 
 
-class CrearNota(LoginRequiredMixin,generic.CreateView):
+class CrearNota(TestDoctorMixin, generic.CreateView):
     login_url = URL_LOGIN
     template_name = "pages/crear_notas.html"
     model = Nota
