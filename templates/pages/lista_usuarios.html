@@ -32,6 +32,7 @@
                                 <th>Creacion</th>
                                 <th>Detalles</th>
                                 <th>Editar</th>
+                                <th>Cambiar<br> Contrasena</th>
                                 <th>Eliminar</th>
                               </tr>
                             </thead>
@@ -52,6 +53,7 @@
                                 <td>{{ Usuario.date_joined }}</td>
                                 <td><center><a href="{% url 'Clinica:detalles_usuario' Usuario.pk%}"><span class="mdi mdi-eye"></span></a></center></td>
                                 <td><center><a href="{% url 'Clinica:editar_usuario' Usuario.pk%}"><span class="ti-pencil"></span></a></center></td>
+                                <td><center><a href="{% url 'Clinica:cambiar_contrasena' Usuario.pk%}"><span class="ti-pencil"></span></a></center></td>
                                 <td><center><a href="{% url 'Clinica:borrar_usuario' Usuario.pk%}"><span class="mdi mdi-delete-forever"></span></a></center></td>
                               </tr>
                               {% endfor %}

@@ -58,8 +58,6 @@ class Usuario(AbstractUser):
     Telefono = models.CharField(max_length=12,verbose_name="Telefono",null=True)
     date_joined = models.DateTimeField(verbose_name="Fecha de creacion",auto_now_add=True)
 
-
-
     def save(self, *args, **kwargs):
         is_new = True if not self.id else False
         super(Usuario, self).save(*args, **kwargs)

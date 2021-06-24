@@ -15,6 +15,7 @@ urlpatterns = [
     path('editar_usuario/<int:pk>', views.EditarUsuario.as_view(), name="editar_usuario"), #Para decorar
     path('detalles_usuario/<int:pk>', views.DetallesUsuario.as_view(), name="detalles_usuario"), #Para decorar
     path('borrar_usuario/<int:pk>', views.BorrarUsuario.as_view(), name="borrar_usuario"), #Para decorar
+    path('cambiar_contrasena/<int:pk>', views.CambiarContrasenaUsuario.as_view(), name="cambiar_contrasena"), #Para decorar
 
         ###____________________________________Tratamientos____________________________________''
     path('lista_tratamientos/', views.ListaTratamiento.as_view(), name="lista_tratamientos"), #Para decorar

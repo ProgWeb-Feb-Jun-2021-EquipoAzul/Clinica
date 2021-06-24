@@ -10,14 +10,8 @@
                     <div class="card-body table-responsive">
                         <form method="post">
                             {% csrf_token %}
-                            <p class="h6" style="display: inline; margin-bottom: 10px;">Usuario: </p>
-                            {{ form.username }}
-                            <p class="h6" style="display: inline; margin-bottom: 10px;">Contraseña: </p>
-                            {{ form.password1 }}
-                            <p class="h6" style="display: inline; margin-bottom: 10px;">Confirmar contraseña: </p>
-                            {{ form.password2 }}
-                            <p class="h6" style="display: inline; margin-bottom: 10px;">Tipo empleado: </p>
-                            {{ form.TipoEmpleado }}
+                            Usuario: {{ object.username }} <br>
+
                             <p class="h6" style="margin-bottom: 5px;">Nombre: </p>
                             {{ form.Nombres }}
                             <p class="h6" style="margin-bottom: 5px; margin-top: 10px;">Apellido Paterno: </p>

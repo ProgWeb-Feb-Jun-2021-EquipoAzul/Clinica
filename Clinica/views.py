@@ -136,6 +136,12 @@ class EditarUsuario(TestAdministradorMixin, generic.UpdateView):
     form_class = EditarUsuarioForm
     success_url = reverse_lazy("Clinica:lista_usuarios")
 
+class CambiarContrasenaUsuario(TestAdministradorMixin, generic.UpdateView):
+    template_name = "pages/editar_contrasena.html"
+    model = Usuario
+    form_class = ContrasenaUsuarioForm
+    success_url = reverse_lazy("Clinica:lista_usuarios")
+
 class DetallesUsuario(TestAdministradorMixin, generic.DetailView):
     template_name = "pages/detalles_usuario.html"
     model = Usuario
