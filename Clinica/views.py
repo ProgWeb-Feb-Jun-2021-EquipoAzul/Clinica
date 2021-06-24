@@ -298,7 +298,7 @@ class BorrarCita(TestRecepcionistaMixin, generic.DeleteView): ###Falta completar
     success_url = reverse_lazy("Clinica:lista_citas")
 
     ###_____________________________Doctores_________________________________________
-class ListaDoctores(TestDoctorMixin, generic.ListView):
+class ListaDoctores(TestRecepcionistaMixin, generic.ListView):
     template_name = "pages/lista_doctores.html"
     model = Doctor
 
@@ -331,7 +331,7 @@ class ListaDoctores(TestDoctorMixin, generic.ListView):
 
         return context
 
-class DetallesDoctor(TestDoctorMixin, generic.DetailView):
+class DetallesDoctor(TestRecepcionistaMixin, generic.DetailView):
     template_name = "pages/detalles_doctor.html"
     model = Doctor
     success_url = reverse_lazy("Clinica:lista_doctores")
@@ -376,7 +376,7 @@ class EditarHorario(TestDoctorMixin, generic.UpdateView):
     template_name = "pages/editar_horario.html"
     model = Hora
     form_class=EditarHoraForms
-    success_url = reverse_lazy("Clinica:horario_doctor")
+    success_url = reverse_lazy("Clinica:horario")
 
     def form_valid(self, form):
         obj = form.save(commit=False)
@@ -395,7 +395,7 @@ class HorarioDoctor(TestDoctorMixin, generic.ListView):
 class BorrarHora(TestDoctorMixin, generic.DeleteView):
     template_name = "pages/borrar_hora.html"
     model = Hora
-    success_url = reverse_lazy("Clinica:horario_doctor")
+    success_url = reverse_lazy("Clinica:horario")
 
     ###_____________________________Citas___________________________________
 
