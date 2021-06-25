@@ -151,23 +151,23 @@ class EditarUsuarioForm(forms.ModelForm):
         )
     class Meta:
         model = Usuario
-        fields = 'username', 'TipoEmpleado','Nombres','ApellidoPaterno','ApellidoMaterno','Genero','Nacimiento','email','Telefono'
+        fields = 'Nombres','ApellidoPaterno','ApellidoMaterno','Genero','Nacimiento','email','Telefono'
 
-    def clean_password2(self):
-        # Check that the two password entries match
-        password1 = self.cleaned_data.get("password1")
-        password2 = self.cleaned_data.get("password2")
-        if password1 and password2 and password1 != password2:
-            raise forms.ValidationError("Passwords don't match")
-        return password2
+    # def clean_password2(self):
+        #Check that the two password entries match
+        # password1 = self.cleaned_data.get("password1")
+        # password2 = self.cleaned_data.get("password2")
+        # if password1 and password2 and password1 != password2:
+            # raise forms.ValidationError("Passwords don't match")
+        # return password2
 
-    def save(self, commit=True):
-        # Save the provided password in hashed format
-        Usuario = super(EditarUsuarioForm, self).save(commit=False)
-        Usuario.set_password(self.cleaned_data["password1"])
-        if commit:
-            Usuario.save()
-        return Usuario
+    # def save(self, commit=True):
+        #Save the provided password in hashed format
+        # Usuario = super(EditarUsuarioForm, self).save(commit=False)
+        # Usuario.set_password(self.cleaned_data["password1"])
+        # if commit:
+            # Usuario.save()
+        # return Usuario
 
 class ContrasenaUsuarioForm(forms.ModelForm):
     password1 = forms.CharField(
@@ -427,6 +427,7 @@ class CitaForm(forms.ModelForm):
         required=True,
         label="Fecha de la cita",
         widget=forms.DateInput(format='%d/%m/%Y',attrs={'type': 'date'}))
+      
     '''HoraInicio = forms.ChoiceField(
         label="Hora de Inicio",
         required=True)'''
@@ -442,7 +443,8 @@ class EditarCitaForm(forms.ModelForm):
         required=True)
     Fecha = forms.DateField(
         required=True,
-        label="Fecha de la cita")
+        label="Fecha de la cita",
+        widget=forms.DateInput(format='%d/%m/%Y',attrs={'type': 'date'}))
     '''HoraInicio = forms.ChoiceField(
         label="Hora de Inicio",
         required=True)'''

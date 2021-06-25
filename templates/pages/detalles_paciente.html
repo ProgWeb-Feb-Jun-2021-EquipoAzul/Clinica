@@ -24,13 +24,14 @@
                   <br>
 
                   Fecha de Nacimiento: {{ object.Nacimiento}} <br>
-                  Correo: {{ object.email}} <br>
+
+                  Correo: {{ object.Correo}} <br>
                   Teléfono: {{ object.Telefono}} <br>
                   Alergias: {{ object.Alergias}} <br>
                   Padecimientos: {{ object.Padecimientos}}<br>
                 </div>
               <div class="modal-footer">
-                  <a href="{% url 'Clinica:lista_usuarios' %}"><input type="button" class= "btn btn-success" name="Return" value="Regresar"></a>
+                  <a href="{% url 'Clinica:lista_pacientes' %}"><input type="button" class= "btn btn-success" name="Return" value="Regresar"></a>
               </div>
           </div>
       </div>

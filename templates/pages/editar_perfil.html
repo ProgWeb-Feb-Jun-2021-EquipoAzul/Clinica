@@ -21,8 +21,10 @@
                             Genero: {{ object.Usuario.Genero}}<br>
                             Correo: {{ object.Usuario.email}}<br>
                             Telefono: {{ object.Usuario.Telefono}}<br>
-                            <p class="h6" style="margin-bottom: 5px; margin-top: 10px ">Campos a editar: </p>
-                            {{ form }}
+                           
+                            <p class="h6" style="margin-bottom: 5px; margin-top: 10px ">Campos a editar: </p><br>
+                            Especialidad: {{ form.Especialidad }}<br>
+                            Tratamientos: {{ form.Tratamientos}}
                             <br><br><br>
                             <button type="submit" class="btn btn-success">Guardar cambios</button>
                             <a href="{% url 'Clinica:lista_pacientes' %}"><input type="button" class="btn btn-danger"name="Cancel" value="Cancelar"></a>
