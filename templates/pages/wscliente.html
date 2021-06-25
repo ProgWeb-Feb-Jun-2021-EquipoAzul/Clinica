@@ -16,9 +16,7 @@
             <td> {{ Usuario.Nombres }}</td>
             <td> {{ Usuario.ApellidoPaterno }}</td>
             <td> {{ Usuario.ApellidoMaterno }}</td>
-            <td><center><a href="{% url 'Clinica:ws/cliente/detalles_usuario' Usuario.pk%}"><span class="mdi mdi-eye"></span></a></center></td>
-            <td><center><a href="{% url 'Clinica:ws/cliente/editar_usuario' Usuario.pk%}"><span class="ti-pencil"></span></a></center></td>
-            <td><center><a href="{% url 'Clinica:ws/cliente/eliminar_usuario' Usuario.pk%}"><span class="mdi mdi-delete-forever"></span></a></center></td>
+            
         </tr>
       {% endfor %}
 

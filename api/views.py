@@ -42,8 +42,8 @@ class UsuarioUpdateSet(RetrieveUpdateAPIView):
 
 
 class UsuarioDetailSet(RetrieveAPIView):
-    def get(seft, request, pk):
-        user = get_object_or_404(Usuario, pk=pk)
+    def get(seft, request, *args, **kwargs):
+        user = get_object_or_404(Usuario, pk=kwargs['pk'])
         serializer_class = UsuarioDelateSerializer(user).data
         return Response(serializer_class)
 

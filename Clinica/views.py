@@ -8,7 +8,9 @@ from django.http import HttpResponseRedirect
 from django.db.models import Q
 from django.shortcuts import HttpResponse
 import requests
-
+from django.http import Http404
+from rest_framework.decorators import api_view
+from rest_framework import generics
 from .models import (Usuario, ExpedientePaciente, Doctor,
 Nota, Cita, Tratamiento, Doctor_Tratamiento, Hora)
 
@@ -403,6 +405,14 @@ class CrearNota(generic.CreateView):
     }
     return render(request,"base/client.html",context)'''
 
+'''def wsBoleta(request):
+    data = serializers.serialize("json", Materia_Actual.objects.all())
+    return HttpResponse(data, content_type="application/json")'''
+
+
+
+
+
 
 
 def wsListaUsuarios(request):
@@ -414,14 +424,21 @@ def wsListaUsuarios(request):
     }
     return render(request, "pages/wscliente.html",context)
 
-def wsDetallesUsuario(request):
-    url = "http://localhost:8000/api/detalles_usuario/<int:pk/>"
+
+
+def wsdetalles_usuario(request):
+    url = "http://localhost:8000/api/detalles_usuario/"
     response = requests.get(url)
     response = response.json()
     context = {
         "object_list": response
     }
-    return render(request, "pages/wscliente.html",context)
+    return render(request, "pages/detalles_usuario.html",context)
+
+
+class DetallesUsuarioAPI(generic.DetailView):
+    template_name = "pages/wsdetail.html"
+    model = Usuario
 
 def wsCrearUsuario(request):
     url = "http://localhost:8000/api/crear_usuario"
@@ -430,22 +447,41 @@ def wsCrearUsuario(request):
     context = {
         "object_list": response
     }
-    return render(request, "pages/wscliente.html",context)
+    return render(request, "pages/nuevo_usuario.html",context)
 
-def wsElminarUsuario(request):
-    url = "http://localhost:8000/api/eliminar_usuario/<int:pk/>"
-    response = requests.get(url)
-    response = response.json()
-    context = {
-        "object_list": response
-    }
-    return render(request, "pages/wscliente.html",context)
+'''@api_view(["GET", "POST"])
+def lista_usuarios(request):
+    if request.method == "GET":
+        usuarios = Usuario.objects.all()
+        serializer = UsuarioListSerializer(usuarios, many=True)
+        return Response(serializer.data, status = status.HTTP_200_OK)
 
-def wsEditarsUsuario(request):
-    url = "http://localhost:8000/api/editar_usuario/<int:pk/>"
-    response = requests.get(url)
-    response = response.json()
-    context = {
-        "object_list": response
-    }
-    return render(request, "pages/wscliente.html",context)
+    elif request.method == "POST":
+        serializer = UsuarioListSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(["GET", "PUT"])
+def detalles_usuario(request, pk=None):
+    queryset = Usuario.objects.filter(id=pk).first
+    if queryset:
+        if request.method == "GET":
+            data = UsuarioDetailSerializer(queryset)
+            return Response(data.data, status=status.HTTP_200_OK)
+    elif request.method == "PUT":
+            data = UsuarioDetailSerializer(queryset, data = request.data)
+            if data.is_valid():
+                data.save()
+                return Response(data.data)
+            return Response(data.errors, status = status.HTTP_400_BAD_REQUEST)'''
+
+
+    #elif request.method == "DELETE":
+
+        #queryset.delete(
+        #return Response({"message": "UsarioDestroy Successsfull"}, status=status.HTTP_200_OK)
+
+  #return Response(data.errors, status=status.HTTP_400_BAD_REQUEST)

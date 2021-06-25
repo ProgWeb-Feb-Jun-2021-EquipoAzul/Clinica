@@ -63,10 +63,10 @@ urlpatterns = [
         ###_____________________________API___________________________________
     #path('ws/client', views.wsClient, name="wsClient"),
     path('ws/cliente/lista_usuarios', views.wsListaUsuarios, name="wslista_usuarios"),
-    path('ws/cliente/detalles_usuario/<int:pk>/', views.wsDetallesUsuario, name="wsdetalles_usuario"),
+    #path('ws/cliente/detalles_usuario/<int:pk>/', views.wsdetalles_usuario.as_view(), name="wsdetalles_usuario"),
     path('ws/cliente/crear_usuario', views.wsCrearUsuario, name="wscrear_usuario"),
-    path('ws/cliente/eliminar_usuario/<int:pk>/', views.wsElminarUsuario, name="wseliminar_usuario"),
-    path('ws/cliente/editar_usuario/<int:pk>/', views.wsEditarsUsuario, name="wseditar_usuario"),
+    #path('ws/cliente/eliminar_usuario/<int:pk>/', views.wsElminarUsuario, name="wseliminar_usuario"),
+    #path('ws/cliente/editar_usuario/<int:pk>/', views.wsEditarsUsuario, name="wseditar_usuario"),
 
 ]
 
