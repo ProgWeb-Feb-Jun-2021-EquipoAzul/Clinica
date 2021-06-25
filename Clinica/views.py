@@ -6,6 +6,13 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.http import HttpResponseRedirect
 from django.db.models import Q
+from django.shortcuts import HttpResponse
+import requests
+from django.http import Http404
+from rest_framework.decorators import api_view
+from rest_framework import generics
+from .models import (Usuario, ExpedientePaciente, Doctor,
+Nota, Cita, Tratamiento, Doctor_Tratamiento, Hora)
 
 from django.contrib.auth import views as auth_views
 
@@ -493,11 +500,92 @@ class CrearNota(TestDoctorMixin, generic.CreateView):
 
 ###_____________________________APIs___________________________________###
 
-def wsClient(request):
+'''def wsClient(request):
     url="http://localhost:8000/api/usuarios_list/"
     response = requests.get(url)
     response = response.json()
     context = {
         "object_list":response
     }
-    return render(request,"base/client.html",context)
+    return render(request,"base/client.html",context)'''
+
+'''def wsBoleta(request):
+    data = serializers.serialize("json", Materia_Actual.objects.all())
+    return HttpResponse(data, content_type="application/json")'''
+
+
+
+
+
+
+
+def wsListaUsuarios(request):
+    url = "http://localhost:8000/api/lista_usuario"
+    response = requests.get(url)
+    response = response.json()
+    context = {
+        "object_list": response
+    }
+    return render(request, "pages/wscliente.html",context)
+
+
+
+def wsdetalles_usuario(request):
+    url = "http://localhost:8000/api/detalles_usuario/"
+    response = requests.get(url)
+    response = response.json()
+    context = {
+        "object_list": response
+    }
+    return render(request, "pages/detalles_usuario.html",context)
+
+
+class DetallesUsuarioAPI(generic.DetailView):
+    template_name = "pages/wsdetail.html"
+    model = Usuario
+
+def wsCrearUsuario(request):
+    url = "http://localhost:8000/api/crear_usuario"
+    response = requests.get(url)
+    response = response.json()
+    context = {
+        "object_list": response
+    }
+    return render(request, "pages/nuevo_usuario.html",context)
+
+'''@api_view(["GET", "POST"])
+def lista_usuarios(request):
+    if request.method == "GET":
+        usuarios = Usuario.objects.all()
+        serializer = UsuarioListSerializer(usuarios, many=True)
+        return Response(serializer.data, status = status.HTTP_200_OK)
+
+    elif request.method == "POST":
+        serializer = UsuarioListSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(["GET", "PUT"])
+def detalles_usuario(request, pk=None):
+    queryset = Usuario.objects.filter(id=pk).first
+    if queryset:
+        if request.method == "GET":
+            data = UsuarioDetailSerializer(queryset)
+            return Response(data.data, status=status.HTTP_200_OK)
+    elif request.method == "PUT":
+            data = UsuarioDetailSerializer(queryset, data = request.data)
+            if data.is_valid():
+                data.save()
+                return Response(data.data)
+            return Response(data.errors, status = status.HTTP_400_BAD_REQUEST)'''
+
+
+    #elif request.method == "DELETE":
+
+        #queryset.delete(
+        #return Response({"message": "UsarioDestroy Successsfull"}, status=status.HTTP_200_OK)
+
+  #return Response(data.errors, status=status.HTTP_400_BAD_REQUEST)

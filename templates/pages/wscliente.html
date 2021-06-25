@@ -1,0 +1,25 @@
+{% extends "utilities/base.html" %}
+
+{% block titulo %}WS CLIENTE {% endblock %}
+
+{% block contenido %}
+  <h3> API Lista de Usuarios  </h3>
+    <table id="table_id" class="table table-striped table-sm table-bordered">
+        <th>Tipo de Empleado</th>
+        <th>Nombre(s)</th>
+        <th>Apellido Paterno</th>
+        <th>Apellido Materno</th>
+
+      {% for Usuario in object_list %}
+        <tr>
+            <td> {{ Usuario.TipoEmpleado }}</td>
+            <td> {{ Usuario.Nombres }}</td>
+            <td> {{ Usuario.ApellidoPaterno }}</td>
+            <td> {{ Usuario.ApellidoMaterno }}</td>
+            
+        </tr>
+      {% endfor %}
+
+    </table>
+
+{% endblock contenido %}
