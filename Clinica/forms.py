@@ -423,10 +423,6 @@ class FiltroCitas(Form):
     filter_field = forms.ChoiceField(choices=FILTER_CHOICES)
 
 class CitaForm(forms.ModelForm):
-    ExpedientePaciente = forms.ModelChoiceField(
-        queryset=ExpedientePaciente.objects.all(),
-        label="Paciente",
-        required=True)
     Fecha = forms.DateField(
         required=True,
         label="Fecha de la cita",

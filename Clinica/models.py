@@ -7,7 +7,6 @@ from django.contrib.auth.validators import UnicodeUsernameValidator
 from smart_selects.db_fields import ChainedForeignKey
 from smart_selects.db_fields import ChainedManyToManyField
 
-# Create your models here.
 
 username_validator = UnicodeUsernameValidator()
 
@@ -136,14 +135,18 @@ class Cita(models.Model):
         verbose_name='Tratamiento',
         chained_field="Doctor",
         chained_model_field="Tratamientos",
+        auto_choose=True,
+        blank=True, null=True
         )'''
-    Tratamiento = ChainedForeignKey(
+    '''Tratamiento = ChainedForeignKey(
         Tratamiento,
         chained_field="Doctor",
         chained_model_field="Doctor",
-        show_all=True,
+        show_all=False,
         auto_choose=True,
-        sort=True)
+        sort=True
+        )'''
+    Tratamiento = models.ForeignKey(Tratamiento, verbose_name="Tratamiento", on_delete=models.CASCADE)
     HoraInicio = ChainedForeignKey(
         Hora,
         chained_field="Doctor",
